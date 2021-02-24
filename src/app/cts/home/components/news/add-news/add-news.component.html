@@ -1,0 +1,139 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">{{pageTitle}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+
+    <form [formGroup]="addNewsForm" class="col-md-12" (ngSubmit)="addNewsSubmit()">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="(!addNewsForm.valid && formSubmitAttempt)">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-triangle"></i>
+                <b>Please correct the following error(s):</b>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 error-div" *ngIf="((!addNewsForm.controls['title'].valid && addNewsForm.controls['title'].touched)|| 
+                                (!addNewsForm.controls['title'].valid && addNewsForm.controls['title'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addNewsForm.controls['title'].errors?.required)">Enter "News Title"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addNewsForm.controls['branchid'].valid && 
+                            addNewsForm.controls['branchid'].touched)|| 
+                            (!addNewsForm.controls['branchid'].valid && addNewsForm.controls['branchid'].untouched && 
+                            formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addNewsForm.controls['branchid'].errors?.required)">
+                                    Enter "Branch Id"
+                                </span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addNewsForm.controls['date'].valid && addNewsForm.controls['date'].touched)|| 
+                            (!addNewsForm.controls['date'].valid && addNewsForm.controls['date'].untouched && 
+                            formSubmitAttempt))">
+                            <i class="fa fa-circle"></i>
+                            <span *ngIf="(addNewsForm.controls['date'].errors?.required)">Enter
+                                "Date"</span>
+                        </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addNewsForm.controls['description'].valid && addNewsForm.controls['description'].touched)|| 
+                                (!addNewsForm.controls['description'].valid && addNewsForm.controls['description'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addNewsForm.controls['description'].errors?.required)">Enter
+                                    "Description"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addNewsForm.controls['status'].valid && addNewsForm.controls['status'].touched)|| 
+                                (!addNewsForm.controls['status'].valid && addNewsForm.controls['status'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addNewsForm.controls['status'].errors?.required)">Enter
+                                    "Status"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row search-box search-box-padding form-block">
+            <div class="col-md-4">
+                <span>
+                    News Title
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="title" type="text" placeholder="News Title" size="30" pInputText [ngClass]="{'error':((!addNewsForm.controls['title'].valid && addNewsForm.controls['title'].touched) || 
+                    (!addNewsForm.controls['title'].valid && addNewsForm.controls['title'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>Branch Id</span><br>
+                <p-dropdown [options]="branchids" filter="true" formControlName="branchid" [disabled]="isDisabled"
+                    placeholder="Select Branch" [ngClass]="{'error':((!addNewsForm.controls['branchid'].valid &&
+                addNewsForm.controls['branchid'].touched) || 
+                (!addNewsForm.controls['branchid'].valid && addNewsForm.controls['branchid'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <span>Date</span><br>
+                <p-calendar placeholder="Select Date" [disabled]="isDisabled" formControlName="date"
+                    [inputStyle]="{'width':'100% !important'}" [showIcon]="true"
+                    [ngClass]="{'error':((!addNewsForm.controls['date'].valid && addNewsForm.controls['date'].touched) || (!addNewsForm.controls['date'].valid && addNewsForm.controls['date'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+                </p-calendar>
+            </div>
+            <div class="col-md-4">
+                <span>Status</span><br>
+                <p-dropdown [options]="status" filter="true" formControlName="status" [disabled]="isDisabled"
+                    placeholder="Select Status" [ngClass]="{'error':((!addNewsForm.controls['status'].valid &&
+                    addNewsForm.controls['status'].touched) || 
+                (!addNewsForm.controls['status'].valid && addNewsForm.controls['status'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>
+            <div class="col-md-12">
+
+                <span>
+                    Description
+                </span><br>
+                <textarea rows="3" cols="30" maxlength="500" placeholder="Descriptiom" pInputTextarea
+                    formControlName="description" autoResize="autoResize" [disabled]="isDisabled" [ngClass]="{'error':((!addNewsForm.controls['description'].valid &&
+            addNewsForm.controls['description'].touched) || 
+            (!addNewsForm.controls['description'].valid && addNewsForm.controls['description'].untouched && formSubmitAttempt)),
+            'required':(isRequired == true )}"></textarea>
+            </div>           
+            <br>
+            <br>
+            <br>
+            <div class="col-md-4  required-block">
+                <span class="required" *ngIf="this.formType == 'create' || this.formType == 'edit'">
+                    <span class="requirednote">Required</span>
+                </span>
+            </div>
+            <div class="col-md-8 text-right">
+                <button pButton type="button" icon="pi pi-check" label="Edit" *ngIf="isDisabled"
+                    (click)="editControls()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="submit" icon="pi pi-check" label="Submit" *ngIf="!isDisabled"
+                    class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-refresh" label="Clear" *ngIf="!isDisabled"
+                    (click)="resetForm()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="list()"
+                    class="ui-button-secondary table-header-items"></button>
+            </div>
+        </div>
+    </form>
+</div>

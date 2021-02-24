@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">Events</span>
+            </div>
+            <div class="col-md-8 text-right">
+                <button pButton type="button" icon="pi pi-plus" label="Event"
+                    class="ui-button-secondary table-header-items" (click)="addNew($event)"></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 search-box">
+        <div class="row">
+            <div class="col-md-9 col-sm-12" >
+                <p-fullCalendar [events]="eventsData" [options]="eventOptions"></p-fullCalendar>
+            </div>
+            <div class="col-md-3 col-sm-12 eventsListCol">
+                <div class="calendar-header">
+                    <div class="row calendar-month">
+                        <div class="col-12">
+                            <h5 class="m-0 text-center">Events</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="eventCardDiv">
+                    <div *ngFor="let event of eventsData">
+                    <div class="card eventCard">
+                        <div class="card-body">                            
+                            <h6> {{event.title}} </h6>
+                            <p><a><i class="fa fa-edit" (click)="editEvent()"></i></a>&nbsp;
+                                <a><i class="fa fa-trash-o" (click)="deleteEvent()"></i></a>
+                                2nd Jan, 2020
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                    <!-- <div class="noEvents">
+                    <p><img class="img-fluid" src="../Styles/Images/noEventsFor Date.png"></p>
+                    <p>No Events Added</p>
+                </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-dialog header="Delete Confirmation" [transitionOptions]="'500ms'" [baseZIndex]="20000" [(visible)]="display" 
+    [style]="{width: '30vw'}" [responsive]="true" [draggable]="true" [position]="position">
+            <p>Are you sure you want to delete Event?</p>
+            <p-footer class="btm-buttons">
+                <button type="button" pButton icon="pi pi-check" label="Yes" (click)="eventRevoke()" ></button>
+                <button type="button" pButton icon="pi pi-times" (click)="display=false" label="No"></button>
+            </p-footer>
+        </p-dialog>  

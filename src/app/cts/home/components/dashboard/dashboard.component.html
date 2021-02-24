@@ -1,0 +1,119 @@
+<div class="container-fluid dashboard-component">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">Dashboard</span>
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-3">
+                <p-calendar placeholder="Select Date Range" [showIcon]="true" selectionMode="range" [readonlyInput]="true"></p-calendar>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-3">
+        <div class="row">
+            <div class="col-md-4 mb-2 chart-padding">
+                <div class="col-md-12 chart-div">
+                    <div class="chart-title">Students</div>
+                    <div class="chart-body">
+                        <p-chart type="doughnut" [data]="ourStudentsData"></p-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2 chart-padding">
+                <div class="col-md-12 chart-div">
+                    <div class="chart-title">Our Income</div>
+                    <div class="chart-body">
+                        <p-chart type="line" [data]="ourIncomedata"></p-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2 chart-padding">
+                <div class="col-md-12 chart-div">
+                    <div class="chart-title">Our Expenditure</div>
+                    <div class="chart-body">
+                        <p-chart type="bar" [data]="ourExpenditureData"></p-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mb-2 chart-padding">
+                <div class="col-md-12 chart-div">
+                    <div class="chart-title">Our Events</div>
+                    <div class="chart-body mt-2">
+                        <p-fullCalendar [events]="eventsData" [options]="eventOptions"></p-fullCalendar>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2 chart-padding">
+                <div class="col-md-12 mb-2 chart-div" style="height:380px"> 
+                    <div class="chart-title">Our Latest Achievements</div>
+                    <div class="chart-body mt-2">
+                        <p-carousel [value]="ourachivementsData" [numVisible]="1" [numScroll]="1" [circular]="true"
+                            [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                            <ng-template let-achivement pTemplate="item">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img class="img-fluid achivement-image" src="./assets/images/avatar.png">
+                                        <div class="text-center"><b>{{achivement.desciption}}</b></div>
+                                    </div>
+                                </div>                              
+                            </ng-template>
+                        </p-carousel>                       
+                    </div>
+                    <div class="">
+                        <a href="#" class="view-more-link" style="margin-top: -5px !important;"> <i class="fa fa-angle-double-right"></i> view more</a>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2 chart-div" style="height:370px">
+                    <div class="chart-title">Our Latest Announcements</div>
+                    <div class="chart-body mt-2 p-10">
+                        <div class="col-md-12">
+                            <div class="col-md-12 announcement-div" *ngFor="let announcement of announcementData">
+                                <p class="mt-2"><span class="btn-styles">{{announcement.date}}</span></p>
+                                <p><b>{{announcement.description}}</b></p>
+                                <p>
+                                    <span class="createdBy">{{announcement.createyBy}}/</span>
+                                    <span class="timeLapse">{{announcement.timelapse}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <a href="#" class="view-more-link"> <i class="fa fa-angle-double-right"></i> view more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2 chart-padding">
+                <div class="col-md-12 chart-div">
+                    <div class="chart-title">Browsing History</div>
+                    <div class="chart-body">
+                        <p-chart type="polarArea" [data]="browsingData"></p-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2 chart-padding">
+                <div class="col-md-12 chart-div">
+                    <div class="chart-title">Our Top Students</div>
+                    <div class="chart-body mt-2">
+                        <p-table [value]="ourTopStudents">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-student>
+                                <tr>
+                                    <td>{{student.name}}</td>
+                                    <td>{{student.class}}</td>
+                                    <td>{{student.percentage}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

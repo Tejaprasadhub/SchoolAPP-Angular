@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div class="col-md-12 component-header">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="table-header-items">Role Access</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+    <div class="col-md-12">
+      <i class="fa fa-exclamation-circle"></i>
+      <b>{{ errorMessage }}</b>
+    </div>
+  </div>
+  <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+    <div class="col-md-12">
+      <i class="fa fa-check"></i>
+      <b>{{ successMessage }}</b>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="row search-box search-box-padding form-block">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <p-dropdown
+          [options]="users"
+          filter="true"
+          (onChange)="dropdownChange($event)"
+          placeholder="Select User" 
+        >
+        </p-dropdown>
+      </div>
+      <div class="col-md-4"></div>
+      <br />
+      <br />
+      <div class="col-md-12 clienttable" *ngIf="this.userFeatures">
+        <div class="p-field-checkbox">
+          <p-checkbox (onChange)="fullControlCheck($event)"
+            [(ngModel)]="checked"
+            binary="true"
+            inputId="binary"
+          ></p-checkbox>&nbsp;&nbsp;
+          <label for="binary">Full control to the selected user</label>
+        </div>
+        <p-table
+          [value]="userFeatures"
+          sortField="brand"
+          sortMode="single"
+          (onSort)="onSort()"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Feature</th>
+              <th>Visibility</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <tr
+              class="ui-widget-header"
+              *ngIf="rowGroupMetadata[rowData.featureTitle].index === rowIndex"
+            >
+              <td colspan="2" style="background-color: #d3c9ee">
+                <span style="font-weight: bold; font-size: 15px">{{
+                  rowData.featureTitle
+                }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ rowData.featureOption }}</td>
+              <td>
+                <!-- <p-checkbox  label="Show" value='Y' class="p-2" [(ngModel)]="rowData.status"></p-checkbox>
+<p-checkbox   label="Hide" value='N' [(ngModel)]="rowData.status"></p-checkbox> -->
+
+                <p-radioButton
+                  label="Show"
+                  value="Y"
+                  class="p-2"
+                  [(ngModel)]="rowData.status" 
+                ></p-radioButton>
+                <p-radioButton
+                  label="Hide"
+                  value="N"
+                  [(ngModel)]="rowData.status"
+                ></p-radioButton>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+          <i class="fa fa-exclamation-circle"></i>
+          <b>{{ errorMessage }}</b>
+        </div>
+      </div>
+      <div
+        class="col-md-12 success-block animated fadeIn"
+        *ngIf="successMessage"
+      >
+        <div class="col-md-12">
+          <i class="fa fa-check"></i>
+          <b>{{ successMessage }}</b>
+        </div>
+      </div>
+
+      <div class="col-md-12 mt-3 text-right" *ngIf="this.userFeatures">
+        <button *ngIf="checkPermissions('ADD')"
+          pButton
+          type="button"
+          icon="pi pi-check"
+          label="Submit"
+          class="ui-button-secondary table-header-items"
+          (click)="onSubmit($event)"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

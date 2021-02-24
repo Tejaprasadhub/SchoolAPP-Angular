@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="col-md-12 search-box">
+    <div class="col-md-12 p-4">
+      <div class="error-block">
+        <i class="fa fa-exclamation-triangle"></i>
+        <b>The application has encountered an error.</b>
+      </div>
+      <div class="error-info">
+        <div *ngIf="error" class="error-message-text">
+          {{ error }}
+        </div>
+        <h5>If the error persists, please contact Technical Support.</h5>
+        <p><strong>Phone</strong>: 9640938361</p>
+        <p><strong>Email</strong>: tejaprasadbehara@gmail.com</p>
+        <p><strong>Hours</strong>: Monday-Friday, 10AM - 5PM IST</p>
+      </div>
+    </div>
+    <div class="col-md-12 text-right">
+        <button pButton type="button" icon="pi pi-angle-left" label="Back" (click)="backtoscreen()"
+        class="ui-button-secondary table-header-items"></button>
+    </div>
+  </div>
+</div>

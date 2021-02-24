@@ -1,0 +1,157 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">Students</span>
+            </div>
+            <div class="col-md-8 text-right">
+                <button pButton type="button" icon="pi pi-filter" label="Filters"
+                    class="ui-button-secondary table-header-items" (click)="toggleClass($event)"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-plus" label="Student"
+                    class="ui-button-secondary table-header-items" (click)="addNew($event)"></button>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="filtersForm"  (ngSubmit)="filterSubmit()">
+    <div #myFiltersDiv class="col-md-12 box transform">
+        <div class="row search-box search-box-padding">            
+            <div class="col-md-3">
+                <span>Student Name</span><br>
+                <input id="name" #nm class="w-100" type="text" formControlName="tname" placeholder="Student Name" size="30"
+                (keydown)="$event.key === 'Enter' ? dt.filter(nm.value,'name',''): ''"
+                pInputText>
+
+            </div>
+            <div class="col-md-3">
+                <span>Gender</span><br>
+                <p-dropdown [options]="gender" class="w-100" formControlName="tgender" placeholder="Select a Gender" ></p-dropdown>
+            </div>
+            <div class="col-md-3">
+                <span>Date Of Birth</span><br>
+                <p-calendar placeholder="Select Date" formControlName="tdateOfbirth" [inputStyle]="{'width':'100% !important'}"  [showIcon]="true"></p-calendar>
+            </div>
+            <div class="col-md-3">
+                <span>Email</span><br>
+                <input id="email" #em class="w-100" type="text" formControlName="temail" placeholder="Enter Email" size="30"
+                (keydown)="$event.key === 'Enter' ? dt.filter(em.value,'email',''): ''"
+                pInputText>
+                
+            </div>
+            <div class="col-md-3">
+                <span>Class</span><br>
+                <p-dropdown [options]="classes" class="w-100" formControlName="tclass" placeholder="Select a Class" ></p-dropdown>
+            </div>
+            <div class="col-md-9 text-right search-buttons">
+                <button pButton type="submit" icon="pi pi-search" label="Search"
+                    class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-refresh" label="Clear" (click)="resetFilterForm()"
+                    class="ui-button-secondary table-header-items"></button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 search-box">
+        <p-table #dt [columns]="cols" [value]="students" [lazy]="true" dataKey="id" [paginator]="true" rowExpandMode="single"
+            [responsive]="true" [rows]="numberOfPages" (onLazyLoad)="onPageChange($event)" [totalRecords]="totalcount"
+            [rowsPerPageOptions]="[10,20,30,40,50]" [reorderableColumns]="true" (onRowExpand)="rowExpand($event,dt)" >          
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th style="width:2.5em"></th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" pReorderableColumn
+                        style="width: 20% !important;">
+                        <div class="">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field" style="float:right"></p-sortIcon>
+                        </div>   
+                    </th>
+                    <th style="width:5em"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowIndex="rowIndex" let-rowData let-columns="columns" let-expanded="expanded">
+                
+                <tr>
+                    <td>
+                        <a href="#" [pRowToggler]="rowData">
+                            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                        </a>
+                    </td>
+                    <td *ngFor="let col of columns">
+                        <div class="" *ngIf="col.field == 'dob'">
+                            <a class="bold" (click)="viewStudent(rowData.id)">{{getFormat(rowData.dob)}}</a>
+                        </div>
+                        <div class="" *ngIf="col.field != 'dob'&& col.field != 'gender'">
+                            <div class="class" *ngIf="col.field != 'status'">
+                                <a class="bold" (click)="viewStudent(rowData.id)">{{rowData[col.field]}}</a>
+                            </div>
+                            <div class="class" *ngIf="col.field == 'status'">
+                                <div class=""  *ngIf="rowData.status == 'AC'">
+                                    <button class="btn btn-success">Active</button>
+                                </div>
+                                <div class=""  *ngIf="rowData.status == 'NA'">
+                                    <button class="btn btn-danger">Not Active</button>
+                                </div>
+                            </div>
+                            <!-- <a class="bold" (click)="viewStudent(rowData.id)">{{rowData[col.field]}}</a> -->
+                        </div>   
+                        <div class="class" *ngIf="col.field == 'gender'">
+                            <div class="" *ngIf="rowData.gender == 'M'">
+                                Male
+                            </div>
+                            <div class="" *ngIf="rowData.gender == 'F'">
+                                Female
+                            </div>
+                        </div>                  
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                        <i class="pi pi-pencil" (click)="editStudent(rowData.id)"></i>&nbsp;
+                        <i class="pi pi-trash" (click)="deleteStudent(rowData.id)"></i>
+                    </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion"  let-rowData let-columns="columns">
+                <tr class="expansion-div">
+                    <td [attr.colspan]="columns.length + 2">
+                        <div class="ui-fluid" [@rowExpansionTrigger]="'active'">
+                            <router-outlet></router-outlet>                            
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+         <!-- pagination div starts from here -->
+         <div class="col-md-12">
+            <div class="pagecount-dropdown">
+                <span class="pagecounting">Items per page</span>
+            </div>
+            <div class="pagecount">
+                <div *ngIf="dt.totalRecords != 0">
+                    {{dt.first+1}}-{{((dt.first+dt.rows)>dt.totalRecords)?dt.totalRecords:(dt.first+dt.rows)}} of
+                    {{dt.totalRecords}}
+                    Items
+                </div>
+                <div *ngIf="dt == undefined || dt.totalRecords==0">No Items to Display</div>
+            </div>
+        </div>
+        <!-- pagination div ends here -->
+    </div>
+    <p-dialog header="Delete Confirmation" [transitionOptions]="'500ms'" [baseZIndex]="20000" [(visible)]="display" [style]="{width: '30vw'}" [responsive]="true" [draggable]="true" [position]="position">
+        <p>Are you sure you want to delete Student?</p>
+        <p-footer class="btm-buttons">
+            <button type="button" pButton icon="pi pi-check" label="Yes" (click)="studentRevoke()" ></button>
+            <button type="button" pButton icon="pi pi-times" (click)="display=false" label="No"></button>
+        </p-footer>
+    </p-dialog>  

@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">{{pageTitle}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+
+    <form [formGroup]="addParentForm" class="col-md-12" (ngSubmit)="addParentSubmit()">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="(!addParentForm.valid && formSubmitAttempt)">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-triangle"></i>
+                <b>Please correct the following error(s):</b>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 error-div" *ngIf="((!addParentForm.controls['fname'].valid && addParentForm.controls['fname'].touched)|| 
+                                (!addParentForm.controls['fname'].valid && addParentForm.controls['fname'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addParentForm.controls['fname'].errors?.required)">Enter "First
+                                    Name"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addParentForm.controls['lname'].valid && 
+                            addParentForm.controls['lname'].touched)|| 
+                            (!addParentForm.controls['lname'].valid && addParentForm.controls['lname'].untouched && 
+                            formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addParentForm.controls['lname'].errors?.required)">
+                                    Enter "Last Name"
+                                </span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addParentForm.controls['mobile'].valid && addParentForm.controls['mobile'].touched)|| 
+                            (!addParentForm.controls['mobile'].valid && addParentForm.controls['mobile'].untouched && 
+                            formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addParentForm.controls['mobile'].errors?.required)">Enter "Mobile
+                                    Number"</span>
+                                <span *ngIf="(addParentForm.controls['mobile'].errors?.pattern)">Enter "Valid
+                                    Number"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addParentForm.controls['gender'].valid && addParentForm.controls['gender'].touched)|| 
+                        (!addParentForm.controls['gender'].valid && addParentForm.controls['gender'].untouched && 
+                        formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addParentForm.controls['gender'].errors?.required)">Enter "Gender"
+                                </span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addParentForm.controls['email'].valid && addParentForm.controls['email'].touched)|| 
+                    (!addParentForm.controls['email'].valid && addParentForm.controls['email'].untouched && 
+                    formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addParentForm.controls['email'].errors?.required)">Enter "Email"
+                                </span>
+                                <span *ngIf="(addParentForm.controls['email'].errors?.required)">Enter " Valid Email"
+                                </span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addParentForm.controls['status'].valid && addParentForm.controls['status'].touched)|| 
+                    (!addParentForm.controls['status'].valid && addParentForm.controls['status'].untouched && 
+                    formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addParentForm.controls['status'].errors?.required)">Enter "Status"
+                                </span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row search-box search-box-padding form-block">
+            <div class="col-md-4">
+                <span>
+                    First Name
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="fname" type="text" placeholder="First Name" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['fname'].valid && addParentForm.controls['fname'].touched) || 
+                    (!addParentForm.controls['fname'].valid && addParentForm.controls['fname'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>
+                    Last Name
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="lname" type="text" placeholder="Last Name" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['lname'].valid && addParentForm.controls['lname'].touched) || 
+                    (!addParentForm.controls['lname'].valid && addParentForm.controls['lname'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>
+                    Mobile Number
+                </span><br>
+                <input id="input" class="w-100" maxlength="10" (keypress)=_keyPress($event)
+                    [attr.disabled]="isDisabled ? 'disabled': null" formControlName="mobile" type="text"
+                    placeholder="Enter Mobile" size="30" pInputText
+                    [ngClass]="{'error':((!addParentForm.controls['mobile'].valid && addParentForm.controls['mobile'].touched) || (!addParentForm.controls['mobile'].valid && addParentForm.controls['mobile'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>Gender</span><br>
+                <p-dropdown [options]="gender" filter="true" formControlName="gender" [disabled]="isDisabled"
+                    placeholder="Select Gender"
+                    [ngClass]="{'error':((!addParentForm.controls['gender'].valid && addParentForm.controls['gender'].touched) || (!addParentForm
+                    .controls['gender'].valid && addParentForm.controls['gender'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+
+                </p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <span>
+                    Email
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="email" type="text" placeholder="Email" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['email'].valid && addParentForm.controls['email'].touched) || 
+                    (!addParentForm.controls['email'].valid && addParentForm.controls['email'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>Status</span><br>
+                <p-dropdown [options]="status" filter="true" formControlName="status" [disabled]="isDisabled"
+                    placeholder="Select Status" [ngClass]="{'error':((!addParentForm.controls['status'].valid &&
+                    addParentForm.controls['status'].touched) || 
+                (!addParentForm.controls['status'].valid && addParentForm.controls['status'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>           
+            <br>
+            <br>
+            <br>
+            <div class="col-md-4  required-block">
+                <span class="required" *ngIf="this.formType == 'create' || this.formType == 'edit'">
+                    <span class="requirednote">Required</span>
+                </span>
+            </div>
+            <div class="col-md-8 text-right">
+                <button pButton type="button" icon="pi pi-check" label="Edit" *ngIf="isDisabled"
+                    (click)="editControls()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="submit" icon="pi pi-check" label="Submit" *ngIf="!isDisabled"
+                    class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-refresh" label="Clear" *ngIf="!isDisabled"
+                    (click)="resetForm()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="list()"
+                    class="ui-button-secondary table-header-items"></button>
+            </div>
+        </div>
+    </form>
+</div>

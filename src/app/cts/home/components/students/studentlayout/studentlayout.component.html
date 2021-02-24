@@ -1,0 +1,73 @@
+<!-- <p>studentlayout works!</p>
+<router-outlet name="detail"></router-outlet> -->
+<div class="student-layout-div">
+    <div class="row">
+    <div class="col-md-12 d-flex">
+    <div class="col-md-2">
+            <div class="d-flex">
+            <div class="card  w-75" (click)="routing('Students/student/(detail:student-profile)')">
+                <div class="card-body">                    
+                        <div class="card-body-content">
+                            <i class="fa fa-user-o " aria-hidden="true"></i>
+                            <p class="card-title">Profile</p>
+                        </div>
+                </div>
+            </div>
+            <div class="right-arrow " [class]="(urlPath == 'student-profile') ? 'd-block' : 'd-none'"></div>
+        </div>
+        
+        <!-- <div class="d-flex">
+            <div class="card w-75" (click)="routing('Students/student/(detail:student-edit)')">
+                <div class="card-body">
+                        <div class="card-body-content"> 
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            <p class="card-title">Edit</p>
+                        </div>
+                </div>
+            </div>
+            <div class="right-arrow" [class]="urlPath == 'student-edit' ? 'd-block' : 'd-none'"></div>
+        </div> -->
+        
+        <div class="d-flex">
+            <div class="card w-75" (click)="routing('Students/student/(detail:student-marks)')">
+                <div class="card-body">
+                        <div class="card-body-content">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <p class="card-title">Marks</p>
+                        </div>
+                </div>
+            </div>
+            <div class="right-arrow" [class]="urlPath == 'student-marks' ? 'd-block' : 'd-none'"></div>
+        </div>
+        
+        <div class="d-flex">
+            <div class="card w-75" (click)="routing('Students/student/(detail:student-reports)')">
+                <div class="card-body">
+                        <div class="card-body-content">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <p class="card-title">Reports</p>
+                        </div>
+                </div>
+            </div>
+            <div class="right-arrow" [class]="urlPath == 'student-reports' ? 'd-block' : 'd-none'"></div>
+        </div>
+        
+        <div class="d-flex">
+            <div class="card w-75" (click)="routing('Students/student/(detail:student-more)')">
+                <div class="card-body">
+                        <div class="card-body-content">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            <p class="card-title">More</p>
+                        </div>
+                </div>
+            </div>
+            <div class="right-arrow" [class]="urlPath == 'student-more' ? 'd-block' : 'd-none'"></div>
+        </div>
+        
+    </div>
+    <div class="col-md-10">
+        <router-outlet name="detail"></router-outlet>
+    </div>
+</div>
+</div>
+</div>

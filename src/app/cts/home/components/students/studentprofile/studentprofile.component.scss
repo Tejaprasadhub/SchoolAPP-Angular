@@ -1,0 +1,64 @@
+.student-profile-container{
+    .profile-title{
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+    .image-div{
+        padding:20px;
+        text-align: center;
+    }
+   
+ .image-logo{
+     width: 150px;
+     height: 150px;
+     border-radius: 100px;
+ }
+ .btn{
+    font-size: 12px;
+ }
+
+ .student-container { position: relative; }
+.student-container img { display: block; }
+.student-container .pi-pencil { 
+    position: absolute;
+    bottom: 30px;
+    color: #fff !important;
+    font-size: 25px;
+    background: #007ad9;
+    border-radius: 16px;
+    border: 1px solid #fff;
+    right: 55px;
+}
+.expansion-div label{
+    color: #000;
+    font-size: 15px;
+    border-bottom:2px solid #000
+}
+.expansion-div .labelstyles{
+    width: 100%;
+    font-size: 13px;
+    color: #929292;
+    margin-bottom: 0px !important;
+}
+.fieldset {
+    border: 1px solid #d3d3d3;
+    padding: 6px;
+    margin: 10px;
+}
+.legend {
+    font-size: 14px;
+    width: inherit;
+    padding: 0px 5px;
+    border-bottom: none;
+    margin-bottom: 3px;
+    font-weight: bold;
+} 
+.upload{
+    font-weight:bold;
+    color:#28a745;
+    margin-left: 15px;
+    line-height: 36px;
+}
+
+}

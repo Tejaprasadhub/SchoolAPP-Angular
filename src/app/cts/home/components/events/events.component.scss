@@ -1,0 +1,39 @@
+.eventsListCol {
+    padding-left: 0px;
+}
+.calendar-header {
+    background-color: #e1e1e1;
+    color: black;
+    border-bottom: 1px solid black;
+}
+.calendar-month {
+    padding: 7px 0px;
+}
+.eventCardDiv {
+    height: 540px;
+}
+.eventCardDiv {
+    height: 504px;
+    overflow-y: auto;
+    padding: 5px 10px 10px 10px;
+    background-color: #f9f9f9;
+    border-bottom: solid 1px black;
+}
+.eventCard {
+    margin: 5px 0px 0px 0px;
+}
+.eventCard .card-body {
+    padding: 10px;
+}
+.eventCard p {
+    color: black;
+    font-size: 0.9rem;
+    text-align: right;
+    margin: 0px;
+}
+.eventCard p i {
+    padding: 5px 6px 2px;
+    float: left;
+    cursor: pointer;
+    font-weight: 500;
+}

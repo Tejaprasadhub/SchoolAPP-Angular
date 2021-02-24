@@ -1,0 +1,108 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">{{pageTitle}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+
+    <form [formGroup]="addBranchForm" class="col-md-12" (ngSubmit)="addBranchSubmit()">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="(!addBranchForm.valid && formSubmitAttempt)">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-triangle"></i>
+                <b>Please correct the following error(s):</b>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 error-div" *ngIf="((!addBranchForm.controls['code'].valid && addBranchForm.controls['code'].touched)|| 
+                                (!addBranchForm.controls['code'].valid && addBranchForm.controls['code'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addBranchForm.controls['code'].errors?.required)">Enter "Branch Code"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addBranchForm.controls['title'].valid && 
+                            addBranchForm.controls['title'].touched)|| 
+                            (!addBranchForm.controls['title'].valid && addBranchForm.controls['title'].untouched && 
+                            formSubmitAttempt))">
+                            <i class="fa fa-circle"></i>
+                            <span *ngIf="(addBranchForm.controls['title'].errors?.required)">
+                                Enter "Branch Title"
+                            </span>
+                        </div>
+                        <div class="col-md-3 error-div" *ngIf="((!addBranchForm.controls['status'].valid && 
+                            addBranchForm.controls['status'].touched)|| 
+                            (!addBranchForm.controls['status'].valid && addBranchForm.controls['status'].untouched && 
+                            formSubmitAttempt))">
+                            <i class="fa fa-circle"></i>
+                            <span *ngIf="(addBranchForm.controls['status'].errors?.required)">
+                                Enter "Status"
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row search-box search-box-padding form-block">
+            <div class="col-md-4">
+                <span>
+                    Branch Code
+                </span><br>
+                <input id="input" maxlength="4" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="code"
+                    type="text" placeholder="Branch Code" size="30" pInputText [ngClass]="{'error':((!addBranchForm.controls['code'].valid && addBranchForm.controls['code'].touched) || 
+                    (!addBranchForm.controls['code'].valid && addBranchForm.controls['code'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>Branch Title</span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="title"
+                type="text" placeholder="Branch Title" size="30" pInputText [ngClass]="{'error':((!addBranchForm.controls['title'].valid && addBranchForm.controls['title'].touched) || 
+                (!addBranchForm.controls['title'].valid && addBranchForm.controls['title'].untouched && 
+                formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>Status</span><br>
+                <p-dropdown [options]="status" filter="true" formControlName="status" [disabled]="isDisabled"
+                    placeholder="Select Status" [ngClass]="{'error':((!addBranchForm.controls['status'].valid &&
+                    addBranchForm.controls['status'].touched) || 
+                (!addBranchForm.controls['status'].valid && addBranchForm.controls['status'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>           
+            <br>
+            <br>
+            <br>
+            <div class="col-md-4  required-block">
+                <span class="required" *ngIf="this.formType == 'create' || this.formType == 'edit'">
+                    <span class="requirednote">Required</span>
+                </span>
+            </div>
+            <div class="col-md-8 text-right">
+                <button pButton type="button" icon="pi pi-check" label="Edit" *ngIf="isDisabled"
+                    (click)="editControls()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="submit" icon="pi pi-check" label="Submit" *ngIf="!isDisabled"
+                    class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-refresh" label="Clear" *ngIf="!isDisabled"
+                    (click)="resetForm()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="list()"
+                    class="ui-button-secondary table-header-items"></button>
+            </div>
+        </div>
+    </form>
+</div>
+

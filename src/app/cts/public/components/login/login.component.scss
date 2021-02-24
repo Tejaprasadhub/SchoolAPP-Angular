@@ -1,0 +1,78 @@
+.login-parent-block{
+    height: 100vh;
+    display: flex;
+    width: 100%;
+}
+.login-child-block{
+    margin: auto;
+    width: 80%;
+}
+.btn-login{
+    background: #444;
+    color: #fff;
+    border: black;
+    font-weight: bold;
+}
+.btn-login:hover{
+    background: #e87722;
+}
+.login-div{
+    
+    background: #fff;
+    padding: 15px 10px;
+    box-shadow: aqua;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    // box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1), 0 0 0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(70, 67, 67, 0);
+    .m-2{
+        padding: 5px !important;
+    }
+    .form-control{
+        border-radius: initial;
+        font-size: 15px;
+        color: #555;
+        background: #efefee;
+    }
+    .ui-inputgroup-addon{
+        width:50px !important;
+    }
+    .forgot{
+        font-weight: 700;
+    font-size: 13px;
+    } 
+}
+.login-div b {
+    font-size: 40px;
+}
+.login-div span {
+    background-color: #e87722 !important;
+    color: #fff;
+    border:#e87722 !important;
+}
+
+.sup-div{
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background:#fff;
+    // box-shadow: inset 0 -3em 3em white, 0 0 0 2px white, 0.3em 0.3em 1em white;
+    padding: 10px;
+    text-decoration: none;
+}
+.login-div p{
+    color: red;
+}
+.sup-div .li1,.sup-div .li2{
+    border-right: 1px solid black;
+}
+.sup-div a b{
+    font-size: 12px !important;
+    text-decoration: none;
+}
+.login-logo{
+    width:100%;
+    height:100px !important;
+}
+.errorMessage p{
+    font-size: 13px;
+    color: red;
+    font-weight: bold;
+}

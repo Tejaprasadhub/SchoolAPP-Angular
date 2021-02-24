@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="table-header-items">Audit Logs</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 search-box">
+        <p-table #dt [columns]="cols" [value]="auditlogs" [lazy]="true" dataKey="indexId" rowExpandMode="single" [paginator]="true"
+        [responsive]="true" [rows]="numberOfPages" (onLazyLoad)="onPageChange($event)" [totalRecords]="totalcount"
+        [rowsPerPageOptions]="[10,20,30,40,50]" [reorderableColumns]="true" (onRowExpand)="rowExpand($event,dt)">              
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width:2.5em"></th>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" pReorderableColumn
+                    style="width: 20% !important;">
+                    <div class="">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field" style="float:right"></p-sortIcon>
+                    </div>   
+                </th>
+                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+            <tr>
+                <td>
+                    <a href="#" [pRowToggler]="rowData">
+                        <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                    </a>
+                </td>
+                <td *ngFor="let col of columns">                    
+                    {{rowData[col.field]}}                       
+                </td>
+            
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion"  let-rowData let-columns="columns">
+            <tr class="expansion-div">
+                <td [attr.colspan]="columns.length + 1">
+                    <div class="ui-fluid">
+                        <router-outlet></router-outlet>                            
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        </p-table>
+        <!-- pagination div starts from here -->
+        <div class="col-md-12">
+            <div class="pagecount-dropdown">
+                <span class="pagecounting">Items per page</span>
+            </div>
+            <div class="pagecount">
+                <div *ngIf="dt.totalRecords != 0">
+                    {{dt.first+1}}-{{((dt.first+dt.rows)>dt.totalRecords)?dt.totalRecords:(dt.first+dt.rows)}} of
+                    {{dt.totalRecords}}
+                    Items
+                </div>
+                <div *ngIf="dt == undefined || dt.totalRecords==0">No Items to Display</div>
+            </div>
+        </div>
+        <!-- pagination div ends here -->
+    </div>
+</div>

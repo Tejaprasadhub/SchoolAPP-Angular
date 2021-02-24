@@ -1,0 +1,14 @@
+<p-dialog header="Timeout Warning"  [transitionOptions]="'500ms'" [baseZIndex]="20000"
+    [visible]="timeoutWarningVisible" [style]="{width: '50vw'}" [responsive]="true" [draggable]="true"
+    (onHide)="KeepAlive()">
+    <div class="time-out-popup">
+        <p>Your session will expire in {{countdownTimerText}} due to inactivity.</p>
+        <p>Please click the button below if you are still using the application.</p>
+        <div class="text-right pdt-10">
+            <button pButton type="button" (click)="KeepAlive()" label="Continue Session" class="ui-button-rounded ui-button-secondary"></button>
+        </div>
+    </div>
+</p-dialog>
+
+<spinner></spinner>
+<router-outlet></router-outlet>

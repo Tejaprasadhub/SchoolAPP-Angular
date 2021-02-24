@@ -1,0 +1,92 @@
+<div class="row student-marks-container info-container">
+    <div class="col-md-12 profile-title">
+        <div class="row">
+            <div class="col-md-6">
+                <h4><i class="fa fa-user" aria-hidden="true"></i> Student Marks</h4>
+            </div>
+            <div class="col-md-3">
+                <p-dropdown [options]="classes" class="w-100" (onChange)="classesdropdownChange($event)"
+                    placeholder="Select Class" filter="true"></p-dropdown>
+            </div>
+            <div class="col-md-3">
+                <p-dropdown [options]="exams" filter="true" (onChange)="examsdropdownChange($event)" class="w-100"
+                    placeholder="Select Exam"></p-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-circle"></i>
+                <b>{{errorMessage}}</b>
+            </div>
+        </div>
+        <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+            <div class="col-md-12">
+                <i class="fa fa-check"></i>
+                <b>{{successMessage}}</b>
+            </div>
+        </div>
+        <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" novalidate *ngIf="validateForm">
+            <div class="row search-box search-box-padding form-block">
+                <ng-container *ngFor="let controls of fields">
+                    <div class="col-md-4">
+                        <span>
+                            {{controls.label}}
+                        </span><br>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input maxlength="3" class="w-100" (keypress)=_keyPress($event)
+                                    [attr.disabled]="isDisabled ? 'disabled': null" [type]="controls.type"
+                                    [formControlName]="controls.label" [placeholder]="controls.label" pInputText
+                                    [ngClass]="{'error':((!dynamicForm.controls[controls.label].valid && dynamicForm.controls[controls.label].touched) || 
+                        (!dynamicForm.controls[controls.label].valid && dynamicForm.controls[controls.label].untouched && 
+                        formSubmitAttempt)),'required':(isRequired == true )}">
+                            </div>
+                            <div class="col-md-4">
+                                <p class="outofmarks">Out of <b>{{controls.total}}</b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 error-block" *ngIf="((!dynamicForm.controls[controls.label].valid && dynamicForm.controls[controls.label].touched)|| 
+                        (!dynamicForm.controls[controls.label].valid && dynamicForm.controls[controls.label].untouched && 
+                        formSubmitAttempt))">
+                            <div class="col-md-12 error-div">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(dynamicForm.controls[controls.label].errors?.required)">Enter
+                                    "{{controls.label}}" Marks</span>
+                                <!-- {{dynamicForm.get[controls.label].value}}
+                                    {{controls.total}}
+                                    <span *ngIf="(dynamicForm.controls[controls.label].value > controls.total)">
+                                        Secured Marks should not be greater than total</span> -->
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4  required-block">
+                    <span class="required">
+                        <span class="requirednote">Required</span>
+                    </span>
+                </div>
+                <div class="col-md-8 text-right">
+                    <button pButton type="button" icon="pi pi-pencil" label="Edit" *ngIf="isDisabled"
+                        (click)="editControls()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                    <button pButton type="submit" icon="pi pi-check" label="Submit" *ngIf="!isDisabled"
+                        class="ui-button-secondary table-header-items"></button>&nbsp;
+                    <button pButton type="button" icon="pi pi-refresh" label="Clear" *ngIf="!isDisabled"
+                        (click)="resetForm()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                </div>
+            </div>
+        </form>
+        <div class="" *ngIf="!validateForm">
+            <div class="col-md-12 text-center p-4">
+                <img class="img-fluid nav-school-logo" src="./assets/images/no_data_found.png">
+                <p><b>Looks there are no marks with the above criteria.</b></p>
+                <p><b>Please change the above criteria to update or view marks.</b></p>
+            </div>
+            
+        </div>
+    </div>
+</div>

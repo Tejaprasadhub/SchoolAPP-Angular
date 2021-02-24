@@ -1,0 +1,81 @@
+<form [formGroup]="classSectionForm" (ngSubmit)="classSectionSubmit()">
+    <div class="row">
+        <div class="col-md-3">
+            <span>
+                Class
+            </span><br>
+            <p-dropdown [options]="teacherclasses" filter="true" formControlName="class" [disabled]="isDisabled"
+                placeholder="Select Class" [ngClass]="{'error':((!classSectionForm.controls['class'].valid &&
+            classSectionForm.controls['class'].touched) || 
+        (!classSectionForm.controls['class'].valid && classSectionForm.controls['class'].untouched && formSubmitAttempt)),
+        'required':(isRequired == true )}">
+            </p-dropdown>
+            <div class="col-md-12 error-block" *ngIf="((!classSectionForm.controls['class'].valid && classSectionForm.controls['class'].touched)|| 
+                    (!classSectionForm.controls['class'].valid && classSectionForm.controls['class'].untouched && 
+                    formSubmitAttempt))">
+                <div class="col-md-12 error-div">
+                    <i class="fa fa-circle"></i>
+                    <span *ngIf="(classSectionForm.controls['class'].errors?.required)">Enter "Class"</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <span>Sections</span><br>
+            <p-multiSelect [options]="teachersections" [disabled]="isDisabled" formControlName="section" class="w-100"
+                [ngClass]="{'error':((!classSectionForm.controls['section'].valid && classSectionForm.controls['section'].touched) || (!classSectionForm.controls['section'].valid && classSectionForm.controls['section'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+            </p-multiSelect>
+            <div class="col-md-12 error-block" *ngIf="((!classSectionForm.controls['section'].valid && classSectionForm.controls['section'].touched)|| 
+                    (!classSectionForm.controls['section'].valid && classSectionForm.controls['section'].untouched && 
+                    formSubmitAttempt))">
+                <div class="col-md-12 error-div">
+                    <i class="fa fa-circle"></i>
+                    <span *ngIf="(classSectionForm.controls['section'].errors?.required)">Enter "Section"</span>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <div class="col-md-3" style="margin-top: 27px;">
+            <button pButton type="submit" icon="pi pi-plus" label="Add" [attr.disabled]="isDisabled ? 'disabled': null"
+                class="ui-button-secondary table-header-items add"></button>&nbsp;
+        </div>
+    </div>
+     <p-table #dt [columns]="cols" [value]="teacherclasssections"
+    [paginator]="true" [rows]="10">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" pReorderableColumn
+                        style="width: 20% !important;">
+                        <div class="">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field" style="float:right"></p-sortIcon>
+                        </div>
+                    </th>     
+                    <th style="width:5em"></th>             
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+                <tr>
+                    <td *ngFor="let col of columns">                        
+                        <div class="" *ngIf="col.field == 'class'">
+                            <a class="bold">{{getClassName(rowData.class)}}</a>
+                        </div>
+                        <div class="" *ngIf="col.field == 'section'">
+                            <span class="tableRowData" *ngFor="let datavalue of rowData.section">
+                                <li>
+                                    {{getSectionName(datavalue)}}
+                                </li>
+                            </span>
+                        </div>
+                    </td>     
+                    <td>
+                        <button class="btn btn-danger" (click)="removeRow(rowData)"><i class="fa fa-times"></i> Remove</button>                       
+                    </td>               
+                </tr>
+            </ng-template>
+        </p-table>         
+</form>

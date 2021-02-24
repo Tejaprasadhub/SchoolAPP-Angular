@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">Settings</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+    <form [formGroup]="settingsForm"  class="col-md-12" (ngSubmit)="settingsSubmit()">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="(!settingsForm.valid && formSubmitAttempt)">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-triangle"></i>
+                <b>Please correct the following error(s):</b>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 error-div" *ngIf="((!settingsForm.controls['sms'].valid && settingsForm.controls['sms'].touched)|| 
+                                (!settingsForm.controls['sms'].valid && settingsForm.controls['sms'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['sms'].errors?.required)">Enter "SMS"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!settingsForm.controls['email1'].valid && settingsForm.controls['email1'].touched)|| 
+                                (!settingsForm.controls['email1'].valid && settingsForm.controls['email1'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['email1'].errors?.required)">Enter "Email1"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!settingsForm.controls['vendor'].valid && settingsForm.controls['vendor'].touched)|| 
+                                (!settingsForm.controls['vendor'].valid && settingsForm.controls['vendor'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['vendor'].errors?.required)">Enter "Vendor"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!settingsForm.controls['sender'].valid && settingsForm.controls['sender'].touched)|| 
+                                (!settingsForm.controls['sender'].valid && settingsForm.controls['sender'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['sender'].errors?.required)">Enter "Sender"</span>
+                            </div> 
+                            <div class="col-md-3 error-div" *ngIf="((!settingsForm.controls['transkey'].valid && settingsForm.controls['transkey'].touched)|| 
+                                (!settingsForm.controls['transkey'].valid && settingsForm.controls['transkey'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['transkey'].errors?.required)">Enter "Transactinal key"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!settingsForm.controls['promkey'].valid && settingsForm.controls['promkey'].touched)|| 
+                                (!settingsForm.controls['promkey'].valid && settingsForm.controls['promkey'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['promkey'].errors?.required)">Enter "Promational Key"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!settingsForm.controls['email2'].valid && settingsForm.controls['email2'].touched)|| 
+                                (!settingsForm.controls['email2'].valid && settingsForm.controls['email2'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['email2'].errors?.required)">Enter "Email2"</span>
+                                <span *ngIf="(settingsForm.controls['email2'].errors?.pattern)">Enter "Valid Email2"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!settingsForm.controls['password'].valid && settingsForm.controls['password'].touched)|| 
+                                (!settingsForm.controls['password'].valid && settingsForm.controls['password'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(settingsForm.controls['password'].errors?.required)">Enter "Password"</span>
+                                <span *ngIf="(settingsForm.controls['password'].errors?.pattern)">Enter "Valid Password"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row search-box search-box-padding form-block ">
+            <div class="col-md-6">
+                <span>SMS</span><br>
+                <p-dropdown [options]="sms" filter="true" class="required" (onChange)="dropdownChange($event,'sms')" placeholder="Select"
+                    formControlName="sms"  [ngClass]="{'error':((!settingsForm.controls['sms'].valid && settingsForm.controls['sms'].touched) || 
+                    (!settingsForm.controls['sms'].valid && settingsForm.controls['sms'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}"></p-dropdown>
+            </div>
+            <div class="col-md-6">
+                <span>EMAIL</span><br>
+                <p-dropdown [options]="email" filter="true" class="required" (onChange)="dropdownChange($event,'email')" placeholder="Select"
+                    formControlName="email1" [ngClass]="{'error':((!settingsForm.controls['email1'].valid && settingsForm.controls['email1'].touched) || 
+                    (!settingsForm.controls['email1'].valid && settingsForm.controls['email1'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}"></p-dropdown>
+            </div>
+            <div class="row col-md-12" *ngIf="smsDiv"><br>
+                <div class="col-md-12">
+                    <span class="table-header-items">SMS Notifications Settings</span>
+                </div>
+                <div class="col-md-6">
+                    <span>Select SMS Vendor</span><br>
+                    <p-dropdown [options]="vendor" class="required" filter="true" formControlName="vendor" placeholder="Select a Vendor" [ngClass]="{'error':((!settingsForm.controls['vendor'].valid && settingsForm.controls['vendor'].touched) || 
+                    (!settingsForm.controls['vendor'].valid && settingsForm.controls['vendor'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+                    </p-dropdown>
+                </div>
+                <div class="col-md-6">
+                    <span>Sender Name</span><br>
+                    <input id="input" class="w-100" class="required" maxlength="45" formControlName="sender" type="text"
+                        placeholder="Student Name" size="30" pInputText [ngClass]="{'error':((!settingsForm.controls['sender'].valid && settingsForm.controls['sender'].touched) || 
+                        (!settingsForm.controls['sender'].valid && settingsForm.controls['sender'].untouched && 
+                        formSubmitAttempt)),'required':(isRequired == true )}">
+                </div>
+                <div class="col-md-6">
+                    <span>Transactional Key</span><br>
+                    <input id="input" class="w-100" class="required" maxlength="45" formControlName="transkey" type="text"
+                        placeholder="Student Name" size="30" pInputText [ngClass]="{'error':((!settingsForm.controls['transkey'].valid && settingsForm.controls['transkey'].touched) || 
+                        (!settingsForm.controls['transkey'].valid && settingsForm.controls['transkey'].untouched && 
+                        formSubmitAttempt)),'required':(isRequired == true )}">
+                </div>
+                <div class="col-md-6">
+                    <span>Promational Key</span><br>
+                    <input id="input" class="w-100" class="required" maxlength="45" formControlName="promkey" type="text"
+                        placeholder="Student Name" size="30" pInputText [ngClass]="{'error':((!settingsForm.controls['promkey'].valid && settingsForm.controls['promkey'].touched) || 
+                        (!settingsForm.controls['promkey'].valid && settingsForm.controls['promkey'].untouched && 
+                        formSubmitAttempt)),'required':(isRequired == true )}">
+                </div>
+            </div>
+
+            <div class="row col-md-12" *ngIf="emailDiv"><br>
+                <div class="col-md-12">
+                    <span class="table-header-items">Email Notification Settings</span>
+                </div>
+                <div class="col-md-6">
+                    <span>Email</span><br>
+                    <input id="input" class="w-100" class="required" maxlength="45" formControlName="email2" type="text"
+                        placeholder="Student Name" size="30" pInputText [ngClass]="{'error':((!settingsForm.controls['email2'].valid && settingsForm.controls['email2'].touched) || 
+                        (!settingsForm.controls['email2'].valid && settingsForm.controls['email2'].untouched && 
+                        formSubmitAttempt)),'required':(isRequired == true )}">
+                </div>
+                <div class="col-md-6">
+                    <span>Password</span><br>
+                    <input id="input" class="w-100" class="required" maxlength="45" formControlName="password" type="text"
+                        placeholder="Student Name" size="30" pInputText [ngClass]="{'error':((!settingsForm.controls['password'].valid && settingsForm.controls['password'].touched) || 
+                        (!settingsForm.controls['password'].valid && settingsForm.controls['password'].untouched && 
+                        formSubmitAttempt)),'required':(isRequired == true )}">
+                </div>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6 text-right"><br>
+                <button pButton type="submit" icon="pi pi-check" label="Submit"
+                    class="ui-button-secondary table-header-items"></button>&nbsp;
+            </div>
+        </div>
+    </form>
+</div>

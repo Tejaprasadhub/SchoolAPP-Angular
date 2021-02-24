@@ -1,0 +1,132 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">{{pageTitle}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+
+    <form [formGroup]="addExamForm" class="col-md-12" (ngSubmit)="addExamSubmit()">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="(!addExamForm.valid && formSubmitAttempt)">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-triangle"></i>
+                <b>Please correct the following error(s):</b>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 error-div" *ngIf="((!addExamForm.controls['title'].valid && addExamForm.controls['title'].touched)|| 
+                                (!addExamForm.controls['title'].valid && addExamForm.controls['title'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addExamForm.controls['title'].errors?.required)">Enter "Title"</span>
+                                <span *ngIf="(!addExamForm.controls['title'].errors?.required && 
+                                    addExamForm.controls['title'].errors?.pattern)">Enter
+                                    Valid "Title"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!addExamForm.controls['year'].valid && addExamForm.controls['year'].touched)|| 
+                                (!addExamForm.controls['year'].valid && addExamForm.controls['year'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addExamForm.controls['year'].errors?.required)">Enter "Year"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!addExamForm.controls['status'].valid && addExamForm.controls['status'].touched)|| 
+                            (!addExamForm.controls['status'].valid && addExamForm.controls['status'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addExamForm.controls['status'].errors?.required)">Enter "Status"</span>
+                            </div>
+
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!addExamForm.controls['classes'].valid && addExamForm.controls['classes'].touched)|| (!addExamForm.controls['classes'].valid && addExamForm.controls['classes'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addExamForm.controls['classes'].errors?.required)">Enter
+                                    "Classes"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="examwisesubjects.length <= 0">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="examwisesubjects.length <= 0">Define Exam Wise Subjects
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row search-box search-box-padding form-block">
+            <div class="col-md-3">
+                <span>
+                    Title
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="title" type="text" placeholder="Title" size="30" pInputText [ngClass]="{'error':((!addExamForm.controls['title'].valid && addExamForm.controls['title'].touched) || 
+                    (!addExamForm.controls['title'].valid && addExamForm.controls['title'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-3">
+                <span>Year</span><br>
+                <p-calendar placeholder="Select Year" view="month" dateFormat="mm/yy" [yearNavigator]="true"
+                    yearRange="2000:2030" [disabled]="isDisabled" formControlName="year"
+                    [inputStyle]="{'width':'100% !important'}" [showIcon]="true"
+                    [ngClass]="{'error':((!addExamForm.controls['year'].valid && addExamForm.controls['year'].touched) || (!addExamForm.controls['year'].valid && addExamForm.controls['year'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+                </p-calendar>
+            </div>
+            <div class="col-md-3">
+                <span>Status</span><br>
+                <p-dropdown [options]="status" filter="true" formControlName="status" [disabled]="isDisabled"
+                    placeholder="Select Status" [ngClass]="{'error':((!addExamForm.controls['status'].valid &&
+                    addExamForm.controls['status'].touched) || 
+                (!addExamForm.controls['status'].valid && addExamForm.controls['status'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>
+            <div class="col-md-3">
+                <span>Classes</span><br>
+                <p-multiSelect [options]="classes" [disabled]="isDisabled" formControlName="classes" class="w-100"
+                    [ngClass]="{'error':((!addExamForm.controls['classes'].valid && addExamForm.controls['classes'].touched) || (!addExamForm.controls['classes'].valid && addExamForm.controls['classes'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+                </p-multiSelect>
+            </div>
+            <div class="col-md-12 mt-3">
+                <h6><b><i class="fa fa-info-circle"></i> Define Exam wise Subjects</b></h6>
+            </div>
+
+            <br>
+            <div class="col-md-12 clienttable">
+                <app-fees (arrayToEmit)="getArray($event)" [isDisabled]="this.isDisabled" [examwisesubjects]="examwisesubjects"></app-fees>
+            </div>
+
+            <div class="row col-md-12 mt-3">
+                <div class="col-md-4  required-block">
+                    <span class="required" *ngIf="this.formType == 'create' || this.formType == 'edit'">
+                        <span class="requirednote">Required</span>
+                    </span>
+                </div>
+                <div class="col-md-8 text-right">
+                    <button pButton type="button" icon="pi pi-check" label="Edit" *ngIf="isDisabled"
+                        (click)="editControls()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                    <button pButton type="submit" icon="pi pi-check" label="Submit" *ngIf="!isDisabled"
+                        class="ui-button-secondary table-header-items"></button>&nbsp;
+                    <button pButton type="button" icon="pi pi-refresh" label="Clear" *ngIf="!isDisabled"
+                        (click)="resetForm()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                    <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="list()"
+                        class="ui-button-secondary table-header-items"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

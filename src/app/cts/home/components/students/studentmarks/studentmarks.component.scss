@@ -1,0 +1,24 @@
+.student-marks-container{
+    .profile-title{
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+    .div-common-styles{
+        margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    }
+    // .ui-button.ui-state-default.ui-button-secondary{
+    //     color: #4282b4 !important;
+    //     background-color: #fff !important;
+    //     border: 1px solid #ccc;
+    //     border-radius:50px;
+    //     font-weight: bold;
+    // }
+    .outofmarks{
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+    }
+}

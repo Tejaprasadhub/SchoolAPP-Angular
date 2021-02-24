@@ -1,0 +1,23 @@
+body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.teacherlogo{
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+    border-radius: 50px;
+}
+
+.teacher-container { position: relative; }
+.teacher-container img { display: block; }
+.teacher-container .pi-pencil { position: absolute;
+    bottom: 0;
+    left: 45px;
+    color: #fff !important;
+    font-size: 25px;
+    background: #007ad9;
+    border-radius: 16px; 
+    border: 1px solid #fff;
+}

@@ -1,0 +1,110 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">{{pageTitle}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+
+    <form [formGroup]="addClassForm" class="col-md-12" (ngSubmit)="addClassSubmit()">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="(!addClassForm.valid && formSubmitAttempt)">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-triangle"></i>
+                <b>Please correct the following error(s):</b>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 error-div" *ngIf="((!addClassForm.controls['class'].valid && addClassForm.controls['class'].touched)|| 
+                                (!addClassForm.controls['class'].valid && addClassForm.controls['class'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addClassForm.controls['class'].errors?.required)">Enter "Class
+                                    Name"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addClassForm.controls['section'].valid && 
+                            addClassForm.controls['section'].touched)|| 
+                            (!addClassForm.controls['section'].valid && addClassForm.controls['section'].untouched && 
+                            formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addClassForm.controls['section'].errors?.required)">
+                                    Enter "Section"
+                                </span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addClassForm.controls['status'].valid && 
+                            addClassForm.controls['status'].touched)|| 
+                            (!addClassForm.controls['status'].valid && addClassForm.controls['status'].untouched && 
+                            formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addClassForm.controls['status'].errors?.required)">
+                                    Enter "Status"
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row search-box search-box-padding form-block">
+            <div class="col-md-4">
+                <span>
+                    Class Name
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="class" type="text" placeholder="Class Name" size="30" pInputText [ngClass]="{'error':((!addClassForm.controls['class'].valid && addClassForm.controls['class'].touched) || 
+                    (!addClassForm.controls['class'].valid && addClassForm.controls['class'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>No Of Sections</span><br>
+                <p-dropdown [options]="sections" filter="true" formControlName="section" [disabled]="isDisabled"
+                    placeholder="Select No of sections" [ngClass]="{'error':((!addClassForm.controls['section'].valid &&
+                addClassForm.controls['section'].touched) || 
+                (!addClassForm.controls['section'].valid && addClassForm.controls['section'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <span>Status</span><br>
+                <p-dropdown [options]="status" filter="true" formControlName="status" [disabled]="isDisabled"
+                    placeholder="Select Status" [ngClass]="{'error':((!addClassForm.controls['status'].valid &&
+                    addClassForm.controls['status'].touched) || 
+                (!addClassForm.controls['status'].valid && addClassForm.controls['status'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>            
+            <br>
+            <br>
+            <br>
+            <div class="col-md-4  required-block">
+                <span class="required" *ngIf="this.formType == 'create' || this.formType == 'edit'">
+                    <span class="requirednote">Required</span>
+                </span>
+            </div>
+            <div class="col-md-8 text-right">
+                <button pButton type="button" icon="pi pi-check" label="Edit" *ngIf="isDisabled"
+                    (click)="editControls()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="submit" icon="pi pi-check" label="Submit" *ngIf="!isDisabled"
+                    class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-refresh" label="Clear" *ngIf="!isDisabled"
+                    (click)="resetForm()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="list()"
+                    class="ui-button-secondary table-header-items"></button>
+            </div>
+        </div>
+    </form>
+</div>

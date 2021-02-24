@@ -1,0 +1,111 @@
+<div class="row">
+    <div class="col-md-4">
+        <span class="table-header-items">{{pageTitle}}</span>
+    </div>
+</div>
+
+<div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+    <div class="col-md-12">
+        <i class="fa fa-exclamation-circle"></i>
+        <b>{{errorMessage}}</b>
+    </div>
+</div>
+<div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+    <div class="col-md-12">
+        <i class="fa fa-check"></i>
+        <b>{{successMessage}}</b>
+    </div>
+</div>
+
+<form [formGroup]="examForm" (ngSubmit)="examSubmit()">
+    <div class="row">
+        <div class="col-md-3">
+            <span>
+                Subject
+            </span><br>
+            <p-dropdown [options]="subject" filter="true" formControlName="subjectid" [disabled]="isDisabled"
+            placeholder="Select subject" [ngClass]="{'error':((!examForm.controls['subjectid'].valid &&
+            examForm.controls['subjectid'].touched) || 
+        (!examForm.controls['subjectid'].valid && examForm.controls['subjectid'].untouched && formSubmitAttempt)),
+        'required':(isRequired == true )}">
+        </p-dropdown>
+            <div class="col-md-12 error-block" *ngIf="((!examForm.controls['subjectid'].valid && examForm.controls['subjectid'].touched)|| 
+                    (!examForm.controls['subjectid'].valid && examForm.controls['subjectid'].untouched && 
+                    formSubmitAttempt))">
+                <div class="col-md-12 error-div">
+                    <i class="fa fa-circle"></i>
+                    <span *ngIf="(examForm.controls['subjectid'].errors?.required)">Enter "Subject"</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <span>Cutoff Marks</span><br>
+            <input id="input" maxlength="3" class="w-100" (keypress)=_keyPress($event) [attr.disabled]="isDisabled ? 'disabled': null"
+                formControlName="cutoff" type="text" placeholder="Cutoff Marks" size="30" pInputText [ngClass]="{'error':((!examForm.controls['cutoff'].valid && examForm.controls['cutoff'].touched) || 
+                (!examForm.controls['cutoff'].valid && examForm.controls['cutoff'].untouched && 
+                formSubmitAttempt)),'required':(isRequired == true )}">
+                <div class="col-md-12 error-block" *ngIf="((!examForm.controls['cutoff'].valid && examForm.controls['cutoff'].touched)|| 
+                    (!examForm.controls['cutoff'].valid && examForm.controls['cutoff'].untouched && 
+                    formSubmitAttempt))">
+                <div class="col-md-12 error-div">
+                    <i class="fa fa-circle"></i>
+                    <span *ngIf="(examForm.controls['cutoff'].errors?.required)">Enter "Cutoff Marks"</span>
+                </div>
+              
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span>Total Marks</span><br>
+            <input id="input" maxlength="3" class="w-100" (keypress)=_keyPress($event) [attr.disabled]="isDisabled ? 'disabled': null"
+                formControlName="total" type="text" placeholder="Total Marks" size="30" pInputText [ngClass]="{'error':((!examForm.controls['total'].valid && examForm.controls['total'].touched) || 
+                (!examForm.controls['total'].valid && examForm.controls['total'].untouched && 
+                formSubmitAttempt)),'required':(isRequired == true )}">
+                <div class="col-md-12 error-block" *ngIf="((!examForm.controls['total'].valid && examForm.controls['total'].touched)|| 
+                    (!examForm.controls['total'].valid && examForm.controls['total'].untouched && 
+                    formSubmitAttempt))">
+                <div class="col-md-12 error-div">
+                    <i class="fa fa-circle"></i>
+                    <span *ngIf="(examForm.controls['total'].errors?.required)">Enter "Total Marks"</span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-3" style="margin-top: 27px;">
+            <button pButton type="submit" icon="pi pi-plus" label="Add" [attr.disabled]="isDisabled ? 'disabled': null"
+                class="ui-button-secondary table-header-items add"></button>&nbsp;
+        </div>
+    </div>
+    <p-table #dt [columns]="cols" [value]="examwisesubjects"
+    [paginator]="true" [rows]="10">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" pReorderableColumn
+                        style="width: 20% !important;">
+                        <div class="">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field" style="float:right"></p-sortIcon>
+                        </div>
+                    </th>     
+                    <th style="width:5em"></th>             
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+                <tr>
+                    <td *ngFor="let col of columns">                        
+                        <div class="" *ngIf="col.field == 'subjectid'">
+                            <a class="bold">{{getSubjectName(rowData.subjectid)}}</a>
+                        </div>
+                        <div class="" *ngIf="col.field != 'subjectid'"> 
+                            {{rowData[col.field]}} 
+                        </div>
+                    </td>     
+                    <td>
+                        <button class="btn btn-danger" (click)="removeRow(rowData)"><i class="fa fa-times"></i> Remove</button>                       
+                    </td>               
+                </tr>
+            </ng-template>
+        </p-table>        
+</form>

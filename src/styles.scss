@@ -1,0 +1,468 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: rgba(224, 224, 224, 1) !important;;
+    overflow-x: hidden;
+}
+.container-fluid{
+    margin-top: -30px !important;
+}
+.pt-lg-3{
+    font-size: 14px;
+}
+
+.word-break{
+    word-break:break-all;
+}
+.navbar {
+    background-color: #fff;
+    color:black;
+}
+.blue{
+    color: #14145d;
+ }
+ .yellow{
+     color:#d69d33;    
+ }
+ .pink{
+    //  color:#e550d3a6;
+    color:#e87722;
+ }
+ .green{
+     color:green;
+ }
+ .lightblue{
+     color:#351681 ;
+ }
+p-dropdown.required,p-calendar.required,p-multiSelect.required{
+    border-left: none !important;
+}
+p-dropdown.required .ui-dropdown,p-calendar.required .ui-calendar .ui-inputtext,p-multiSelect.required .ui-multiselect{
+    border-left: 3px solid #e32315 !important;
+}
+.ui-inputtext{
+width: 100% !important;
+}
+
+// p-dropdown.error .ui-dropdown,p-calendar.error .ui-calendar .ui-inputtext,p-multiSelect.error .ui-multiselect{
+//     background-color: rgb(245, 179, 179) !important;
+// }
+ .required{
+     border-left: 3px solid #e32315 !important;
+ }
+ .required-block{
+     display: block;
+     font-size: 12px;
+     margin-top: 9px;
+ }
+ .requirednote{
+     margin-left: 4px;
+     color: #e32315;
+ }
+ .error-block{
+    background: #FFF3F3;
+    color: #e32315;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 10px;
+    margin-top: 5px;
+ }
+ .success-block{
+     background:#c5ddc5;
+     color: green;
+     font-size: 14px;
+     font-family: inherit;
+     padding: 10px;
+     margin-top: 5px;
+ }
+ .ui-state-disabled,.ui-widget:disabled{
+     opacity: unset !important;
+     border: 1px solid #efefee !important;
+     cursor: default !important;
+     background-color:#efefee !important;
+     color: #282a2e !important;
+ }
+ .error-block i,.success-block i{
+    font-size: 20px;
+    margin-right: 10px;
+    float: left;
+ }
+ .error-block .error-div{
+    font-weight: bold;
+    font-size: 12px;
+ }
+ .error-block .error-div i{
+    padding: 5px 0px;
+    font-size: 8px;
+ }
+ .error.ui-inputtext,p-calendar.error .ui-calendar .ui-inputtext,p-dropdown.error .ui-dropdown,p-multiSelect.error .ui-multiselect{
+     border-top:1px solid #e32315 !important;
+     border-right: 1px solid #e32315 !important;
+     border-bottom: 1px solid #e32315 !important;
+     background: #FFF3F3 !important;
+ }
+ .ui-table-wrapper .pi-pencil{
+    color: green !important;
+    font-size: 20px;
+    cursor: pointer;
+ }
+ .ui-table-wrapper .pi-trash{
+    color: red !important;
+    font-size: 20px;
+    cursor: pointer;
+ }
+ .ui-dialog-top,.ui-dialog-wrapper{
+    background: rgba(0,0,0,.55);  
+    pointer-events: auto !important;
+ }
+ 
+.blue:hover:not(.fa),.blue:focus:not(.fa){
+    border: 2px solid #14145d;
+    cursor: pointer;
+ }
+ .yellow:hover:not(.fa),.yellow:focus:not(.fa){
+     border:2px solid #d69d33;
+     cursor: pointer;
+ }
+ .pink:hover:not(.fa),.pink:focus:not(.fa){
+    //  border: 2px solid #e550d3a6;
+     border: 2px solid #e87722;
+     cursor: pointer;
+ }
+ .green:hover:not(.fa),.green:focus:not(.fa)
+ {
+     border:2px solid green;
+     cursor: pointer;
+ }
+ .lightblue:hover:not(.fa),.lightblue:focus:not(.fa)
+ {
+     border: 2px solid #351681;
+     cursor: pointer;
+ }
+
+ .tiles-section .card:hover,.bg{
+    background: url(./assets/images/cardbg.png) no-repeat center;
+    box-shadow: 0px 10px 30px rgba(108, 39, 255, 0.3);
+    background-size: 100% 100%;
+    color: #fff !important;
+    border:2px solid #fff !important;
+    .fa{
+        color:#fff !important
+    }
+ }
+
+ .student-layout-div .card{
+    background: url(./assets/images/cardbg.png) no-repeat center;
+    box-shadow: 0px 10px 30px rgba(108, 39, 255, 0.3);
+    background-size: 100% 100%;
+    color: #fff !important;
+    border:2px solid #fff !important;
+    .fa{
+        color:#fff !important
+    }
+ }
+ .ui-menuitem-text{
+    color: #351681 !important;
+}
+
+//  .card:hover::before{
+//     background: url(./assets/images/cardbg2.png) no-repeat center;
+//     top:8px;
+//  }
+//  .card:hover::after{
+//     background: url(./assets/images/cardbg3.png) no-repeat center;
+//     top:16px;
+//  }
+ 
+
+// table common styles starts from here
+.table-section{
+    background-color: #fff;
+    color:black;
+}
+.table-header-items{
+    color:black;
+    font-weight: 700;
+    font-size: 20px;
+}
+.table-heading{
+    padding: 10px;
+}
+.ui-multiselect .ui-multiselect-panel {
+    width: 200px !important;
+    // right: 20px !important;
+    left: auto !important ;
+}
+
+.ui-multiselect{
+    width: 100% !important;
+}
+
+.ui-chkbox .ui-chkbox-box.ui-state-active,.ui-calendar .ui-button,.ui-button.ui-state-default.ui-button-secondary:hover,
+.ui-multiselect-panel .ui-multiselect-items .ui-multiselect-item.ui-state-highlight,body .ui-radiobutton .ui-radiobutton-box.ui-state-active:not(.ui-state-disabled):hover,
+body .ui-radiobutton .ui-radiobutton-box.ui-state-active,body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active a{
+    border-color: #351681 !important;
+    background-color: #351681 !important;
+    color: #ffffff !important;
+}
+
+.ui-button.ui-state-default.ui-button-secondary{
+    color: #351681 !important;
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+    border-radius:50px;
+}
+ 
+.info-container{
+    border-left: 1px solid #ccc;
+}
+  
+  .transform {
+     display: none;
+  }  
+  .transform-active {
+      display: block;
+  }
+
+  .search-box{
+    background: #f8f9fa;
+    padding: 10px 10px 35px 10px;
+    margin-top: 10px;
+    border-top: 3px solid #351681;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;   
+  }
+  .search-box span:not(.ui-clickable),.ui-table{
+      font-size: 13px !important;
+    //   font-weight: 500 !important;
+  }
+  .search-buttons{
+    padding: 25px 12px 0px 0px;
+  }
+  .ui-dropdown{
+      width: 100% !important;
+  }  
+  .ui-calendar{
+    width: 100% !important;
+}
+    .ui-calendar .ui-inputtext{
+        width: 100% !important;
+    }
+    .ui-calendar .ui-calendar-button{
+      position: absolute;
+      right: 0px;
+  }
+  .ui-megamenu{
+    background-color: #f8f9fa !important;
+    border:1px solid #f8f9fa !important;
+}
+.ui-menuitem-link {
+    font-weight: bold !important;
+}
+  .ui-table .card,.ui-table .card:hover{
+    cursor: pointer;
+    background-color: #efefee !important;
+    margin-bottom: 5px;
+    border: 2px solid #e5e5e5;
+  }
+  .ui-table .card-body{
+      padding:2px !important
+  }
+  .ui-table-tbody a{
+      color:black;
+      text-decoration: none;
+  }
+  .ui-table-tbody .btn{
+    border-radius: 50px;
+    padding: 0px 10px !important;
+    font-size: 12px;
+  }
+  .ui-table .card-body .fa{
+    font-size: 20px !important;
+}
+.ui-table .card-body-content{
+    text-align: center;
+    padding-top: 10px !important;
+}
+  
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-left: 100px solid red;
+    border-bottom: 50px solid transparent;
+  }
+  .student-layout-div .card-title{
+      font-weight: bold !important;
+  }
+  .student-profile-container .ui-tabview-nav{
+    display: flex !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active, body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active, body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active {
+    background-color: #351681 !important;
+    border: 1px solid #351681 !important;
+}
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight, body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
+    color: #ffffff;
+    background-color: #351681 !important;
+}
+
+body .ui-dialog .ui-dialog-titlebar {
+    border: 1px solid #351681 !important;
+    background-color: #351681 !important;
+    color: #fff !important;
+    padding: 1em;
+    font-weight: 700;
+    border-bottom: 0 none;
+}
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+    color: #fff !important;
+}
+.ui-dialog-footer .ui-button {
+    background-color: #351681 !important;
+    border: 1px solid #351681 !important;
+}
+ 
+
+ 
+body .ui-table .ui-table-thead > tr > th {
+    padding: 0.5em 0.5em !important;
+    border: 1px solid #c8c8c8 !important;
+    font-weight: 700;
+    color: #fff !important;
+    background-color: #351681 !important;
+}
+body .ui-table .ui-sortable-column .ui-sortable-column-icon {
+    color: #fff !important;
+    font-size: 0.8em !important;
+}
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #351681 !important;
+    color: #ffffff !important;
+}
+
+body .fc .fc-toolbar .fc-button {
+    background-color: #351681 !important;
+    border: 1px solid #351681 !important;
+}
+body .fc .fc-event {
+    // background-color: #008000 !important;
+    // border: 1px solid #008000 !important;
+    background-color: #e1e1e1 !important;
+    border: 1px solid #e1e1e1 !important;
+    color: black !important;
+    padding: 5px;
+}
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0px !important; 
+}
+.ui-fluid .ui-button {
+    width: auto !important;
+}
+.ui-dropdown .ui-inputtext{
+    background: none !important;
+}
+
+.search-box-padding{
+    padding:10px !important;
+}
+    
+//   table common styles ends here
+
+
+//pagination starts from here
+.ui-table .ui-paginator-bottom {
+    border-top: 0;
+    margin-top: 3px;
+    background-color: #fff;
+    padding: 0;
+    background: linear-gradient(180deg, #fff 0, #fff);
+    float: left;
+    .ui-dropdown{
+        border:1px solid #ccc;
+    }
+    .ui-dropdown-trigger{
+        background: none !important;
+        .ui-clickable{
+            margin-top: -0.4em !important;
+        }
+    }   
+}
+.pagecount-dropdown{
+    float: left;
+    padding-left: 5px;
+}
+.pagecounting{
+    color:black;
+    padding-left: 5px;
+    line-height: 35px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.pagecount{
+    float: right;
+    color:black;
+    padding-right: 2px;
+    font-size: 13px;
+    line-height: 35px;
+    font-weight: bold;
+}
+
+.ui-paginator-bottom p-dropdown{
+    float: right;
+    display: block;
+    margin-left: 12px;
+    width: 50px;
+    height: auto;
+}
+.ui-paginator{
+    border-bottom:none !important;
+}
+.tableRowData li{
+    display: inline-block;
+    border: 1px solid #ccc;
+    background: #f5f2f2;
+    padding: 2px 10px;
+    margin: 3px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.clienttable .ui-table .ui-paginator-bottom {
+    border-top: 0 !important;
+    margin-top: 3px !important;
+    background-color: #fff !important;
+    padding-left: 0px !important;
+    float: inherit !important;
+    background: linear-gradient(180deg, #efefee 0, #efefee) !important;
+}
+
+
+//scroll bar css starts
+body::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+body::-webkit-scrollbar
+{
+    width: 5px;
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44, rgb(122,153,217)),
+									   color-stop(0.72, rgb(73,125,189)),
+									   color-stop(0.86, rgb(28,58,148)));
+}
+//Scroll bar css ended
+ 

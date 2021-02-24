@@ -1,0 +1,109 @@
+<div class="row student-reports-container info-container">
+    <div class="col-md-12 profile-title">
+        <!-- <div class="row">
+            <div class="col-md-6">
+                <h4><i class="fa fa-user" aria-hidden="true"></i> Student Reports</h4>
+            </div>
+            <div class="col-md-3">
+                <p-dropdown [options]="years" class="w-100" placeholder="Select Class" filter="true"></p-dropdown>
+            </div>
+            <div class="col-md-3">
+                <p-dropdown [options]="exams" filter="true" class="w-100" placeholder="Select Exam"></p-dropdown>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4><i class="fa fa-user" aria-hidden="true"></i> Student Reports</h4>
+            </div>
+            <div class="col-md-3">
+                <p-dropdown [options]="classes" class="w-100" (onChange)="classesdropdownChange($event)"
+                    placeholder="Select Class" filter="true"></p-dropdown>
+            </div>
+            <div class="col-md-3">
+                <p-dropdown [options]="exams" filter="true" (onChange)="examsdropdownChange($event)" class="w-100"
+                    placeholder="Select Exam"></p-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="report-card-div p-4" *ngIf="subjects.length > 0">
+            <div class="col-md-12">
+                <h3 class="text-center font-weight-bold">REPORT CARD</h3>
+            </div>
+            <div class="col-md-12 row">
+                <div class="col-md-9 ">
+                    <div class="col-md-12 d-flex p-1">
+                        <div class="label">Address :</div>
+                        <div class="value">{{this.reportsData.address}}</div>
+                    </div>
+                    <div class="col-md-12 d-flex p-1">
+                        <div class="label">Phone :</div>
+                        <div class="value">{{this.reportsData.mobile}}</div>
+                    </div>
+                    <div class="col-md-12 d-flex p-1">
+                        <div class="label">Email :</div>
+                        <div class="value">{{this.reportsData.email}}</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <img class="img-fluid nav-school-logo" src="./assets/images/schoollogo.png">
+                </div>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <table class="table  table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row" colspan="2">Name of the Student</th>
+                            <td colspan="4">{{this.reportsData.studentname}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date of Birth</th>
+                            <td>{{this.reportsData.dob}}</td>
+                            <th scope="row">Class</th>
+                            <td>{{this.reportsData.classname}}</td>
+                            <th scope="row">Attendance %</th>
+                            <td>89</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="6" class="text-center">MARKS OF EACH SUBJECT </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <p-table #dt [columns]="cols" [value]="subjects" [rows]="10" [totalRecords]="totalRecords"
+                    [responsive]="true" [reorderableColumns]="true" dataKey="firstname">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field" pReorderableColumn
+                                style="width: 20% !important;">
+                                <div class="">
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field" style="float:right"></p-sortIcon>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+                        <tr>
+                            <td *ngFor="let col of columns">
+                                {{rowData[col.field]}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+        </div>
+
+        <div class="" *ngIf="subjects.length <= 0">
+            <div class="col-md-12 text-center p-4">
+                <img class="img-fluid nav-school-logo" src="./assets/images/no_data_found.png">
+                <p><b>Looks there are no reports with the above criteria.</b></p>
+                <p><b>Please change the above criteria to view report.</b></p>
+            </div>
+            
+        </div>
+
+
+    </div>

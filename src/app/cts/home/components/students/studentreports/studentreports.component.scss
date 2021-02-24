@@ -1,0 +1,28 @@
+.student-reports-container{
+    .profile-title{
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+  
+    .ui-button.ui-state-default.ui-button-secondary{
+        color: #4282b4 !important;
+        background-color: #fff !important;
+        border: 1px solid #ccc;
+        border-radius:50px;
+        font-weight: bold;
+    }
+    .label{
+        font-size: 15px;
+        color: #929292;
+        font-weight: bold;
+    }
+    .value{
+        font-size: 16px;
+        color: #000;
+        font-weight: bold;
+    }
+    .report-card-div{
+        box-shadow: 0px 1px 7px 1px #00000030;
+    }
+}

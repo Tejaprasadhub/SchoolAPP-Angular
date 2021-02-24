@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <div class="col-md-12 component-header">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="table-header-items">{{pageTitle}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
+    <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
+        <div class="col-md-12">
+            <i class="fa fa-check"></i>
+            <b>{{successMessage}}</b>
+        </div>
+    </div>
+
+    <form [formGroup]="addSubjectForm" class="col-md-12" (ngSubmit)="addSubjectSubmit()">
+        <div class="col-md-12 error-block animated fadeIn" *ngIf="(!addSubjectForm.valid && formSubmitAttempt)">
+            <div class="col-md-12">
+                <i class="fa fa-exclamation-triangle"></i>
+                <b>Please correct the following error(s):</b>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3 error-div" *ngIf="((!addSubjectForm.controls['code'].valid && addSubjectForm.controls['code'].touched)|| 
+                                (!addSubjectForm.controls['code'].valid && addSubjectForm.controls['code'].untouched && 
+                                formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addSubjectForm.controls['code'].errors?.required)">Enter "Subject Code"</span>
+                                
+                            </div>
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!addSubjectForm.controls['name'].valid && addSubjectForm.controls['name'].touched)|| 
+                                (!addSubjectForm.controls['name'].valid && addSubjectForm.controls['name'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addSubjectForm.controls['name'].errors?.required)">Enter "Subject Name"</span>
+                            </div>
+                            <div class="col-md-3 error-div"
+                            *ngIf="((!addSubjectForm.controls['status'].valid && addSubjectForm.controls['status'].touched)|| 
+                            (!addSubjectForm.controls['status'].valid && addSubjectForm.controls['status'].untouched && formSubmitAttempt))">
+                            <i class="fa fa-circle"></i>
+                            <span *ngIf="(addSubjectForm.controls['status'].errors?.required)">Enter "Status"</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row search-box search-box-padding form-block">
+            <div class="col-md-4">
+                <span>
+                    Code
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="code"
+                    type="text" placeholder="Subject Code" size="30" pInputText [ngClass]="{'error':((!addSubjectForm.controls['code'].valid && addSubjectForm.controls['code'].touched) || 
+                    (!addSubjectForm.controls['code'].valid && addSubjectForm.controls['code'].untouched && 
+                    formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>Name</span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="name"
+                type="text" placeholder="Subject Name" size="30" pInputText [ngClass]="{'error':((!addSubjectForm.controls['name'].valid && addSubjectForm.controls['name'].touched) || 
+                (!addSubjectForm.controls['name'].valid && addSubjectForm.controls['name'].untouched && 
+                formSubmitAttempt)),'required':(isRequired == true )}">
+            </div>
+            <div class="col-md-4">
+                <span>Status</span><br>
+                <p-dropdown [options]="status" filter="true" formControlName="status" [disabled]="isDisabled"
+                    placeholder="Select Status" [ngClass]="{'error':((!addSubjectForm.controls['status'].valid &&
+                    addSubjectForm.controls['status'].touched) || 
+                (!addSubjectForm.controls['status'].valid && addSubjectForm.controls['status'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>            
+            <br>
+            <br>
+            <br>
+            <div class="col-md-4  required-block">
+                <span class="required" *ngIf="this.formType == 'create' || this.formType == 'edit'">
+                    <span class="requirednote">Required</span>
+                </span>
+            </div>
+            <div class="col-md-8 text-right">
+                <button pButton type="button" icon="pi pi-check" label="Edit" *ngIf="isDisabled"
+                    (click)="editControls()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="submit" icon="pi pi-check" label="Submit" *ngIf="!isDisabled"
+                    class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-refresh" label="Clear" *ngIf="!isDisabled"
+                    (click)="resetForm()" class="ui-button-secondary table-header-items"></button>&nbsp;
+                <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="list()"
+                    class="ui-button-secondary table-header-items"></button>
+            </div>
+        </div>
+    </form>
+</div>

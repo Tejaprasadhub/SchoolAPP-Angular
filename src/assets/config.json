@@ -1,0 +1,18 @@
+{
+    "api":{
+        "security":"http://localhost:64341/api/",
+        "AdminApp":"http://localhost:64371/api/"      
+    },
+    "datetimeformat":{
+        "datetimeformat":"MMMM Do YYYY, hh:mm A",
+        "serversidedateformat":"YYYY-MM-DD",
+        "serversideyearformat":"YYYY",
+        "angulardateformat":"MMMM Do, YYYY",
+        "filterdateformat":"DD-MM-YYYY 00:00:00"
+    },
+    "messages":{
+        "successMessage":"Your changes have been successfully saved",
+        "errorMessage":"Unable to process your request, please try again later"
+    }
+    
+} 

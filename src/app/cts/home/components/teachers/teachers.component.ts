@@ -332,8 +332,6 @@ export class TeachersComponent implements OnInit {
 
   }
 
- 
-
 
   
   //Reset form method

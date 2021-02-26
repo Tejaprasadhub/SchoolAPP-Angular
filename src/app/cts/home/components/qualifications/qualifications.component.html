@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <form [formGroup]="filtersForm"  (ngSubmit)="filterSubmit()">
+    <form [formGroup]="filtersForm">
         <div #myFiltersDiv class="col-md-12 box transform">
             <div class="row search-box search-box-padding">
                 <div class="col-md-3">
@@ -21,34 +21,25 @@
                     (keydown)="$event.key === 'Enter' ? dt.filter(tt.value,'title',''): ''"
                         pInputText>
                 </div>
-                <div class="col-md-3">
-                    <span>Year</span><br>
-                    <p-calendar placeholder="Select Year" view="month" dateFormat="mm/yy" [yearNavigator]="true"
-                        yearRange="2000:2030" formControlName="tyear" [inputStyle]="{'width':'100% !important'}"
-                        [showIcon]="true">
-                    </p-calendar>
-                </div>
                 
                 <div class="col-md-3">
-                    <span>Created On</span><br>
-                    <p-calendar #td placeholder="Select Date" formControlName="tcreateddate" (onSelect)="dt.filter(getFilterFormat(td.value),'dob','')"
+                    <span>Created Date</span><br>
+                    <p-calendar #td placeholder="Select Date" formControlName="tcreateddate" (onSelect)="dt.filter(getFilterFormat(td.value),'createddate','')"
                         [inputStyle]="{'width':'100% !important'}" [showIcon]="true"></p-calendar>
                 </div>
                 <div class="col-md-3">
-                  <span>User Type</span><br>
-                  <p-dropdown [options]="usertypes" class="w-100" formControlName="tusertype" placeholder="Select User Type" 
+                    <span>User</span><br>
+                    <p-dropdown #ut [options]="users" class="w-100" formControlName="tusertype" placeholder="Select User" 
+                    (onChange)="dt.filter(ut.value,'userid','')"
+                        ></p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <span>Status</span><br>
+                  <p-dropdown #st [options]="status" class="w-100" formControlName="tstatus" placeholder="Select Status" 
+                  (onChange)="dt.filter(st.value,'status','')"
                       ></p-dropdown>
               </div>
-              <div class="col-md-3">
-                <span>Status</span><br>
-                <p-dropdown [options]="status" class="w-100" formControlName="tstatus" placeholder="Select Status" 
-                    ></p-dropdown>
-            </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3 text-right search-buttons">
-                    <button pButton type="submit" icon="pi pi-search" label="Search"
-                        class="ui-button-secondary table-header-items"></button>&nbsp;
+                <div class="col-md-12 text-right search-buttons">
                     <button pButton type="button" icon="pi pi-refresh" label="Clear" (click)="resetFilterForm()"
                         class="ui-button-secondary table-header-items"></button>
                 </div>

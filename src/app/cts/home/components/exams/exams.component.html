@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <form [formGroup]="filtersForm" (ngSubmit)="filterSubmit()">
+    <form [formGroup]="filtersForm" >
         <div #myFiltersDiv class="col-md-12 box transform">
             <div class="row search-box search-box-padding">
                 <div class="col-md-3">
@@ -30,7 +30,7 @@
                 <div class="col-md-3">
                     <span>Classes</span><br>
                     <p-multiSelect [options]="classes" formControlName="tClasses" placeholder="Select Classes"
-                        (onChange)="multiselectSearch($event,'class_id')" class="w-100">
+                        (onChange)="multiselectSearch($event,'classid')" class="w-100">
                     </p-multiSelect>
                 </div>
                 <div class="col-md-3">
@@ -40,14 +40,13 @@
                 </div>
                 <div class="col-md-3">
                     <span>Created by</span><br>
-                    <p-dropdown [options]="usertypes" class="w-100" formControlName="tcreatedby" placeholder="Select User Type" 
+                    <p-dropdown #cb [options]="users" class="w-100" formControlName="tcreatedby" placeholder="Select User" 
+                    (onChange)="dt.filter(cb.value,'userid','')"
                         ></p-dropdown>
                 </div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3 text-right search-buttons">
-                    <button pButton type="submit" icon="pi pi-search" label="Search"
-                        class="ui-button-secondary table-header-items"></button>&nbsp;
                     <button pButton type="button" icon="pi pi-refresh" label="Clear" (click)="resetFilterForm()"
                         class="ui-button-secondary table-header-items"></button>
                 </div>

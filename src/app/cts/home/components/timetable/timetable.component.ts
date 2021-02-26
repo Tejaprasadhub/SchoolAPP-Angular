@@ -10,6 +10,8 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { AuthorizationGuard } from 'src/app/core/security/authorization-guard';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { Table } from 'primeng/table';
 
 
 @Component({
@@ -30,9 +32,11 @@ export class TimetableComponent implements OnInit {
   display:boolean=false;
   position: string;
   filtersForm: FormGroup;
-  classid: any[];
-  subjectid: any[];
-  teacherid: any[];
+  classid: any[]=[];
+  subjectid: any[]=[];
+  teacherid: any[]=[];
+  status: any[]=[];
+  users: any[]=[];
   toBeDeletedId:any;
 
    //pagination and api integration starts from here
@@ -43,24 +47,25 @@ export class TimetableComponent implements OnInit {
    currentPage:number = 1;
    pageCount:number;
  
+   @ViewChild(Table, { static: false }) DataTable: Table;
 
-  constructor(private TimetableService: TimetableService, private router: Router,private route:ActivatedRoute,private fb: FormBuilder) {
-    this.classid = [
-      { label: 'class1', value: '1' },
-      { label: 'class2', value: '2' },
-      { label: 'class3', value: '3' }
-    ];
-    this.subjectid = [
-      { label: 'subject1', value: '1' },
-      { label: 'subject2', value: '2' },
-      { label: 'subject3', value: '3' }
-    ];
-    this.teacherid = [
-      { label: 'teacher1', value: '1' },
-      { label: 'teacher2', value: '2' },
-      { label: 'teacher3', value: '3' }
-    ];
+  constructor(private dropdownService: DropdownService,private TimetableService: TimetableService, private router: Router,private route:ActivatedRoute,private fb: FormBuilder) {
+    
     this.timetable = [];
+    this.status = [
+      { label: 'Active', value: 'AC' },
+      { label: 'InActive', value: 'NA' }
+    ];
+    var dropdowns = ["classes","subjects","teachers","users"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.classid = result.data.classes;
+          this.subjectid = result.data.subjects;
+          this.teacherid = result.data.teachers;
+          this.users = result.data.users;
+        }
+      });
   }
 
   public ngOnInit() {
@@ -173,7 +178,10 @@ viewTimetable(id):void{
       'tsubjectid': new FormControl(''),
       'tteaherid': new FormControl(''),
       'tperiodfrom': new FormControl(''),
-      'tperiodto': new FormControl('')
+      'tperiodto': new FormControl(''),
+      'tcreateddate': new FormControl(''),
+      'tusertype': new FormControl(''),
+      'tstatus': new FormControl(''),
     });
   }
   filterSubmit(): void {
@@ -182,7 +190,7 @@ viewTimetable(id):void{
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.DataTable.reset();
   }
   //to get date format
   getFormat(createddate):string{
@@ -190,5 +198,8 @@ viewTimetable(id):void{
    }
    checkPermissions(permissionValue){
     return  AuthorizationGuard.checkPermission(permissionValue);
+   }
+   getFilterFormat(createddate):string{
+    return moment(createddate).format(Paginationutil.getFilterDateFormat())
    }
 }

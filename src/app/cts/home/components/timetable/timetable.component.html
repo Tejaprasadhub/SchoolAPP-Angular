@@ -12,22 +12,26 @@
             </div>
         </div>
     </div>
-    <form [formGroup]="filtersForm" (ngSubmit)="filterSubmit()">
+    <form [formGroup]="filtersForm">
         <div #myFiltersDiv class="col-md-12 box transform">
             <div class="row search-box search-box-padding">
                 <div class="col-md-3">
                     <span>Class Id</span><br>
-                    <p-dropdown [options]="classid" class="w-100" formControlName="tclassid" placeholder="Select Class">
+                    <p-dropdown #cl [options]="classid" class="w-100" formControlName="tclassid"
+                    (onChange)="dt.filter(cl.value,'class_id','')"
+                    placeholder="Select Class">
                     </p-dropdown>
                 </div>
                 <div class="col-md-3">
                     <span>Subject Id</span><br>
-                    <p-dropdown [options]="subjectid" class="w-100" formControlName="tsubjectid"
+                    <p-dropdown #sb [options]="subjectid" class="w-100" formControlName="tsubjectid"
+                    (onChange)="dt.filter(sb.value,'subject_id','')"
                         placeholder="Select Subject"></p-dropdown>
                 </div>
                 <div class="col-md-3">
                     <span>Teacher Id</span><br>
-                    <p-dropdown [options]="teacherid" class="w-100" formControlName="tteaherid"
+                    <p-dropdown #tc [options]="teacherid" class="w-100" formControlName="tteaherid"
+                    (onChange)="dt.filter(tc.value,'teacher_id','')"
                         placeholder="Select Teacher"></p-dropdown>
                 </div>
                 <div class="col-md-3">
@@ -40,11 +44,25 @@
                     <p-calendar [showTime]="true" class="w-100" formControlName="tperiodto" placeholder="Select Time">
                     </p-calendar>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3 text-right search-buttons">
-                    <button pButton type="submit" icon="pi pi-search" label="Search"
-                        class="ui-button-secondary table-header-items"></button>&nbsp;
+                <div class="col-md-3">
+                    <span>Created On</span><br>
+                    <p-calendar #co placeholder="Select Date" formControlName="tcreateddate" 
+                    (onSelect)="dt.filter(getFilterFormat(co.value),'createddate','')"
+                        [inputStyle]="{'width':'100% !important'}" [showIcon]="true"></p-calendar>
+                </div>
+                <div class="col-md-3">
+                  <span>User</span><br>
+                  <p-dropdown #us [options]="users" class="w-100" formControlName="tusertype" placeholder="Select User" 
+                  (onChange)="dt.filter(us.value,'userid','')"
+                      ></p-dropdown>
+              </div>
+              <div class="col-md-3">
+                <span>Status</span><br>
+                <p-dropdown #st [options]="status" class="w-100" formControlName="tstatus" placeholder="Select Status" 
+                (onChange)="dt.filter(st.value,'status','')"
+                    ></p-dropdown>
+            </div>
+                <div class="col-md-12 text-right search-buttons">
                     <button pButton type="button" icon="pi pi-refresh" label="Clear" (click)="resetFilterForm()"
                         class="ui-button-secondary table-header-items"></button>
                 </div>

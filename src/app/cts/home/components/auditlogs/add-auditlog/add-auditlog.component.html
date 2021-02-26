@@ -11,25 +11,29 @@
     </div>
     <form [formGroup]="filtersForm">
         <div #myFiltersDiv class="col-md-12 box transform">
-            <div class="row col-md-12 search-box search-box-padding">
+            <div class="row search-box search-box-padding">
                 <div class="col-md-3">
                     <span>Field Name</span><br>
-                    <input id="name" class="w-100" type="text" formControlName="fieldname" placeholder="Field Name"
+                    <input id="name" #fn class="w-100" type="text" formControlName="fieldname" placeholder="Field Name"
+                    (keydown)="$event.key === 'Enter' ? dt.filter(fn.value,'fieldname',''): ''"
                         size="30" pInputText>
                 </div>
                 <div class="col-md-3">
                     <span>Old Value</span><br>
-                    <input id="name" class="w-100" type="text" formControlName="oldvalue" placeholder="Old Value"
+                    <input id="name" #ov class="w-100" type="text" formControlName="oldvalue" placeholder="Old Value"
+                    (keydown)="$event.key === 'Enter' ? dt.filter(ov.value,'oldvalue',''): ''"
                         size="30" pInputText>
                 </div>
                 <div class="col-md-3">
                     <span>New Value</span><br>
-                    <input id="name" class="w-100" type="text" formControlName="newvalue" placeholder="New Value"
+                    <input id="name" #nv class="w-100" type="text" formControlName="newvalue" placeholder="New Value"
+                    (keydown)="$event.key === 'Enter' ? dt.filter(nv.value,'newvalue',''): ''"
                         size="30" pInputText>
                 </div>
                 <div class="col-md-3">
                     <span>Processed User</span><br>
-                    <p-dropdown [options]="users" formControlName="processeduser" class="w-100"
+                    <p-dropdown #pu [options]="users" formControlName="processeduser" class="w-100"
+                    (onChange)="dt.filter(pu.value,'userid','')"
                         placeholder="Select User"></p-dropdown>
                 </div>
                 <div class="col-md-3">
@@ -44,12 +48,11 @@
                 </div>
                 <div class="col-md-3">
                     <span>Action</span><br>
-                    <p-dropdown [options]="actions" formControlName="action" class="w-100" placeholder="Select Action">
+                    <p-dropdown #an [options]="actions" formControlName="action" class="w-100"
+                    (onChange)="dt.filter(an.value,'action','')" placeholder="Select Action">
                     </p-dropdown>
                 </div>
                 <div class="col-md-3 text-right search-buttons">
-                    <button pButton type="submit" icon="pi pi-search" label="Search"
-                        class="ui-button-secondary table-header-items"></button>&nbsp;
                     <button pButton type="button" icon="pi pi-refresh" label="Clear" (click)="resetForm()"
                         class="ui-button-secondary table-header-items"></button>&nbsp;
                 </div>

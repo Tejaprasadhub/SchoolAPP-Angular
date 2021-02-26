@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { AuditlogsService } from 'src/app/cts/shared/services/auditlogs.service';
 import { ActivatedRoute } from '@angular/router';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { Table } from 'primeng/table';
 @Component({
   selector: 'app-add-auditlog',
   templateUrl: './add-auditlog.component.html',
@@ -37,17 +39,23 @@ export class AddAuditlogComponent implements OnInit {
     moment: any = moment;
     AppConstants:any;
 
-  constructor(private auditLogService:AuditlogsService,private route: ActivatedRoute,private fb: FormBuilder,private addauditlogService: AddauditlogService) {
+    @ViewChild(Table, { static: false }) DataTable: Table;
+
+
+  constructor(private dropdownService: DropdownService,private auditLogService:AuditlogsService,private route: ActivatedRoute,private fb: FormBuilder,private addauditlogService: AddauditlogService) {
     this.actions = [
       { label: 'Insert', value: 'Insert' },
       { label: 'Delete', value: 'Delete' },
       { label: 'Update', value: 'Update' }
     ];
-    this.users = [
-      { label: 'Admin', value: 'ADMN' },
-      { label: 'Operator', value: 'OPTR' },
-      { label: 'Teacher', value: 'TCHR' }
-    ];
+   
+    var dropdowns = ["users"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.users = result.data.users;
+        }
+      });
    }
    toggleClass($event: any) {
     if (this.myFiltersDiv.nativeElement.classList.contains('transform-active'))
@@ -61,7 +69,7 @@ export class AddAuditlogComponent implements OnInit {
     });
    
     this.cols = [
-      { field: 'id', header: 'Id' },
+      // { field: 'id', header: 'Id' },
       { field: 'date', header: 'Date' },
       { field: 'fieldname', header: 'Fieldname' },
       { field: 'action', header: 'Action' },
@@ -87,6 +95,7 @@ export class AddAuditlogComponent implements OnInit {
   }
   resetForm(): void {
     this.filtersForm.reset();
+    this.DataTable.reset();
   }
  //Api Integration Starts from here
  onPageChange(event:LazyLoadEvent){

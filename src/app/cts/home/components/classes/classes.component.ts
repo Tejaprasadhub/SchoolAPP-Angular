@@ -10,6 +10,8 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { AuthorizationGuard } from 'src/app/core/security/authorization-guard';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-classes',
@@ -31,7 +33,7 @@ export class ClassesComponent implements OnInit {
   toBeDeletedId:any;
   errorMessage: string = "";
   status: SelectItem[] = [];
-  usertypes: any[];
+  users: any[]=[];
   successMessage: string = "";
   //pagination and api integration starts from here
   numberOfPages:number =10;
@@ -41,22 +43,33 @@ export class ClassesComponent implements OnInit {
   currentPage:number = 1;
   pageCount:number;
 
-  constructor(private ClassesService: ClassesService, private router: Router, private route: ActivatedRoute,private fb: FormBuilder) {
+  @ViewChild(Table, { static: false }) DataTable: Table;
+
+  constructor(private dropdownService: DropdownService,private ClassesService: ClassesService, private router: Router, private route: ActivatedRoute,private fb: FormBuilder) {
     this.classes = [];
     this.sections = [
-      { label: '1-section', value: '1' },
-      { label: '2-sections', value: '2' }
+      { label: '1-section', value: 1 },
+      { label: '2-sections', value: 2 },
+      { label: '3-sections', value: 3 },
+      { label: '4-sections', value: 4 },
+      { label: '5-sections', value: 5 },
+      { label: '6-sections', value: 6 },
+      { label: '7-sections', value: 7 },
+      { label: '8-sections', value: 8 },
+      { label: '9-sections', value: 9 },
+      { label: '10-sections', value: 10 },
     ];
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
     ];
-    this.usertypes = [
-      { label: 'Admin', value: 'ADMN' },
-      { label: 'DataEntryOperator', value: 'DEOP' },
-      { label: 'Teacher', value: 'TCHR' },
-      { label: 'Parent', value: 'PART' }
-    ];
+    var dropdowns = ["users"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.users = result.data.users;
+        }
+      });
   }
 
   public ngOnInit() {
@@ -171,14 +184,10 @@ loadGrids(pagingData){
     });
   }
 
-  // Add Teacher method
-  filterSubmit(): void {
-    console.log(this.filtersForm.value);
-  }
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.DataTable.reset();
   } 
 //to get date format
 getFormat(createddate):string{

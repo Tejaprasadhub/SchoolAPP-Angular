@@ -10,6 +10,8 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { AuthorizationGuard } from 'src/app/core/security/authorization-guard';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-branches',
@@ -27,7 +29,7 @@ export class BranchesComponent implements OnInit {
   errorMessage: string = "";
   successMessage: string = "";
   toBeDeletedId:any;
-  usertypes: any[];
+  users: any[]=[];
   status: SelectItem[] = [];
   //pagination and api integration starts from here
   numberOfPages:number =10;
@@ -37,22 +39,23 @@ export class BranchesComponent implements OnInit {
   currentPage:number = 1;
   pageCount:number;
   moment: any = moment;
-  AppConstants:any;
+  AppConstants:any; 
 
- 
+  @ViewChild(Table, { static: false }) DataTable: Table;
 
-  constructor(private BranchesService: BranchesService, private router: Router, private route: ActivatedRoute,private fb: FormBuilder) {
-    this.branches = [];
-    this.usertypes = [
-      { label: 'Admin', value: 'ADMN' },
-      { label: 'DataEntryOperator', value: 'DEOP' },
-      { label: 'Teacher', value: 'TCHR' },
-      { label: 'Parent', value: 'PART' }
-    ];
+  constructor(private dropdownService: DropdownService,private BranchesService: BranchesService, private router: Router, private route: ActivatedRoute,private fb: FormBuilder) {
+    this.branches = [];   
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
     ];
+    var dropdowns = ["users"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.users = result.data.users;
+        }
+      });
    }
 
   ngOnInit(): void {
@@ -164,13 +167,10 @@ export class BranchesComponent implements OnInit {
       'tstatus': new FormControl('')         
     });
   }
-  //Filter Submit method
-  filterSubmit(): void {
-    console.log(this.filtersForm.value);
-  }
   //Filter Reset method
   resetFilterForm(): void {
-    this.filtersForm.reset();    
+    this.filtersForm.reset();
+    this.DataTable.reset();
   } 
   //to get date format
   getFormat(createddate):string{

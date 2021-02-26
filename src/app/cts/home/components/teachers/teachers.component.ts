@@ -335,14 +335,12 @@ export class TeachersComponent implements OnInit {
  
 
 
-  // Add Teacher method
-  filterSubmit(): void {
-    console.log(this.filtersForm.value);
-  }
+  
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.multiSelectFilterValue="";
+    this.DataTable.reset();
   }
   //to get date format
   getFormat(createddate): string {

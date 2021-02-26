@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-achievements',
@@ -27,6 +29,9 @@ export class AchievementsComponent implements OnInit {
   successMessage:string="";
   display:boolean=false;
   position: string;
+  users: any[]=[];
+  status: SelectItem[] = [];
+  branches:any[]=[];
 //to create Teacher From 
 filtersForm: FormGroup;
 toBeDeletedId:any;
@@ -38,8 +43,23 @@ toBeDeletedId:any;
  advancedFilterValue:string ="";
  currentPage:number = 1;
  pageCount:number;
-  constructor(private AchievementsService: AchievementsService, private router: Router,private route:ActivatedRoute,private fb: FormBuilder) {
+
+ @ViewChild(Table, { static: false }) DataTable: Table;
+
+  constructor(private dropdownService: DropdownService,private AchievementsService: AchievementsService, private router: Router,private route:ActivatedRoute,private fb: FormBuilder) {
     this.achievements = [];
+    this.status = [
+      { label: 'Active', value: 'AC' },
+      { label: 'InActive', value: 'NA' }
+    ];
+    var dropdowns = ["users","branches"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.users = result.data.users;
+          this.branches = result.data.branches;
+        }
+      });
   }
 
   public ngOnInit() {    
@@ -148,21 +168,23 @@ loadGrids(pagingData){
    createFilterForm() {
     this.filtersForm = this.fb.group({
       'ttitle': new FormControl(''),
-      'tdate': new FormControl('')
+      'tdate': new FormControl(''),
+      'tusertype': new FormControl(''),
+      'tstatus': new FormControl(''),
+      'tbranch': new FormControl('')
     });
   }
 
-  // Add Teacher method
-  filterSubmit(): void {
-    console.log(this.filtersForm.value);
-  }
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.DataTable.reset();
   }
   //to get date format
   getFormat(createddate):string{
     return moment(createddate).format(Paginationutil.getDefaultFormat())
+   }
+   getFilterFormat(createddate):string{
+    return moment(createddate).format(Paginationutil.getFilterDateFormat())
    }
 }

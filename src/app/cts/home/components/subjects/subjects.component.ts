@@ -10,6 +10,8 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { AuthorizationGuard } from 'src/app/core/security/authorization-guard';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { Table } from 'primeng/table';
 
 
 @Component({
@@ -32,7 +34,7 @@ export class SubjectsComponent implements OnInit {
   filtersForm: FormGroup;
   toBeDeletedId:any;
   status: SelectItem[] = [];
-  usertypes: any[];
+  users: any[]=[];
   //pagination and api integration starts from here
   numberOfPages:number =10;
   totalcount:number=0;
@@ -41,18 +43,21 @@ export class SubjectsComponent implements OnInit {
   currentPage:number = 1;
   pageCount:number;
 
-  constructor(private SubjectsService: SubjectsService, private router: Router,private route:ActivatedRoute,private fb: FormBuilder) {
+  @ViewChild(Table, { static: false }) DataTable: Table;
+
+  constructor(private dropdownService: DropdownService,private SubjectsService: SubjectsService, private router: Router,private route:ActivatedRoute,private fb: FormBuilder) {
     this.subjects = [];
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
     ];
-    this.usertypes = [
-      { label: 'Admin', value: 'ADMN' },
-      { label: 'DataEntryOperator', value: 'DEOP' },
-      { label: 'Teacher', value: 'TCHR' },
-      { label: 'Parent', value: 'PART' }
-    ];
+    var dropdowns = ["users"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.users = result.data.users;
+        }
+      });
   }
 
   public ngOnInit() {
@@ -168,13 +173,10 @@ viewSubject(id):void{
       'tstatus': new FormControl('') 
     });
   }
-  filterSubmit(): void {
-    console.log(this.filtersForm.value);
-  }
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.DataTable.reset();
   }
   //to get date format
   getFormat(createddate):string{

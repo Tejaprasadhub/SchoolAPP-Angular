@@ -10,6 +10,8 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { AuthorizationGuard } from 'src/app/core/security/authorization-guard';
+import { Table } from 'primeng/table';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
 
 @Component({
   selector: 'app-news',
@@ -23,12 +25,12 @@ export class NewsComponent implements OnInit {
   totalRecords: number;
   cols: any[];
   status: SelectItem[] = [];
-  usertypes: any[];
+  users: any[]=[];
   @ViewChild('myFiltersDiv') myFiltersDiv: ElementRef;
   loading: boolean;
   display: boolean = false;
   position: string;
-  branchids: SelectItem[] = [];
+  branches: SelectItem[] = [];
   toBeDeletedId:any;
   errorMessage: string = "";
   successMessage: string = "";
@@ -42,22 +44,24 @@ export class NewsComponent implements OnInit {
   currentPage: number = 1;
   pageCount: number;
 
-  constructor(private NewsService: NewsService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
-    this.news = [];
-    this.branchids = [
-      { label: 'skota', value: '1' },
-      { label: 'boddam', value: '2' }
-    ];
+  @ViewChild(Table, { static: false }) DataTable: Table;
+
+
+  constructor(private dropdownService: DropdownService,private NewsService: NewsService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
+    this.news = [];   
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
     ];
-    this.usertypes = [
-      { label: 'Admin', value: 'ADMN' },
-      { label: 'DataEntryOperator', value: 'DEOP' },
-      { label: 'Teacher', value: 'TCHR' },
-      { label: 'Parent', value: 'PART' }
-    ];
+    var dropdowns = ["users","branches"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.users = result.data.users;
+          this.branches = result.data.branches;
+        }
+      });
+   
   }
 
   public ngOnInit() {
@@ -174,14 +178,10 @@ export class NewsComponent implements OnInit {
     });
   }
 
-  // Add Teacher method
-  filterSubmit(): void {
-    console.log(this.filtersForm.value);
-  }
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.DataTable.reset();
   }
 //to get date format
 getFormat(createddate):string{

@@ -16,7 +16,6 @@ export class Paginationutil {
     }
 
     static getGridFilters(Table: any, multiselectFilter: string, isReset = false) {
-        
         let currentPage = Table.first + 1;
         let pageCount = (Table.first / Table.rows) + 1;
         let pageNumber = 1;
@@ -31,8 +30,13 @@ export class Paginationutil {
 
         let columnLevelFilter = Object.keys(Table.filters).map((key) => {
             if((key != "dob" && key != "createddate"))    {     
-            let comparison = `LIKE '%${Table.filters[key].value}%'`;
-            return `(${key} ${comparison})`
+                if(typeof(Table.filters[key].value) != "number"){
+                    let comparison = `LIKE '%${Table.filters[key].value}%'`;
+                    return `(${key} ${comparison})`
+                }else{
+                    let comparison = `='${Table.filters[key].value}'`;
+                    return `(${key} ${comparison})`
+                }            
             }
             else{
                 let comparison = `< '${Table.filters[key].value}'`;
@@ -57,6 +61,7 @@ export class Paginationutil {
 
         if (isReset) {
             Table.first = 0;
+            finalFilterString="";
         }
 
         return {

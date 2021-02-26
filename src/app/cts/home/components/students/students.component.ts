@@ -11,6 +11,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-students',
@@ -65,6 +66,8 @@ export class StudentsComponent implements OnInit {
   advancedFilterValue:string ="";
   currentPage:number = 1;
   pageCount:number;
+
+  @ViewChild(Table, { static: false }) DataTable: Table;
 
   constructor(private StudentsService: StudentsService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
     this.gender = [
@@ -233,7 +236,7 @@ loadGrids(pagingData){
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.DataTable.reset();
   }
   //to get date format
   getFormat(createddate):string{

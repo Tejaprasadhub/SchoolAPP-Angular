@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { AuthorizationGuard } from 'src/app/core/security/authorization-guard';
 import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { Table } from 'primeng/table';
 
 enum UserTypes {
   'PART' = "Parent",
@@ -51,6 +52,8 @@ export class UsersComponent implements OnInit {
   currentPage:number = 1;
   pageCount:number;
   branches: SelectItem[] = [];
+
+  @ViewChild(Table, { static: false }) DataTable: Table;
 
   constructor(private UsersService: UsersService,private dropdownService: DropdownService, private router: Router,private route:ActivatedRoute, private fb: FormBuilder) {
     this.usertypes = [
@@ -187,13 +190,10 @@ viewUser(id):void{
 
     });
   }
-  filterSubmit(): void {
-    console.log(this.filtersForm.value);
-  }
   //Reset form method
   resetFilterForm(): void {
     this.filtersForm.reset();
-    console.log(this.filtersForm.value);
+    this.DataTable.reset();
   }
 //to get date format
 getFormat(createddate):string{

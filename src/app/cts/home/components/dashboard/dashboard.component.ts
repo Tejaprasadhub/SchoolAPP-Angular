@@ -3,6 +3,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { FullCalendar } from 'primeng/fullcalendar/primeng-fullcalendar';
+import { DashboardService } from 'src/app/cts/shared/services/dashboard.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +13,7 @@ import { FullCalendar } from 'primeng/fullcalendar/primeng-fullcalendar';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  private ngUnsubscribe = new Subject();
   ourStudentsData: any;
   ourExpenditureData: any;
   ourIncomedata: any;
@@ -21,25 +25,15 @@ export class DashboardComponent implements OnInit {
   responsiveOptions;
   browsingData:any;
   ourTopStudents:any;
+  academicPerformance: any;
 
-  constructor() { }
+  constructor(private dashboardservice:DashboardService) { }
 
   ngOnInit(): void {
-    this.ourStudentsData = {
-      labels: ['Male', 'Female'],
-      datasets: [
-        {
-          data: [300, 50],
-          backgroundColor: [
-            "#448fab",
-            "#008000"
-          ],
-          hoverBackgroundColor: [
-            "#448fab",
-            "#008000"
-          ]
-        }]
-    };
+    this.GetSudentsbyGender();
+    this.GetAcademicPerformance();
+    
+    
     this.ourExpenditureData = {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
       datasets: [
@@ -305,6 +299,82 @@ export class DashboardComponent implements OnInit {
     ]
   }
 
+  GetSudentsbyGender()
+  {
+    var params=JSON.stringify(this.getReqData("GetStudentsbyGender"));
+    this.dashboardservice.getDashBoard(params)
+    .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{  
+      if(result.success){
+        var res=[];
+        result.data.forEach(element => {
+          res.push(element.count);
+        });
+        this.ourStudentsData = {
+          labels: ['Male', 'Female'],
+          datasets: [
+            {
+              data: res,
+              backgroundColor: [
+                "#448fab",
+                "#008000"
+              ],
+              hoverBackgroundColor: [
+                "#448fab",
+                "#008000"
+              ]
+            }]
+        };
+      }  
+    });
+  }
+
+  GetAcademicPerformance()
+  {
+    var params=JSON.stringify(this.getReqData("GetAcademicPerformance"));
+    this.dashboardservice.getDashBoard(params)
+    .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{  
+      if(result.success){
+        var res=[];
+        result.data.forEach(element => {
+          res.push(element.count);
+        });
+      }  
+    });
+    this.academicPerformance={
+      labels: ['Maths', 'Physics', 'Science', 'Computer', 'English', 'Hindi', 'Telugu'],
+      datasets: [
+          {
+              label: 'Boys',
+              backgroundColor: 'rgb(153, 255, 187,0.2)',
+              borderColor: 'rgb(0, 153, 51)',
+              pointBackgroundColor: 'rgb(153, 255, 187,1)',
+              pointBorderColor: '#009933',
+              pointHoverBackgroundColor: '#009933',
+              pointHoverBorderColor: 'rgb(153, 255, 187,1)',
+              data: [65, 59, 90, 81, 56, 55, 40]
+          },
+          {
+              label: 'Girls',
+              backgroundColor: 'rgb(179, 204, 255,0.2)',
+              borderColor: 'rgb(0, 122, 204)',
+              pointBackgroundColor: 'rgb(179, 204, 255,1)',
+              pointBorderColor: '#6699ff',
+              pointHoverBackgroundColor: '#6699ff',
+              pointHoverBorderColor: 'rgb(179, 204, 255,1)',
+              data: [28, 48, 40, 19, 96, 27, 100]
+          }
+      ]
+  };
+  }
+
+  getReqData(chartType)
+  {
+    return {
+      "start": "",
+      "end": "",
+      "chartType": chartType
+  };
+  }
 
 
 }

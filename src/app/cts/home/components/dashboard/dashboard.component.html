@@ -30,17 +30,26 @@
             </div>
             <div class="col-md-4 mb-2 chart-padding">
                 <div class="col-md-12 chart-div">
+                    <div class="chart-title">Academic Performance</div>
+                    <div class="chart-body">
+                        <p-chart type="radar" [data]="academicPerformance"></p-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-4 mb-2 chart-padding">
+                <div class="col-md-12 chart-div">
                     <div class="chart-title">Our Expenditure</div>
                     <div class="chart-body">
                         <p-chart type="bar" [data]="ourExpenditureData"></p-chart>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8 mb-2 chart-padding">
+            </div> -->
+            <div class="col-md-12 mb-2 chart-padding">
                 <div class="col-md-12 chart-div">
                     <div class="chart-title">Our Events</div>
                     <div class="chart-body mt-2">
-                        <p-fullCalendar [events]="eventsData" [options]="eventOptions"></p-fullCalendar>
+                        <!-- <p-fullCalendar [events]="eventsData" [options]="eventOptions"></p-fullCalendar> -->
+                        <app-events></app-events>
                     </div>
                 </div>
             </div>
@@ -64,31 +73,31 @@
                         <a href="#" class="view-more-link" style="margin-top: -5px !important;"> <i class="fa fa-angle-double-right"></i> view more</a>
                     </div>
                 </div>
-                <div class="col-md-12 mb-2 chart-div" style="height:370px">
-                    <div class="chart-title">Our Latest Announcements</div>
-                    <div class="chart-body mt-2 p-10">
-                        <div class="col-md-12">
-                            <div class="col-md-12 announcement-div" *ngFor="let announcement of announcementData">
-                                <p class="mt-2"><span class="btn-styles">{{announcement.date}}</span></p>
-                                <p><b>{{announcement.description}}</b></p>
-                                <p>
-                                    <span class="createdBy">{{announcement.createyBy}}/</span>
-                                    <span class="timeLapse">{{announcement.timelapse}}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <a href="#" class="view-more-link"> <i class="fa fa-angle-double-right"></i> view more</a>
-                    </div>
-                </div>
             </div>
-            <div class="col-md-6 mb-2 chart-padding">
-                <div class="col-md-12 chart-div">
+            <div class="col-md-4 mb-2 chart-padding">
+                <div class="col-md-12 chart-div" style="height:380px">
                     <div class="chart-title">Browsing History</div>
                     <div class="chart-body">
                         <p-chart type="polarArea" [data]="browsingData"></p-chart>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2 chart-div" style="height:380px">
+                <div class="chart-title">Our Latest Announcements</div>
+                <div class="chart-body mt-2 p-10">
+                    <div class="col-md-12">
+                        <div class="col-md-12 announcement-div" *ngFor="let announcement of announcementData">
+                            <p class="mt-2"><span class="btn-styles">{{announcement.date}}</span></p>
+                            <p><b>{{announcement.description}}</b></p>
+                            <p>
+                                <span class="createdBy">{{announcement.createyBy}}/</span>
+                                <span class="timeLapse">{{announcement.timelapse}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <a href="#" class="view-more-link"> <i class="fa fa-angle-double-right"></i> view more</a>
                 </div>
             </div>
             <div class="col-md-6 mb-2 chart-padding">
@@ -114,6 +123,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

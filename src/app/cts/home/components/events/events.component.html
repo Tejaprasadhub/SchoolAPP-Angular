@@ -12,25 +12,32 @@
     </div>
     <div class="col-md-12 search-box">
         <div class="row">
-            <div class="col-md-9 col-sm-12" >
-                <p-fullCalendar [events]="eventsData" [options]="eventOptions"></p-fullCalendar>
+            <div class="col-md-8 col-sm-12" >
+                <p-fullCalendar #fullCalendar [events]="events" [options]="options"></p-fullCalendar>
             </div>
-            <div class="col-md-3 col-sm-12 eventsListCol">
+            <div class="col-md-4 col-sm-12 eventsListCol">
                 <div class="calendar-header">
-                    <div class="row calendar-month">
+                    <div class="row">
                         <div class="col-12">
                             <h5 class="m-0 text-center">Events</h5>
                         </div>
                     </div>
                 </div>
                 <div class="eventCardDiv">
-                    <div *ngFor="let event of eventsData">
+                    <div *ngFor="let event of events">
                     <div class="card eventCard">
-                        <div class="card-body">                            
+                        <div class="card-body">   
+                            <div class="d-flex">                    
                             <h6> {{event.title}} </h6>
-                            <p><a><i class="fa fa-edit" (click)="editEvent()"></i></a>&nbsp;
-                                <a><i class="fa fa-trash-o" (click)="deleteEvent()"></i></a>
-                                2nd Jan, 2020
+                            <div class="event-container">
+                                <img class="img-fluid eventlogo" src="./assets/images/avatar.png">
+                                <a  download="new-filename"><i class="pi pi-pencil"></i></a>
+                            </div>
+                        </div>     
+                            <p>
+                                <a><i class="pi pi-pencil green" (click)="editEvent()"></i></a>&nbsp;
+                                <a><i class="pi pi-trash red" (click)="deleteEvent()"></i></a>
+                                <span>2nd Jan, 2020</span>                                
                             </p>
                         </div>
                     </div>

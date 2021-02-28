@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -11,15 +11,23 @@ import { FullCalendar } from 'primeng/fullcalendar/primeng-fullcalendar';
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
-eventsData :any;
-eventOptions:any;
+events :any;
+options:any;
 position: string;
 display:boolean=false;
 successMessage:string="";
+
+calendar:any;
+
+nextListener:any;
+
+prevListener:any;
+
+@ViewChild('fullCalendar') fullCalendar:any;
   constructor(private router: Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.eventsData = [
+    this.events = [
       {
         "id": 1,
         "title": "All Day Event",
@@ -54,21 +62,6 @@ successMessage:string="";
         "end": "2020-02-12T12:30:00"
       },
       {
-        "id": 7,
-        "title": "Lunch",
-        "start": "2020-02-12T12:00:00"
-      },
-      {
-        "id": 8,
-        "title": "Meeting",
-        "start": "2020-02-12T14:30:00"
-      },
-      {
-        "id": 9,
-        "title": "Happy Hour",
-        "start": "2020-02-12T17:30:00"
-      },
-      {
         "id": 10,
         "title": "Dinner",
         "start": "2020-02-12T20:00:00"
@@ -85,19 +78,43 @@ successMessage:string="";
         "start": "2020-02-28"
       }
     ];
-    this.eventOptions = {
+    this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: '2020-02-01',
       header: {
-        left: 'prev,next',
+        left: 'prev',
         center: 'title',
-        right: 'dayGridMonth,dayGridWeek,timeGridDay'
+        // right: 'dayGridMonth,dayGridWeek,timeGridDay'
+        right: 'next'
+      },
+      customButtons: {
+        prev:{
+          text:"Prev",
+          click: r=> {
+            this.getEvents("Prev");
+            //this works but displayAddAppointment within the component is inaccessible.
+            //I would like to display a modal dialog to add a new appointment from this.
+          }
+        },
+        next:{
+          text:"Next",          
+          click: r=> {
+            this.getEvents("Next");
+            //this works but displayAddAppointment within the component is inaccessible.
+            //I would like to display a modal dialog to add a new appointment from this.
+          }
+        }
       },
       editable: true,
       dateClick: (e) => {
         alert("click event");
       }
     }
+  }
+
+
+  getEvents(from:string){
+    alert(from)
   }
   addNew($event:any){
     // this.router.navigateByUrl("Events/add-event?type=create");
@@ -116,5 +133,6 @@ successMessage:string="";
     this.display=false;
     this.successMessage="Event deleted successfully"
   }
+
 
 }

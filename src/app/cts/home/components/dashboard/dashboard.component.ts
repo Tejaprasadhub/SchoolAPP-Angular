@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   announcementData: any;
   ourachivementsData: any[];
   responsiveOptions;
-  browsingData:any;
+  teacherPerformancedata:any;
   ourTopStudents:any;
   academicPerformance: any;
 
@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.GetSudentsbyGender();
     this.GetAcademicPerformance();
+    this.GetAcievements();
+    this.GetTeacherPerformance();
     
     
     this.ourExpenditureData = {
@@ -207,59 +209,7 @@ export class DashboardComponent implements OnInit {
         numScroll: 1
       }
     ];
-    this.ourachivementsData = [
-      {
-        "desciption": "VW"
-      },
-      {
-        "desciption": "Audi"
-      },
-      {
-        "desciption": "Renault"
-      },
-      {
-        "desciption": "BMW"
-      },
-      {
-        "desciption": "Mercedes"
-      },
-      {
-        "desciption": "Volvo"
-      },
-      {
-        "desciption": "Honda"
-      },
-      {
-        "desciption": "Jaguar"
-      },
-      {
-        "desciption": "Ford"
-      },
-      {
-        "desciption": "Fiat"
-      }
-    ]
 
-    this.browsingData = {
-      datasets: [{
-        data: [
-          25,
-          16,
-          7
-        ],
-        backgroundColor: [
-          "#448fab",
-          "#008000",
-          "#d69d33"
-        ],
-        label: 'My dataset'
-      }],
-      labels: [
-        "Chrome",
-        "IE",
-        "Firefox"
-      ]
-    }
     this.ourTopStudents=[
       {
         "name":"Teja Prasad",
@@ -305,15 +255,17 @@ export class DashboardComponent implements OnInit {
     this.dashboardservice.getDashBoard(params)
     .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{  
       if(result.success){
-        var res=[];
-        result.data.forEach(element => {
-          res.push(element.count);
+        var gendercount=[];
+        let Gender=["M","F"];
+        Gender.forEach(ele=>{
+            let val=result.data.ctcstudents.find(x=>x.ctcstudent_gender==ele).count;
+            gendercount.push(val);
         });
         this.ourStudentsData = {
-          labels: ['Male', 'Female'],
+          labels: ["Male","Female"],
           datasets: [
             {
-              data: res,
+              data: gendercount,
               backgroundColor: [
                 "#448fab",
                 "#008000"
@@ -334,37 +286,91 @@ export class DashboardComponent implements OnInit {
     this.dashboardservice.getDashBoard(params)
     .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{  
       if(result.success){
-        var res=[];
-        result.data.forEach(element => {
-          res.push(element.count);
+        var subjects=[];
+        var MaledataSet=[];
+        var FemaledataSet=[];
+        result.data.subjects.forEach(element => {
+          subjects.push(element.subjectName);
         });
+        subjects.forEach(ele=>{
+          let MaleResult=result.data.table1.find(x=>x.subjectName==ele && x.gender=='M');
+          let FemaleResult=result.data.table1.find(x=>x.subjectName==ele && x.gender=='F');
+          MaledataSet.push(MaleResult==undefined?"0":MaleResult.marks);
+          FemaledataSet.push(FemaleResult==undefined?"0":FemaleResult.marks);
+      });
+      this.academicPerformance={
+        labels: subjects,
+        datasets: [
+            {
+                label: 'Boys',
+                backgroundColor: 'rgb(153, 255, 187,0.2)',
+                borderColor: 'rgb(0, 153, 51)',
+                pointBackgroundColor: 'rgb(153, 255, 187,1)',
+                pointBorderColor: '#009933',
+                pointHoverBackgroundColor: '#009933',
+                pointHoverBorderColor: 'rgb(153, 255, 187,1)',
+                data: MaledataSet
+            },
+            {
+                label: 'Girls',
+                backgroundColor: 'rgb(179, 204, 255,0.2)',
+                borderColor: 'rgb(0, 122, 204)',
+                pointBackgroundColor: 'rgb(179, 204, 255,1)',
+                pointBorderColor: '#6699ff',
+                pointHoverBackgroundColor: '#6699ff',
+                pointHoverBorderColor: 'rgb(179, 204, 255,1)',
+                data: FemaledataSet
+            }
+        ]
+    };
       }  
     });
-    this.academicPerformance={
-      labels: ['Maths', 'Physics', 'Science', 'Computer', 'English', 'Hindi', 'Telugu'],
-      datasets: [
-          {
-              label: 'Boys',
-              backgroundColor: 'rgb(153, 255, 187,0.2)',
-              borderColor: 'rgb(0, 153, 51)',
-              pointBackgroundColor: 'rgb(153, 255, 187,1)',
-              pointBorderColor: '#009933',
-              pointHoverBackgroundColor: '#009933',
-              pointHoverBorderColor: 'rgb(153, 255, 187,1)',
-              data: [65, 59, 90, 81, 56, 55, 40]
-          },
-          {
-              label: 'Girls',
-              backgroundColor: 'rgb(179, 204, 255,0.2)',
-              borderColor: 'rgb(0, 122, 204)',
-              pointBackgroundColor: 'rgb(179, 204, 255,1)',
-              pointBorderColor: '#6699ff',
-              pointHoverBackgroundColor: '#6699ff',
-              pointHoverBorderColor: 'rgb(179, 204, 255,1)',
-              data: [28, 48, 40, 19, 96, 27, 100]
-          }
-      ]
-  };
+    
+  }
+
+  GetAcievements()
+  {
+    var params=JSON.stringify(this.getReqData("GetAcievements"));
+    this.dashboardservice.getDashBoard(params)
+    .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{  
+      if(result.success){
+        this.ourachivementsData = result.data.achievements;
+       
+      }  
+    });
+  }
+
+  GetTeacherPerformance()
+  {
+    var params=JSON.stringify(this.getReqData("GetTeacherPerformance"));
+    this.dashboardservice.getDashBoard(params)
+    .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{  
+      if(result.success){
+        
+      }  
+    });
+    
+    this.teacherPerformancedata = {
+      datasets: [{
+        data: [
+          88,67,76,
+          72,61,56,
+          91,58,86,
+        ],
+        backgroundColor: [
+          "#448fab","#d69d33","#448fab",
+          "#d69d33","#448fab","#d69d33",
+          "#448fab","#d69d33","#448fab",
+        ],
+        label: 'My dataset'
+      }],
+      labels: [
+        "Teacher1","teacher2","Teacher3",
+        "Teacher4","teacher5","Teacher6",
+        "Teacher7","teacher8","Teacher9",
+      ],
+      legend: {display: false}
+    }
   }
 
   getReqData(chartType)

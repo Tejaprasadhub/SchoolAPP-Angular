@@ -8,6 +8,7 @@
         "serversidedateformat":"YYYY-MM-DD",
         "serversideyearformat":"YYYY",
         "angulardateformat":"MMMM Do, YYYY",
+        "angularmonthformat":"MMMM YYYY",
         "filterdateformat":"DD-MM-YYYY 00:00:00"
     },
     "messages":{

@@ -39,30 +39,37 @@
                             addEventForm.controls['branchid'].touched)|| 
                             (!addEventForm.controls['branchid'].valid && addEventForm.controls['branchid'].untouched && 
                             formSubmitAttempt))">
-                            <i class="fa fa-circle"></i>
-                            <span *ngIf="(addEventForm.controls['branchid'].errors?.required)">
-                                Enter "Branch Id"
-                            </span>
-                        </div>
-                        <div class="col-md-3 error-div"
-                        *ngIf="((!addEventForm.controls['category'].valid && addEventForm.controls['category'].touched)|| 
-                        (!addEventForm.controls['category'].valid && addEventForm.controls['category'].untouched && formSubmitAttempt))">
-                        <i class="fa fa-circle"></i>
-                        <span *ngIf="(addEventForm.controls['category'].errors?.required)">Enter "Category"</span>
-                    </div>
-                    <div class="col-md-3 error-div"
-                    *ngIf="((!addEventForm.controls['register'].valid && addEventForm.controls['register'].touched)|| 
-                    (!addEventForm.controls['register'].valid && addEventForm.controls['register'].untouched && formSubmitAttempt))">
-                    <i class="fa fa-circle"></i>
-                    <span *ngIf="(addEventForm.controls['register'].errors?.required)">Enter "Registration"</span>
-                </div>
-                        <div class="col-md-3 error-div" *ngIf="((!addEventForm.controls['description'].valid && addEventForm.controls['description'].touched)|| 
-                                (!addEventForm.controls['description'].valid && addEventForm.controls['description'].untouched && 
-                                formSubmitAttempt))">
                                 <i class="fa fa-circle"></i>
-                                <span *ngIf="(addEventForm.controls['description'].errors?.required)">Enter "Description"</span>
+                                <span *ngIf="(addEventForm.controls['branchid'].errors?.required)">
+                                    Enter "Branch Id"
+                                </span>
                             </div>
-                           
+                          
+                            <div class="col-md-3 error-div"
+                                *ngIf="((!addEventForm.controls['register'].valid && addEventForm.controls['register'].touched)|| 
+                    (!addEventForm.controls['register'].valid && addEventForm.controls['register'].untouched && formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addEventForm.controls['register'].errors?.required)">Enter
+                                    "Registration"</span>
+                            </div>
+
+                            <div class="col-md-3 error-div"
+                            *ngIf="((!addEventForm.controls['startdate'].valid && addEventForm.controls['startdate'].touched)|| 
+                (!addEventForm.controls['startdate'].valid && addEventForm.controls['startdate'].untouched && formSubmitAttempt))">
+                            <i class="fa fa-circle"></i>
+                            <span *ngIf="(addEventForm.controls['startdate'].errors?.required)">Enter
+                                "Start Date"</span>
+                        </div>
+
+
+                        <div class="col-md-3 error-div"
+                            *ngIf="((!addEventForm.controls['status'].valid && addEventForm.controls['status'].touched)|| 
+                (!addEventForm.controls['status'].valid && addEventForm.controls['status'].untouched && formSubmitAttempt))">
+                            <i class="fa fa-circle"></i>
+                            <span *ngIf="(addEventForm.controls['status'].errors?.required)">Enter
+                                "Status"</span>
+                        </div>
+                        
                         </div>
                     </div>
                 </div>
@@ -73,37 +80,64 @@
                 <span>
                     Event Name
                 </span><br>
-                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="name"
-                    type="text" placeholder=" Event Name" size="30" pInputText [ngClass]="{'error':((!addEventForm.controls['name'].valid && addEventForm.controls['name'].touched) || 
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="name" type="text" placeholder=" Event Name" size="30" pInputText [ngClass]="{'error':((!addEventForm.controls['name'].valid && addEventForm.controls['name'].touched) || 
                     (!addEventForm.controls['name'].valid && addEventForm.controls['name'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
             <div class="col-md-4">
                 <span>Branch Id</span><br>
                 <p-dropdown [options]="branchids" filter="true" formControlName="branchid" [disabled]="isDisabled"
-                placeholder="Select Branch" [ngClass]="{'error':((!addEventForm.controls['branchid'].valid &&
+                    placeholder="Select Branch" [ngClass]="{'error':((!addEventForm.controls['branchid'].valid &&
                 addEventForm.controls['branchid'].touched) || 
                 (!addEventForm.controls['branchid'].valid && addEventForm.controls['branchid'].untouched && formSubmitAttempt)),
                 'required':(isRequired == true )}">
-            </p-dropdown>
+                </p-dropdown>
             </div>
             <div class="col-md-4">
                 <span>Category</span><br>
                 <p-dropdown [options]="categories" filter="true" formControlName="category" [disabled]="isDisabled"
-                placeholder="Select category" [ngClass]="{'error':((!addEventForm.controls['category'].valid &&
-                addEventForm.controls['category'].touched) || 
-                (!addEventForm.controls['category'].valid && addEventForm.controls['category'].untouched && formSubmitAttempt)),
-                'required':(isRequired == true )}">
-            </p-dropdown>
+                    placeholder="Select category">
+                </p-dropdown>
             </div>
             <div class="col-md-4">
                 <span>Accept Registration</span><br>
                 <p-dropdown [options]="registration" filter="true" formControlName="register" [disabled]="isDisabled"
-                placeholder="Select Registration" [ngClass]="{'error':((!addEventForm.controls['register'].valid &&
+                    placeholder="Select Registration" [ngClass]="{'error':((!addEventForm.controls['register'].valid &&
                 addEventForm.controls['register'].touched) || 
                 (!addEventForm.controls['register'].valid && addEventForm.controls['register'].untouched && formSubmitAttempt)),
                 'required':(isRequired == true )}">
-            </p-dropdown>
+                </p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <span>Start Date</span><br>
+                <p-calendar placeholder="Start Date" [disabled]="isDisabled" formControlName="startdate"
+                    [inputStyle]="{'width':'100% !important'}" [showIcon]="true"
+                    [ngClass]="{'error':((!addEventForm.controls['startdate'].valid && addEventForm.controls['startdate'].touched) || (!addEventForm.controls['startdate'].valid && addEventForm.controls['startdate'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+                </p-calendar>
+            </div>
+            <div class="col-md-4">
+                <span>End Date</span><br>
+                <p-calendar placeholder="End Date" [disabled]="isDisabled" formControlName="enddate"
+                    [inputStyle]="{'width':'100% !important'}" [showIcon]="true"
+                    >
+                </p-calendar>
+            </div>
+            <div class="col-md-4">
+                <span>Status</span><br>
+                <p-dropdown [options]="status" filter="true" formControlName="status" [disabled]="isDisabled"
+                    placeholder="Select Status" [ngClass]="{'error':((!addEventForm.controls['status'].valid &&
+                    addEventForm.controls['status'].touched) || 
+                (!addEventForm.controls['status'].valid && addEventForm.controls['status'].untouched && formSubmitAttempt)),
+                'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <span>
+                    Event URL
+                </span><br>
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="url" type="text" placeholder="Event URL" size="30" pInputText >
             </div>
             <div class="col-md-4">
             </div>
@@ -112,10 +146,8 @@
                 <span>
                     Description
                 </span><br>
-            <textarea rows="3" cols="30" maxlength="500" placeholder="Descriptiom" pInputTextarea formControlName="description" autoResize="autoResize" [disabled]="isDisabled" [ngClass]="{'error':((!addEventForm.controls['description'].valid &&
-            addEventForm.controls['description'].touched) || 
-            (!addEventForm.controls['description'].valid && addEventForm.controls['description'].untouched && formSubmitAttempt)),
-            'required':(isRequired == true )}"></textarea>
+                <textarea rows="3" cols="30" maxlength="500" placeholder="Descriptiom" pInputTextarea
+                    formControlName="description" autoResize="autoResize" [disabled]="isDisabled"></textarea>
             </div>
             <br>
             <br>

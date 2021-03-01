@@ -6,13 +6,14 @@
             </div>
             <div class="col-md-8 text-right">
                 <button pButton type="button" icon="pi pi-plus" label="Event"
-                    class="ui-button-secondary table-header-items" (click)="addNew($event)"></button>
+                    class="ui-button-secondary table-header-items" (click)="addEvent($event)"></button>
             </div>
         </div>
     </div>
     <div class="col-md-12 search-box">
         <div class="row">
-            <div class="col-md-8 col-sm-12" >
+            <div class="col-md-8 col-sm-12 full-calendar">
+                <h5>{{getMonthFormat(date)}}</h5>
                 <p-fullCalendar #fullCalendar [events]="events" [options]="options"></p-fullCalendar>
             </div>
             <div class="col-md-4 col-sm-12 eventsListCol">
@@ -25,36 +26,38 @@
                 </div>
                 <div class="eventCardDiv">
                     <div *ngFor="let event of events">
-                    <div class="card eventCard">
-                        <div class="card-body">   
-                            <div class="d-flex">                    
-                            <h6> {{event.title}} </h6>
-                            <div class="event-container">
-                                <img class="img-fluid eventlogo" src="./assets/images/avatar.png">
-                                <a  download="new-filename"><i class="pi pi-pencil"></i></a>
+                        <div class="card eventCard">
+                            <div class="card-body">
+                                <span *ngIf="event.status == 'AC'" class="active">Active</span>     
+                                <span *ngIf="event.status == 'NA'" class="not-active">Not Active</span>   
+                                <div class="d-flex">
+                                    <h6> {{event.title}} </h6>                                                              
+                                    <div class="event-container">
+                                        <img class="img-fluid eventlogo" src="./assets/images/event.jpg">
+                                        <a download="new-filename"><i class="pi pi-pencil"></i></a>
+                                    </div>
+                                </div>
+                                <p>
+                                    <a><i class="pi pi-pencil green" (click)="editEvent(event.id)"></i></a>&nbsp;
+                                    <a><i class="pi pi-trash red" (click)="deleteEvent(event.id)"></i></a>
+                                    <span>{{getDateFormat(event.start)}}</span>
+                                </p>
                             </div>
-                        </div>     
-                            <p>
-                                <a><i class="pi pi-pencil green" (click)="editEvent()"></i></a>&nbsp;
-                                <a><i class="pi pi-trash red" (click)="deleteEvent()"></i></a>
-                                <span>2nd Jan, 2020</span>                                
-                            </p>
                         </div>
                     </div>
-                </div>
-                    <!-- <div class="noEvents">
-                    <p><img class="img-fluid" src="../Styles/Images/noEventsFor Date.png"></p>
-                    <p>No Events Added</p>
-                </div> -->
+                    <div class="text-center" *ngIf="!events.length" style="margin-top: 200px;">
+                        <p><img class="img-fluid" src="../assets/images/no_data_found.png"></p>
+                        <p>No Events Found</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <p-dialog header="Delete Confirmation" [transitionOptions]="'500ms'" [baseZIndex]="20000" [(visible)]="display" 
-    [style]="{width: '30vw'}" [responsive]="true" [draggable]="true" [position]="position">
-            <p>Are you sure you want to delete Event?</p>
-            <p-footer class="btm-buttons">
-                <button type="button" pButton icon="pi pi-check" label="Yes" (click)="eventRevoke()" ></button>
-                <button type="button" pButton icon="pi pi-times" (click)="display=false" label="No"></button>
-            </p-footer>
-        </p-dialog>  
+    <p-dialog header="Delete Confirmation" [transitionOptions]="'500ms'" [baseZIndex]="20000" [(visible)]="display"
+        [style]="{width: '30vw'}" [responsive]="true" [draggable]="true" [position]="position">
+        <p>Are you sure you want to delete Event?</p>
+        <p-footer class="btm-buttons">
+            <button type="button" pButton icon="pi pi-check" label="Yes" (click)="eventRevoke()"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="display=false" label="No"></button>
+        </p-footer>
+    </p-dialog>

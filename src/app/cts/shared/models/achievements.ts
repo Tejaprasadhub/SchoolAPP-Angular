@@ -10,3 +10,10 @@ export class Achievements {
          status:string;
     
 }
+
+export class Events{
+    id: number;
+    querytype:number;
+    start:string;
+    end:string;
+}

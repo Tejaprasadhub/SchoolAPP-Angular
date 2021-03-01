@@ -35,5 +35,31 @@ export class AchievementsService {
                     return response;
                 }));
     }
+
+    public getEvents(pagingData) {
+        // this.achievementsJsonData.next(this.achievements);
+        const headers = new HttpHeaders().set("Content-Type", "application/json");
+
+        var loginUrl: string = AppConstants.Api.AdminApp + "Events/GetEvents"
+
+        return this.httpClient.post
+            (loginUrl, pagingData, { headers: headers, withCredentials: true }).pipe(
+                map((response: any) => {
+                    return response;
+                }));
+    }
+
+    public AEDEvents(pagingData) {
+        // this.branchesJsonData.next(this.branches);
+        const headers = new HttpHeaders().set("Content-Type", "application/json");
+
+        var loginUrl: string = AppConstants.Api.AdminApp + "Events/AEDEvents"
+
+        return this.httpClient.post
+            (loginUrl, pagingData, { headers: headers, withCredentials: true }).pipe(
+                map((response: any) => {
+                    return response;
+                }));
+    }
 }
 

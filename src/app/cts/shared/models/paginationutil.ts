@@ -97,4 +97,8 @@ export class Paginationutil {
     static getFilterDateFormat(){
         return AppConstants.DateTimeFormat.filterdateformat;
     }
+
+    static getAngularMonthFormat(){
+        return AppConstants.DateTimeFormat.angularmonthformat;
+    }
 }

@@ -131,7 +131,7 @@ width: 100% !important;
      border: 2px solid #e87722;
      cursor: pointer;
  }
- .green:hover:not(.fa),.green:focus:not(.fa)
+ .green:hover:not(.fa):not(.pi),.green:focus:not(.fa):not(.pi)
  {
      border:2px solid green;
      cursor: pointer;

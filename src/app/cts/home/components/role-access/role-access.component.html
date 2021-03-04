@@ -22,32 +22,30 @@
     <div class="row search-box search-box-padding form-block">
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <p-dropdown
-          [options]="users"
-          filter="true"
-          (onChange)="dropdownChange($event)"
-          placeholder="Select User" 
-        >
+        <p-dropdown [options]="users" filter="true" (onChange)="dropdownChange($event)" placeholder="Select User">
         </p-dropdown>
       </div>
       <div class="col-md-4"></div>
       <br />
       <br />
       <div class="col-md-12 clienttable" *ngIf="this.userFeatures">
-        <div class="p-field-checkbox">
-          <p-checkbox (onChange)="fullControlCheck($event)"
-            [(ngModel)]="checked"
-            binary="true"
-            inputId="binary"
-          ></p-checkbox>&nbsp;&nbsp;
+        <div class="p-field-checkbox text-right">
+          <p-checkbox (onChange)="fullControlCheck($event)" [(ngModel)]="checked" binary="true" inputId="binary">
+          </p-checkbox>&nbsp;&nbsp;
           <label for="binary">Full control to the selected user</label>
         </div>
-        <p-table
-          [value]="userFeatures"
-          sortField="brand"
-          sortMode="single"
-          (onSort)="onSort()"
-        >
+        <p-table #dt [value]="userFeatures" sortField="brand" sortMode="single" (onSort)="onSort()" [rows]="10"
+           styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+          [globalFilterFields]="['featureTitle']" currentPageReportTemplate="Showing {{dt.first+1}}-{{((dt.first+dt.rows)>dt.totalRecords)?dt.totalRecords:(dt.first+dt.rows)}} of {{dt.totalRecords}} entries" [showCurrentPageReport]="true">
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+              <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Search Feature" />
+              </span>
+            </div>
+          </ng-template>
           <ng-template pTemplate="header">
             <tr>
               <th>Feature</th>
@@ -55,33 +53,18 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
-            <tr
-              class="ui-widget-header"
-              *ngIf="rowGroupMetadata[rowData.featureTitle].index === rowIndex"
-            >
+            <tr class="ui-widget-header" *ngIf="rowGroupMetadata[rowData.featureTitle].index === rowIndex">
               <td colspan="2" style="background-color: #d3c9ee">
                 <span style="font-weight: bold; font-size: 15px">{{
                   rowData.featureTitle
-                }}</span>
+                  }}</span>
               </td>
             </tr>
             <tr>
               <td>{{ rowData.featureOption }}</td>
               <td>
-                <!-- <p-checkbox  label="Show" value='Y' class="p-2" [(ngModel)]="rowData.status"></p-checkbox>
-<p-checkbox   label="Hide" value='N' [(ngModel)]="rowData.status"></p-checkbox> -->
-
-                <p-radioButton
-                  label="Show"
-                  value="Y"
-                  class="p-2"
-                  [(ngModel)]="rowData.status" 
-                ></p-radioButton>
-                <p-radioButton
-                  label="Hide"
-                  value="N"
-                  [(ngModel)]="rowData.status"
-                ></p-radioButton>
+                <p-radioButton label="Show" value="Y" class="p-2" [(ngModel)]="rowData.status"></p-radioButton>
+                <p-radioButton label="Hide" value="N" [(ngModel)]="rowData.status"></p-radioButton>
               </td>
             </tr>
           </ng-template>
@@ -94,10 +77,7 @@
           <b>{{ errorMessage }}</b>
         </div>
       </div>
-      <div
-        class="col-md-12 success-block animated fadeIn"
-        *ngIf="successMessage"
-      >
+      <div class="col-md-12 success-block animated fadeIn" *ngIf="successMessage">
         <div class="col-md-12">
           <i class="fa fa-check"></i>
           <b>{{ successMessage }}</b>
@@ -105,14 +85,8 @@
       </div>
 
       <div class="col-md-12 mt-3 text-right" *ngIf="this.userFeatures">
-        <button *ngIf="checkPermissions('ADD')"
-          pButton
-          type="button"
-          icon="pi pi-check"
-          label="Submit"
-          class="ui-button-secondary table-header-items"
-          (click)="onSubmit($event)"
-        ></button>
+        <button *ngIf="checkPermissions('ADD')" pButton type="button" icon="pi pi-check" label="Submit"
+          class="ui-button-secondary table-header-items" (click)="onSubmit($event)"></button>
       </div>
     </div>
   </div>

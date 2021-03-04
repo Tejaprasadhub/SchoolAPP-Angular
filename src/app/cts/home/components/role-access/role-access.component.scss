@@ -2,6 +2,16 @@ body{
     
 }
 
+::ng-deep{
 .p-field-checkbox{
     font-size: 15px;
+}
+
+.ui-table-caption{
+    .pi-search{
+        position: absolute;
+        right: 20px;
+        top: 18px;
+    }
+}
 }

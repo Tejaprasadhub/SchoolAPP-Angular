@@ -58,7 +58,7 @@ export class BranchesComponent implements OnInit {
       });
    }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     //Table headers and fields
     this.cols = [
       { field: 'title', header: 'title' },

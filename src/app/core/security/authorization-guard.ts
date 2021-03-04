@@ -18,9 +18,10 @@ export class AuthorizationGuard  implements CanActivate, CanActivateChild,CanLoa
     canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot): Observable<boolean> | boolean{
         
         return this.authorizationService.authorizeRouteAccess(state.url).pipe(
-            map(result =>{
+            map(result =>{     
                 if(result.status == 'true'){
                     this.permissions = result.featureOptions;
+                    AuthorizationGuard.permissionsOnComponent=[];
                     for(let permission of this.permissions){
                         AuthorizationGuard.permissionsOnComponent.push(permission)
                     }
@@ -32,6 +33,7 @@ export class AuthorizationGuard  implements CanActivate, CanActivateChild,CanLoa
 
                     else
                     this.permissions = result.featureOptions;
+                    AuthorizationGuard.permissionsOnComponent=[];
                     for(let permission of this.permissions){
                         AuthorizationGuard.permissionsOnComponent.push(permission)
                     }

@@ -23,6 +23,7 @@ export class RoleAccessComponent implements OnInit {
   userid:string="";
   formSubmitAttempt: boolean = false;
   checked: boolean = false;
+  loading: boolean = true;
   private ngUnsubscribe = new Subject();
   constructor(private dropdownService: DropdownService,private roleaccessService:RoleAccessService,private router: Router) {
          //Get Dropdowns API call
@@ -99,14 +100,13 @@ onSubmit(permissionData){
 }
 
 fullControlCheck(event){
-  let GetArray = this.userFeatures;
   if(event){
     this.userFeatures.forEach(element => {
       element.status = 'Y';
     });
   }
   else{
-    this.userFeatures = GetArray;
+    this.getUserFeatures(this.userid);
   }
 }
 

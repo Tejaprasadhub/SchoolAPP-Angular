@@ -358,9 +358,9 @@ export class DashboardComponent implements OnInit {
           91,58,86,
         ],
         backgroundColor: [
-          "#448fab","#d69d33","#448fab",
-          "#d69d33","#448fab","#d69d33",
-          "#448fab","#d69d33","#448fab",
+          "#448fab","#008000","#448fab",
+          "#008000","#448fab","#008000",
+          "#448fab","#008000","#448fab",
         ],
         label: 'My dataset'
       }],

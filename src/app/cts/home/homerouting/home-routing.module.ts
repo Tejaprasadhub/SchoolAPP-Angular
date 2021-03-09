@@ -149,7 +149,7 @@ const homeRoutes: Routes = [
         data: { title: 'Achievement' }
       },
       {
-        path: 'achivements/add-achivement',
+        path: 'achivements/add-achievement',
         component: AddAchievementComponent,
         canActivate:[AuthenticationGuardService,AuthorizationGuard],
         data: { title: 'Add achievement' }

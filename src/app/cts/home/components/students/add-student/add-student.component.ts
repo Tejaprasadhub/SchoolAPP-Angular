@@ -39,6 +39,8 @@ export class AddStudentComponent implements OnInit {
   states: SelectItem[] = [];
   cities: SelectItem[] = [];
   status: SelectItem[] = [];
+  adm_categories: SelectItem[] = [];
+  blood_groups: SelectItem[] = [];
 
   maxDate= new Date();
 
@@ -55,6 +57,16 @@ export class AddStudentComponent implements OnInit {
       { label: 'Active', value: 'AC' }, 
       { label: 'Not Active', value: 'NA' }
     ];
+
+    this.adm_categories = [
+      { label: 'General', value: 'GEN' }, 
+      { label: 'Payment', value: 'PMT' }
+    ];
+    this.blood_groups = [
+      { label: 'O Positive', value: 'o+' }, 
+      { label: 'O Negative', value: 'o-' }
+    ];
+
      //Get Dropdowns API call
      var dropdowns = ["branches","sections","classes","countries","states","cities","parents"];
      this.dropdownService.getDropdowns(dropdowns)
@@ -114,7 +126,7 @@ export class AddStudentComponent implements OnInit {
       'section': new FormControl('', { validators: [Validators.required] }),
       'd_noc': new FormControl(''),
       'streetc': new FormControl(''),
-      'countryc': new FormControl(''),
+      'countryc': new FormControl('',{ validators: [Validators.required] }),
       'statec': new FormControl('',{ validators: [Validators.required] }),
       'villagec': new FormControl(''),
       'cityc': new FormControl('',{ validators: [Validators.required] }),
@@ -123,7 +135,7 @@ export class AddStudentComponent implements OnInit {
       'mblno':  new FormControl('', { validators: [Validators.required,Validators.pattern('[0-9]\\d{9}')] }),
       'd_nop': new FormControl(''),
       'streetp': new FormControl(''),
-      'countryp': new FormControl(''),
+      'countryp': new FormControl('',{ validators: [Validators.required] }),
       'statep': new FormControl('',{ validators: [Validators.required] }),
       'villagep': new FormControl(''),
       'cityp': new FormControl('',{ validators: [Validators.required] }),
@@ -137,6 +149,10 @@ export class AddStudentComponent implements OnInit {
       'e2mobile': new FormControl('', { validators: [Validators.pattern('[0-9]\\d{9}')] }),
       'e2email': new FormControl('',{ validators: [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")] }),
       'status': new FormControl('',{ validators: [Validators.required] }),
+      'adm_category': new FormControl(''),
+      'religion': new FormControl(''),
+      'blood_group': new FormControl(''),
+      'languages_known': new FormControl('')
     });
   }
 
@@ -197,8 +213,11 @@ export class AddStudentComponent implements OnInit {
             'e2lname': this.editData.ctce2lname,
             'e2email': this.editData.ctce2email,
             'e2mobile':this.editData.ctce2mobile,
-            'status':this.editData.ctcstudent_status
-
+            'status':this.editData.ctcstudent_status,
+            'adm_category':this.editData.adm_category,
+            'religion':this.editData.religion,
+            'blood_group':this.editData.blood_group,
+            'languages_known':this.editData.languages_known
           })
         }
       });   

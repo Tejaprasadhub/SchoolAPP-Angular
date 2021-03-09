@@ -129,6 +129,13 @@
                                 <span *ngIf="(addStudentForm.controls['mblno'].errors?.pattern)">
                                     Enter "Valid mobile number"</span>
                             </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addStudentForm.controls['countryc'].valid && addStudentForm.controls['countryc'].touched)||
+                            (!addStudentForm.controls['countryc'].valid && addStudentForm.controls['countryc'].untouched &&
+                             formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addStudentForm.controls['countryc'].errors?.required)">
+                                    Enter "Current Country"</span>
+                            </div>
                             <div class="col-md-3 error-div" *ngIf="((!addStudentForm.controls['statec'].valid && addStudentForm.controls['statec'].touched)||
                             (!addStudentForm.controls['statec'].valid && addStudentForm.controls['statec'].untouched &&
                              formSubmitAttempt))">
@@ -156,6 +163,13 @@
                                 <i class="fa fa-circle"></i>
                                 <span *ngIf="(addStudentForm.controls['pincodep'].errors?.pattern)">
                                     Enter "Valid Pincode-2"</span>
+                            </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addStudentForm.controls['countryp'].valid && addStudentForm.controls['countryp'].touched)||
+                            (!addStudentForm.controls['countryp'].valid && addStudentForm.controls['countryp'].untouched &&
+                             formSubmitAttempt))">
+                                <i class="fa fa-circle"></i>
+                                <span *ngIf="(addStudentForm.controls['countryp'].errors?.required)">
+                                    Enter "Perminant Country"</span>
                             </div>
                             <div class="col-md-3 error-div" *ngIf="((!addStudentForm.controls['statep'].valid && addStudentForm.controls['statep'].touched)||
                             (!addStudentForm.controls['statep'].valid && addStudentForm.controls['statep'].untouched &&
@@ -310,6 +324,28 @@
                 'required':(isRequired == true )}">
                 </p-dropdown>
             </div>  
+            <div class="col-md-4">
+                <span>Admission Category</span><br>
+                <p-dropdown [options]="adm_categories" filter="true" formControlName="adm_category" [disabled]="isDisabled"
+                    placeholder="Select admission category">
+                </p-dropdown>
+            </div>  
+            <div class="col-md-4">
+                <span>Religion</span><br>
+                <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="religion" type="text" placeholder="Enter religion" size="30" pInputText>
+            </div>
+            <div class="col-md-4">
+                <span>Blood Group</span><br>
+                <p-dropdown [options]="blood_groups" filter="true" formControlName="blood_group" [disabled]="isDisabled"
+                    placeholder="Select Blood Group">
+                </p-dropdown>
+            </div>  
+            <div class="col-md-4">
+                <span>Languages knows</span><br>
+                <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
+                    formControlName="languages_known" type="text" placeholder="Enter Languages" size="30" pInputText>
+            </div>
             <div class="col-md-12 header">
                 Address Details
             </div>
@@ -348,7 +384,7 @@
                     placeholder="Select Country"
                     [ngClass]="{'error':((!addStudentForm.controls['countryc'].valid &&
                              addStudentForm.controls['countryc'].touched) || 
-                            (!addStudentForm.controls['countryc'].valid && addStudentForm.controls['countryc'].untouched && formSubmitAttempt))}">
+                            (!addStudentForm.controls['countryc'].valid && addStudentForm.controls['countryc'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
                 </p-dropdown>
             </div>
             <div class="col-md-4">
@@ -431,7 +467,7 @@
                     placeholder="Select Country"
                     [ngClass]="{'error':((!addStudentForm.controls['countryp'].valid &&
                              addStudentForm.controls['countryp'].touched) || 
-                            (!addStudentForm.controls['countryp'].valid && addStudentForm.controls['countryp'].untouched && formSubmitAttempt))}">
+                            (!addStudentForm.controls['countryp'].valid && addStudentForm.controls['countryp'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
                 </p-dropdown>
             </div>
             <div class="col-md-4">

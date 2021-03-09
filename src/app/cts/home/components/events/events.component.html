@@ -27,13 +27,13 @@
                 <div class="eventCardDiv">
                     <div *ngFor="let event of events">
                         <div class="card eventCard">
-                            <div class="card-body">
-                                <span *ngIf="event.status == 'AC'" class="active">Active</span>     
-                                <span *ngIf="event.status == 'NA'" class="not-active">Not Active</span>   
+                            <div class="card-body">                                
                                 <div class="d-flex">
-                                    <h6> {{event.title}} </h6>                                                              
+                                    <h6> {{event.title}} </h6>         
+                                    <label *ngIf="event.status == 'AC'" class="active">Active</label>     
+                                    <label *ngIf="event.status == 'NA'" class="not-active">Not Active</label>                                                       
                                     <div class="event-container">
-                                        <img class="img-fluid eventlogo" src="./assets/images/event.jpg">
+                                        <img class="img-fluid eventlogo" src="./assets/images/schoollogo.jpg">
                                         <a download="new-filename"><i class="pi pi-pencil"></i></a>
                                     </div>
                                 </div>

@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Table } from 'primeng/table';
+import { AuthorizationGuard } from 'src/app/core/security/authorization-guard';
 
 @Component({
   selector: 'app-students',
@@ -241,5 +242,8 @@ loadGrids(pagingData){
   //to get date format
   getFormat(createddate):string{
     return moment(createddate).format(Paginationutil.getAngularDateFormat())
+   }
+   checkPermissions(permissionValue){
+    return  AuthorizationGuard.checkPermission(permissionValue);
    }
 }

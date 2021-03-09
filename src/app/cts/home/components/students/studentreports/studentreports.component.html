@@ -30,24 +30,65 @@
         <div class="report-card-div p-4" *ngIf="subjects.length > 0">
             <div class="col-md-12">
                 <h3 class="text-center font-weight-bold">REPORT CARD</h3>
+                <button pButton type="button" icon="pi pi-share-alt" label="Share"
+                class="ui-button-secondary table-header-items" style="float: right;margin-top: -30px;"></button>
             </div>
             <div class="col-md-12 row">
                 <div class="col-md-9 ">
-                    <div class="col-md-12 d-flex p-1">
-                        <div class="label">Address :</div>
-                        <div class="value">{{this.reportsData.address}}</div>
+                    <div class="row col-md-12 d-flex p-1">
+                        <div class="col-md-2">
+                            <div class="label">Phone</div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="value">: {{this.reportsData.mobile}}</div>
+                        </div>                        
                     </div>
-                    <div class="col-md-12 d-flex p-1">
-                        <div class="label">Phone :</div>
-                        <div class="value">{{this.reportsData.mobile}}</div>
+                    <div class="row col-md-12 d-flex p-1">
+                        <div class="col-md-2">
+                            <div class="label">Email</div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="value">: {{this.reportsData.email}}</div>
+                        </div> 
                     </div>
-                    <div class="col-md-12 d-flex p-1">
-                        <div class="label">Email :</div>
-                        <div class="value">{{this.reportsData.email}}</div>
+                    <div class="row col-md-12 p-1">
+                        <div class="col-md-2">
+                            <div class="label">Address</div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="value">: {{this.reportsData.d_no}},</div>
+                        </div> 
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="value"> {{this.reportsData.street}},</div>
+                        </div> 
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="value"> {{this.reportsData.village}},</div>
+                        </div> 
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="value">{{this.reportsData.city}},</div>
+                        </div> 
+
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="value">{{this.reportsData.pincode}}.</div>
+                        </div> 
+                        
+                        
+                        
+                        
                     </div>
+                   
                 </div>
                 <div class="col-md-3">
-                    <img class="img-fluid nav-school-logo" src="./assets/images/schoollogo.png">
+                    <img class="img-fluid nav-school-logo" style="height: 170px;" src="./assets/images/ssc.jpg">
+
                 </div>
             </div>
             <br>

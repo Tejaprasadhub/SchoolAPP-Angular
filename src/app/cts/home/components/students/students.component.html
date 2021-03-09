@@ -8,7 +8,7 @@
                 <button pButton type="button" icon="pi pi-filter" label="Filters"
                     class="ui-button-secondary table-header-items" (click)="toggleClass($event)"></button>&nbsp;
                 <button pButton type="button" icon="pi pi-plus" label="Student"
-                    class="ui-button-secondary table-header-items" (click)="addNew($event)"></button>
+                    class="ui-button-secondary table-header-items" *ngIf="checkPermissions('ADD')" (click)="addNew($event)"></button>
             </div>
         </div>
     </div>
@@ -116,8 +116,8 @@
                     </td>
                     <td>
                         <div class="d-flex">
-                        <i class="pi pi-pencil" (click)="editStudent(rowData.id)"></i>&nbsp;
-                        <i class="pi pi-trash" (click)="deleteStudent(rowData.id)"></i>
+                        <i class="pi pi-pencil" *ngIf="checkPermissions('EDIT')" (click)="editStudent(rowData.id)"></i>&nbsp;
+                        <i class="pi pi-trash"  *ngIf="checkPermissions('DELETE')" (click)="deleteStudent(rowData.id)"></i>
                     </div>
                     </td>
                 </tr>

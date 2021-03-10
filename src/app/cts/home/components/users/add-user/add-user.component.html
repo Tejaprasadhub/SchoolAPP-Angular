@@ -12,6 +12,12 @@
             <b>{{successMessage}}</b>
         </div>
     </div>
+    <div class="col-md-12 error-block animated fadeIn" *ngIf="errorMessage">
+        <div class="col-md-12">
+            <i class="fa fa-exclamation-circle"></i>
+            <b>{{errorMessage}}</b>
+        </div>
+    </div>
     <form [formGroup]="addUserForm" class="col-md-12" (ngSubmit)="addUserSubmit()">
         <div class="col-md-12 error-block animated fadeIn" *ngIf="(!addUserForm.valid && formSubmitAttempt)">
             <div class="col-md-12">
@@ -101,7 +107,8 @@
                 </div>
                 <div class="col-md-12">
                     <span>User Name</span><br>
-                    <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" 
+                        (keypress)="keyPressAlphabet($event)" 
                         formControlName="userName" type="text" placeholder="UserName" size="30" pInputText
                         class="required"
                         [ngClass]="{'error':((!addUserForm.controls['userName'].valid && addUserForm.controls['userName'].touched) || (!addUserForm.controls['userName'].valid && addUserForm.controls['userName'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
@@ -147,6 +154,7 @@
                 <div class="col-md-12">
                     <span>DisplayName</span><br>
                     <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                        (keypress)="keyPressAlphabet($event)" 
                         formControlName="dispName" type="text" placeholder="DisplayName" size="30" pInputText
                         class="required"
                         [ngClass]="{'error':((!addUserForm.controls['dispName'].valid && addUserForm.controls['dispName'].touched) || (!addUserForm.controls['dispName'].valid && addUserForm.controls['dispName'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">

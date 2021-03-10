@@ -11,6 +11,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { UsersService } from 'src/app/cts/shared/services/users.service';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class AddUserComponent implements OnInit {
   //to create Teacher From 
   addUserForm: FormGroup;
   formSubmitAttempt: boolean = false;
-  constructor(private dropdownService: DropdownService, private UsersService: UsersService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
+  constructor(private dropdownService: DropdownService, private UsersService: UsersService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location,private inputpattern:InputPatternService) {
     this.usertypes = [
       { label: 'Admin', value: 'ADMN' },
       { label: 'Data Entry Operator', value: 'DEOP' },
@@ -183,6 +184,7 @@ export class AddUserComponent implements OnInit {
       //AED Branches API call
       this.UsersService.AEDUsers(customObj)
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+          debugger;
           if (result.success) {
             // this.branches= result.data;    
             if (this.formType == "create") {
@@ -234,4 +236,9 @@ export class AddUserComponent implements OnInit {
     this.addUserForm.get('userName').setValue(this.userData.name);
   }
 
+  
+ keyPressAlphabet(event)
+ {
+    this.inputpattern.Alphabet(event);
+ }
 }

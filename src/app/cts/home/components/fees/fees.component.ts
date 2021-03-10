@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SelectItem } from 'primeng/api/selectitem';
 import { examswisesubject } from 'src/app/cts/shared/models/exams';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-fees',
@@ -30,7 +31,7 @@ export class FeesComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private dropdownService: DropdownService) {
+  constructor(private fb: FormBuilder, private dropdownService: DropdownService,private inputpattern:InputPatternService) {
     var dropdowns = ["subjects"];
     this.dropdownService.getDropdowns(dropdowns)
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
@@ -81,11 +82,7 @@ export class FeesComponent implements OnInit {
   }
 
   _keyPress(event: any) {
-    const pattern = /[0-9]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {
-      event.preventDefault();
-    }
+    this.inputpattern.Integers(event);
   }
 
   getSubjectName(id):string{  

@@ -12,6 +12,7 @@ import { AppConstants } from 'src/app/cts/app-constants';
 import { SelectItem } from 'primeng/api/selectitem';
 import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
 import * as moment from 'moment';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-exam',
@@ -39,7 +40,7 @@ export class AddExamComponent implements OnInit {
   loading: boolean;
   classes:any[]=[];
   
-  constructor(private dropdownService: DropdownService,private ExamsService: ExamsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location) { 
+  constructor(private dropdownService: DropdownService,private ExamsService: ExamsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location,private inputpattern:InputPatternService) { 
      //Get Dropdowns API call
      var dropdowns = ["classes"];
      this.dropdownService.getDropdowns(dropdowns)
@@ -187,5 +188,8 @@ export class AddExamComponent implements OnInit {
   getArray(array: any[]) {
       this.examwisesubjects = array;
   }
-  
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.AlphaNumeric(event);
+  }
 }

@@ -74,6 +74,7 @@
                     Title
                 </span><br>
                 <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    (keypress)="keyPressAlphabet($event)"     
                     formControlName="title" type="text" placeholder="Title" size="30" pInputText [ngClass]="{'error':((!addExamForm.controls['title'].valid && addExamForm.controls['title'].touched) || 
                     (!addExamForm.controls['title'].valid && addExamForm.controls['title'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">

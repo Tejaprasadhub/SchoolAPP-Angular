@@ -1,7 +1,7 @@
 {
     "api":{
-        "security":"http://localhost:64371/api/",
-        "AdminApp":"http://localhost:64371/api/"      
+        "security":"http://localhost:57942/api/",
+        "AdminApp":"http://localhost:57942/api/"      
     },
     "datetimeformat":{
         "datetimeformat":"MMMM Do YYYY, hh:mm A",

@@ -15,6 +15,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { Utility } from 'src/app/cts/shared/models/utility';
 import { TeachersService } from 'src/app/cts/shared/services/teachers.service';
 import { AppConstants } from 'src/app/cts/app-constants';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-teacher',
@@ -47,7 +48,7 @@ export class AddTeacherComponent implements OnInit {
 
   
 
-  constructor(private teachersService:TeachersService, private dropdownService: DropdownService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
+  constructor(private teachersService:TeachersService, private dropdownService: DropdownService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location,private inputpattern:InputPatternService) {
     
        //Get Dropdowns API call
        var dropdowns = ["branches","qualifications","experiences","sections","subjects","classes"];
@@ -266,14 +267,16 @@ export class AddTeacherComponent implements OnInit {
     })
   }
   _keyPress(event: any) {
-    const pattern = /[0-9]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {
-      event.preventDefault();
-    }
+    this.inputpattern.Integers(event);
+    
   }
 
   getFormat(createddate):string{
     return moment(createddate).format(Paginationutil.getServerSideDateFormat())
+   }
+
+   keyPressAlphabet(event)
+   {
+      this.inputpattern.Alphabet(event);
    }
 }

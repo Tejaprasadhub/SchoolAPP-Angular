@@ -10,6 +10,7 @@ import { Utility } from 'src/app/cts/shared/models/utility';
 import { ParentsService } from 'src/app/cts/shared/services/parents.service';
 import { Parents } from 'src/app/cts/shared/models/parents';
 import { AppConstants } from 'src/app/cts/app-constants';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-parent',
@@ -36,7 +37,7 @@ export class AddParentComponent implements OnInit {
 
 
 
-  constructor(private ParentsService: ParentsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
+  constructor(private ParentsService: ParentsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location,private inputpattern:InputPatternService) {
     this.gender = [
       { label: 'Male', value: 'M' },
       { label: 'Female', value: 'F' }     
@@ -184,6 +185,10 @@ export class AddParentComponent implements OnInit {
 
   list(): void {
     this.location.back();
+  }
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.Alphabet(event);
   }
 
 }

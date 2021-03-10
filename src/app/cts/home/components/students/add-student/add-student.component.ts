@@ -12,6 +12,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { StudentsService } from 'src/app/cts/shared/services/students.service';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { Utility } from 'src/app/cts/shared/models/utility';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-student',
@@ -45,7 +46,7 @@ export class AddStudentComponent implements OnInit {
   maxDate= new Date();
 
   querytype:number;
-  constructor(private studentsService: StudentsService,private dropdownService: DropdownService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location:Location) {
+  constructor(private studentsService: StudentsService,private dropdownService: DropdownService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location:Location,private inputpattern:InputPatternService) {
     this.maxDate.setDate(this.maxDate.getDate()); 
  
     this.gender = [
@@ -64,7 +65,13 @@ export class AddStudentComponent implements OnInit {
     ];
     this.blood_groups = [
       { label: 'O Positive', value: 'o+' }, 
-      { label: 'O Negative', value: 'o-' }
+      { label: 'O Negative', value: 'o-' },
+      { label: 'A Positive', value: 'A+' }, 
+      { label: 'A Negative', value: 'A-' },
+      { label: 'B Positive', value: 'B+' }, 
+      { label: 'B Negative', value: 'B-' },
+      { label: 'AB Positive', value: 'AB+' }, 
+      { label: 'AB Negative', value: 'AB-' }
     ];
 
      //Get Dropdowns API call
@@ -264,10 +271,22 @@ export class AddStudentComponent implements OnInit {
     this.successMessage = "";
   }
   _keyPress(event: any) {
-    const pattern = /[0-9]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {
-        event.preventDefault();
-    }
-}
+    this.inputpattern.Integers(event);
+  }
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.Alphabet(event);
+  }
+  keyPressAlphanumeric(event)
+  {
+     this.inputpattern.AlphaNumeric(event);
+  }
+  keyPressAlphanumericwithcomas(event)
+  {
+     this.inputpattern.AlphaNumericwithcomma(event);
+  }
+  keyPressAlphanumericwithspecialchars(event)
+  {
+     this.inputpattern.AlphaNumericwithspecialsymbols(event);
+  }
 }

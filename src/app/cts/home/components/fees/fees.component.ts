@@ -68,9 +68,16 @@ export class FeesComponent implements OnInit {
       this.formSubmitAttempt = false;
       let customObj = new examswisesubject();
       customObj = this.examForm.value;
-      this.examwisesubjects.push(customObj);
-      this.arrayToEmit.emit(this.examwisesubjects)
-      this.examForm.reset();
+      if(!this.examwisesubjects.some((item) => item.subjectid == customObj.subjectid))
+      {
+        this.examwisesubjects.push(customObj);
+        this.arrayToEmit.emit(this.examwisesubjects)
+        this.examForm.reset();
+      }
+      else
+      {
+        this.errorMessage="Already Subject Exist in the Table";
+      }
     }
   }
 

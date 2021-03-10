@@ -88,8 +88,8 @@
                 <span>
                     First Name
                 </span><br>
-                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="fname" type="text" placeholder="First Name" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['fname'].valid && addParentForm.controls['fname'].touched) || 
+                <input id="input" maxlength="255" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    (keypress)="keyPressAlphabet($event)" formControlName="fname" type="text" placeholder="First Name" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['fname'].valid && addParentForm.controls['fname'].touched) || 
                     (!addParentForm.controls['fname'].valid && addParentForm.controls['fname'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
@@ -97,8 +97,8 @@
                 <span>
                     Last Name
                 </span><br>
-                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="lname" type="text" placeholder="Last Name" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['lname'].valid && addParentForm.controls['lname'].touched) || 
+                <input id="input" maxlength="255" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    (keypress)="keyPressAlphabet($event)" formControlName="lname" type="text" placeholder="Last Name" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['lname'].valid && addParentForm.controls['lname'].touched) || 
                     (!addParentForm.controls['lname'].valid && addParentForm.controls['lname'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
@@ -124,7 +124,7 @@
                 <span>
                     Email
                 </span><br>
-                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                <input id="input" maxlength="255" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
                     formControlName="email" type="text" placeholder="Email" size="30" pInputText [ngClass]="{'error':((!addParentForm.controls['email'].valid && addParentForm.controls['email'].touched) || 
                     (!addParentForm.controls['email'].valid && addParentForm.controls['email'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">

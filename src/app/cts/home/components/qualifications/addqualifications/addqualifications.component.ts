@@ -10,6 +10,7 @@ import { QualificationsService } from 'src/app/cts/shared/services/qualification
 import { Utility } from 'src/app/cts/shared/models/utility';
 import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { SelectItem } from 'primeng/api/selectitem';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-addqualifications',
@@ -34,7 +35,7 @@ export class AddQualificationComponent implements OnInit {
 
 
   
-  constructor(private QualificationsService: QualificationsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location) {
+  constructor(private QualificationsService: QualificationsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location,private inputpattern:InputPatternService) {
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
@@ -163,6 +164,11 @@ export class AddQualificationComponent implements OnInit {
 
   list(): void {
     this.location.back();
+  }
+
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.Alphabet(event);
   }
 
 }

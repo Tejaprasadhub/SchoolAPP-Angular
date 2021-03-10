@@ -10,6 +10,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { NewsService } from 'src/app/cts/shared/services/news.service';
 import { News } from 'src/app/cts/shared/models/news';
 import { AppConstants } from 'src/app/cts/app-constants';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-news',
@@ -35,7 +36,7 @@ export class AddNewsComponent implements OnInit {
 
 
 
-  constructor(private NewsService: NewsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
+  constructor(private NewsService: NewsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location,private inputpattern:InputPatternService) {
     this.branchids = [
       { label: 'skota', value: '1' },
       { label: 'boddam', value: '2' }
@@ -80,7 +81,7 @@ export class AddNewsComponent implements OnInit {
       'title': new FormControl('', { validators: [Validators.required] }),
       'branchid': new FormControl('', { validators: [Validators.required] }),
       'date': new FormControl('', { validators: [Validators.required] }),
-      'description': new FormControl('', { validators: [Validators.required] }),
+      'description': new FormControl(''),
       'status': new FormControl('', { validators: [Validators.required] })
 
     });
@@ -169,6 +170,11 @@ export class AddNewsComponent implements OnInit {
 
   list(): void {
     this.location.back();
+  }
+  
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.AlphaNumeric(event);
   }
 
 } 

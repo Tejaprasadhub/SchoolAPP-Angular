@@ -65,7 +65,7 @@
                     Class Name
                 </span><br>
                 <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="class" type="text" placeholder="Class Name" size="30" pInputText [ngClass]="{'error':((!addClassForm.controls['class'].valid && addClassForm.controls['class'].touched) || 
+                    (keypress)="keyPressAlphabet($event)" formControlName="class" type="text" placeholder="Class Name" size="30" pInputText [ngClass]="{'error':((!addClassForm.controls['class'].valid && addClassForm.controls['class'].touched) || 
                     (!addClassForm.controls['class'].valid && addClassForm.controls['class'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>

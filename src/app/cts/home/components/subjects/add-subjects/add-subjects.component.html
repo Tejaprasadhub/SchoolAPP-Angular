@@ -58,15 +58,15 @@
                 <span>
                     Code
                 </span><br>
-                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="code"
-                    type="text" placeholder="Subject Code" size="30" pInputText [ngClass]="{'error':((!addSubjectForm.controls['code'].valid && addSubjectForm.controls['code'].touched) || 
+                <input id="input" maxlength="4" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="code"
+                    (keypress)="keyPressAlphabet($event)" type="text" placeholder="Subject Code" size="30" pInputText [ngClass]="{'error':((!addSubjectForm.controls['code'].valid && addSubjectForm.controls['code'].touched) || 
                     (!addSubjectForm.controls['code'].valid && addSubjectForm.controls['code'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
             <div class="col-md-4">
                 <span>Name</span><br>
                 <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="name"
-                type="text" placeholder="Subject Name" size="30" pInputText [ngClass]="{'error':((!addSubjectForm.controls['name'].valid && addSubjectForm.controls['name'].touched) || 
+                (keypress)="keyPressAlphabet($event)" type="text" placeholder="Subject Name" size="30" pInputText [ngClass]="{'error':((!addSubjectForm.controls['name'].valid && addSubjectForm.controls['name'].touched) || 
                 (!addSubjectForm.controls['name'].valid && addSubjectForm.controls['name'].untouched && 
                 formSubmitAttempt)),'required':(isRequired == true )}">
             </div>

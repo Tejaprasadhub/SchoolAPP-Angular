@@ -10,6 +10,7 @@ import { Utility } from 'src/app/cts/shared/models/utility';
 import { ClassesService } from 'src/app/cts/shared/services/classes.service';
 import { Classes } from 'src/app/cts/shared/models/classes';
 import { AppConstants } from 'src/app/cts/app-constants';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-class',
@@ -36,7 +37,7 @@ export class AddClassComponent implements OnInit {
 
 
 
-  constructor(private ClassesService: ClassesService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
+  constructor(private ClassesService: ClassesService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location,private inputpattern:InputPatternService) {
     this.sections = [
       { label: '1-section', value: 1 },
       { label: '2-sections', value: 2 },
@@ -177,6 +178,10 @@ export class AddClassComponent implements OnInit {
     this.location.back();
   }
 
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.AlphaNumeric(event);
+  }
 }
 
 

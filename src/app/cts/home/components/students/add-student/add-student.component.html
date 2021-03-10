@@ -226,7 +226,7 @@
             <div class="col-md-4">
                 <span>First Name</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="firstName" type="text" placeholder="First Name" size="30" pInputText
+                    (keypress)="keyPressAlphabet($event)" formControlName="firstName" type="text" placeholder="First Name" size="30" pInputText
                     [ngClass]="{'error':((!addStudentForm.controls['firstName'].valid && 
                     addStudentForm.controls['firstName'].touched) || (!addStudentForm.controls['firstName'].valid && 
                     addStudentForm.controls['firstName'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
@@ -234,14 +234,14 @@
             <div class="col-md-4">
                 <span>Middle Name</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="middleName" type="text" placeholder="Middle Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['middleName'].valid && 
+                    (keypress)="keyPressAlphabet($event)" formControlName="middleName" type="text" placeholder="Middle Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['middleName'].valid && 
                         addStudentForm.controls['middleName'].touched) || (!addStudentForm.controls['middleName'].valid && 
                         addStudentForm.controls['middleName'].untouched && formSubmitAttempt))}">
             </div>
             <div class="col-md-4">
                 <span>Last Name</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="lastName" type="text" placeholder="Last Name" size="30" pInputText
+                    (keypress)="keyPressAlphabet($event)" formControlName="lastName" type="text" placeholder="Last Name" size="30" pInputText
                     [ngClass]="{'error':((!addStudentForm.controls['lastName'].valid && 
                             addStudentForm.controls['lastName'].touched) || (!addStudentForm.controls['lastName'].valid && 
                             addStudentForm.controls['lastName'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
@@ -333,7 +333,7 @@
             <div class="col-md-4">
                 <span>Religion</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="religion" type="text" placeholder="Enter religion" size="30" pInputText>
+                (keypress)="keyPressAlphabet($event)" formControlName="religion" type="text" placeholder="Enter religion" size="30" pInputText>
             </div>
             <div class="col-md-4">
                 <span>Blood Group</span><br>
@@ -344,7 +344,7 @@
             <div class="col-md-4">
                 <span>Languages knows</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="languages_known" type="text" placeholder="Enter Languages" size="30" pInputText>
+                (keypress)="keyPressAlphabet($event)"formControlName="languages_known" type="text" placeholder="Enter Languages" size="30" pInputText>
             </div>
             <div class="col-md-12 header">
                 Address Details
@@ -356,8 +356,8 @@
             </div>
             <div class="col-md-4">
                 <span>D.No</span><br>
-                <input id="input" maxlength="10" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="d_noc" type="text" placeholder="D.No" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['d_noc'].valid && 
+                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    (keypress)="keyPressAlphanumericwithspecialchars($event)" formControlName="d_noc" type="text" placeholder="D.No" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['d_noc'].valid && 
                             addStudentForm.controls['d_noc'].touched) || (!addStudentForm.controls['d_noc'].valid && 
                             addStudentForm.controls['d_noc'].untouched && formSubmitAttempt))}">
             </div>
@@ -365,14 +365,14 @@
             <div class="col-md-4">
                 <span>Street</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="streetc" type="text" placeholder="Street" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['streetc'].valid && 
+                    (keypress)="keyPressAlphanumericwithspecialchars($event)" formControlName="streetc" type="text" placeholder="Street" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['streetc'].valid && 
                             addStudentForm.controls['streetc'].touched) || (!addStudentForm.controls['streetc'].valid && 
                             addStudentForm.controls['streetc'].untouched && formSubmitAttempt))}">
             </div>
             <div class="col-md-4">
                 <span>Village</span><br>
                 <input id="input" maxlength="100" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="villagec" type="text" placeholder="Village" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['villagec'].valid && 
+                    (keypress)="keyPressAlphanumericwithspecialchars($event)" formControlName="villagec" type="text" placeholder="Village" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['villagec'].valid && 
                             addStudentForm.controls['villagec'].touched) || (!addStudentForm.controls['villagec'].valid && 
                             addStudentForm.controls['villagec'].untouched && formSubmitAttempt))}">
 
@@ -442,7 +442,7 @@
             <div class="col-md-4">
                 <span>D.No</span><br>
                 <input id="input" class="w-100" maxlength="10" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="d_nop" type="text" placeholder="D.No" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['d_nop'].valid && 
+                    (keypress)="keyPressAlphanumericwithspecialchars($event)" formControlName="d_nop" type="text" placeholder="D.No" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['d_nop'].valid && 
                             addStudentForm.controls['d_nop'].touched) || (!addStudentForm.controls['d_nop'].valid && 
                             addStudentForm.controls['d_nop'].untouched && formSubmitAttempt))}">
             </div>
@@ -450,14 +450,14 @@
             <div class="col-md-4">
                 <span>Street</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="streetp" type="text" placeholder="Street" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['streetp'].valid && 
+                    (keypress)="keyPressAlphanumericwithspecialchars($event)" formControlName="streetp" type="text" placeholder="Street" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['streetp'].valid && 
                             addStudentForm.controls['streetp'].touched) || (!addStudentForm.controls['streetp'].valid && 
                             addStudentForm.controls['streetp'].untouched && formSubmitAttempt))}">
             </div>
             <div class="col-md-4">
                 <span>Village</span><br>
                 <input id="input" class="w-100" maxlength="100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="villagep" type="text" placeholder="Village" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['villagep'].valid && 
+                    (keypress)="keyPressAlphanumericwithspecialchars($event)" formControlName="villagep" type="text" placeholder="Village" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['villagep'].valid && 
                             addStudentForm.controls['villagep'].touched) || (!addStudentForm.controls['villagep'].valid && 
                             addStudentForm.controls['villagep'].untouched && formSubmitAttempt))}">
             </div>
@@ -509,14 +509,14 @@
             <div class="col-md-4">
                 <span>First Name</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="e1fname" type="text" placeholder="First Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e1fname'].valid && 
+                    (keypress)="keyPressAlphabet($event)" formControlName="e1fname" type="text" placeholder="First Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e1fname'].valid && 
                     addStudentForm.controls['e1fname'].touched) || (!addStudentForm.controls['e1fname'].valid && 
                     addStudentForm.controls['e1fname'].untouched && formSubmitAttempt))}">
             </div>
             <div class="col-md-4">
                 <span>Last Name</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="e1lname" type="text" placeholder="Last Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e1lname'].valid && 
+                    (keypress)="keyPressAlphabet($event)" formControlName="e1lname" type="text" placeholder="Last Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e1lname'].valid && 
                             addStudentForm.controls['e1lname'].touched) || (!addStudentForm.controls['e1lname'].valid && 
                             addStudentForm.controls['e1lname'].untouched && formSubmitAttempt))}">
             </div>
@@ -544,14 +544,14 @@
             <div class="col-md-4">
                 <span>First Name</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="e2fname" type="text" placeholder="First Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e2fname'].valid && 
+                    (keypress)="keyPressAlphabet($event)" formControlName="e2fname" type="text" placeholder="First Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e2fname'].valid && 
                     addStudentForm.controls['e2fname'].touched) || (!addStudentForm.controls['e2fname'].valid && 
                     addStudentForm.controls['e2fname'].untouched && formSubmitAttempt))}">
             </div>
             <div class="col-md-4">
                 <span>Last Name</span><br>
                 <input id="input" class="w-100" maxlength="45" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="e2lname" type="text" placeholder="Last Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e2lname'].valid && 
+                    (keypress)="keyPressAlphabet($event)" formControlName="e2lname" type="text" placeholder="Last Name" size="30" pInputText [ngClass]="{'error':((!addStudentForm.controls['e2lname'].valid && 
                             addStudentForm.controls['e2lname'].touched) || (!addStudentForm.controls['e2lname'].valid && 
                             addStudentForm.controls['e2lname'].untouched && formSubmitAttempt))}">
             </div>

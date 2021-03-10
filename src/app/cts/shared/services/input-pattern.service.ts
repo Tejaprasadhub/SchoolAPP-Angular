@@ -42,6 +42,18 @@ export class InputPatternService {
       return false;
     }
   }
+  // Only AlphaNumeric with comma
+  AlphaNumericwithcomma(event) {
+
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/[a-zA-Z0-9 ,]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
 
    // Only Alphabet
    Alphabet(event) {
@@ -53,4 +65,14 @@ export class InputPatternService {
       return false;
     }
   }
+   AlphaNumericwithspecialsymbols(event) {
+    var inp = String.fromCharCode(event.keyCode);
+    if (/[a-zA-Z0-9 ;_/,:*&.-]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
 }

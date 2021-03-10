@@ -10,6 +10,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { Subjects } from 'src/app/cts/shared/models/subjects';
 import { SelectItem } from 'primeng/api/selectitem';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-subjects',
@@ -34,7 +35,7 @@ export class AddSubjectsComponent implements OnInit {
   status: SelectItem[] = [];
 
   
-  constructor(private SubjectsService: SubjectsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location) {
+  constructor(private SubjectsService: SubjectsService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location,private inputpattern:InputPatternService) {
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
@@ -162,6 +163,12 @@ export class AddSubjectsComponent implements OnInit {
   list(): void {
     this.location.back();
   }
+
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.AlphaNumeric(event);
+  }
+
 
 }
 

@@ -63,8 +63,8 @@
                 <span>
                     Code
                 </span><br>
-                <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="code" type="text" placeholder="Code" size="30" pInputText [ngClass]="{'error':((!addQualificationForm.controls['code'].valid && addQualificationForm.controls['code'].touched) || 
+                <input id="input" maxlength="4" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
+                    (keypress)="keyPressAlphabet($event)" formControlName="code" type="text" placeholder="Code" size="30" pInputText [ngClass]="{'error':((!addQualificationForm.controls['code'].valid && addQualificationForm.controls['code'].touched) || 
                     (!addQualificationForm.controls['code'].valid && addQualificationForm.controls['code'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
@@ -73,7 +73,7 @@
                     Title
                 </span><br>
                 <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="title" type="text" placeholder="Title" size="30" pInputText [ngClass]="{'error':((!addQualificationForm.controls['title'].valid && addQualificationForm.controls['title'].touched) || 
+                    (keypress)="keyPressAlphabet($event)" formControlName="title" type="text" placeholder="Title" size="30" pInputText [ngClass]="{'error':((!addQualificationForm.controls['title'].valid && addQualificationForm.controls['title'].touched) || 
                     (!addQualificationForm.controls['title'].valid && addQualificationForm.controls['title'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>

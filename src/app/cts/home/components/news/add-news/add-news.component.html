@@ -76,7 +76,7 @@
                     News Title
                 </span><br>
                 <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="title" type="text" placeholder="News Title" size="30" pInputText [ngClass]="{'error':((!addNewsForm.controls['title'].valid && addNewsForm.controls['title'].touched) || 
+                    (keypress)="keyPressAlphabet($event)" formControlName="title" type="text" placeholder="News Title" size="30" pInputText [ngClass]="{'error':((!addNewsForm.controls['title'].valid && addNewsForm.controls['title'].touched) || 
                     (!addNewsForm.controls['title'].valid && addNewsForm.controls['title'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
@@ -110,11 +110,8 @@
                 <span>
                     Description
                 </span><br>
-                <textarea rows="3" cols="30" maxlength="500" placeholder="Descriptiom" pInputTextarea
-                    formControlName="description" autoResize="autoResize" [disabled]="isDisabled" [ngClass]="{'error':((!addNewsForm.controls['description'].valid &&
-            addNewsForm.controls['description'].touched) || 
-            (!addNewsForm.controls['description'].valid && addNewsForm.controls['description'].untouched && formSubmitAttempt)),
-            'required':(isRequired == true )}"></textarea>
+                <textarea rows="3" cols="30" maxlength="500" placeholder="Description" pInputTextarea
+                    formControlName="description" autoResize="autoResize" [disabled]="isDisabled" ></textarea>
             </div>           
             <br>
             <br>

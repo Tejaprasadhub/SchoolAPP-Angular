@@ -10,6 +10,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { BranchesService } from 'src/app/cts/shared/services/branches.service';
 import { Branches } from 'src/app/cts/shared/models/branches';
 import { AppConstants } from 'src/app/cts/app-constants';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class AddBranchComponent implements OnInit {
 
   querytype:number;
 
-  constructor(private BranchesService: BranchesService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
+  constructor(private BranchesService: BranchesService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location,private inputpattern:InputPatternService) {
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
@@ -153,5 +154,9 @@ export class AddBranchComponent implements OnInit {
     this.location.back();
   }
 
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.AlphaNumeric(event);
+  }
 }
 

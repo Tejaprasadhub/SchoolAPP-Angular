@@ -64,14 +64,14 @@
                     Branch Code
                 </span><br>
                 <input id="input" maxlength="4" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="code"
-                    type="text" placeholder="Branch Code" size="30" pInputText [ngClass]="{'error':((!addBranchForm.controls['code'].valid && addBranchForm.controls['code'].touched) || 
+                    (keypress)="keyPressAlphabet($event)" type="text" placeholder="Branch Code" size="30" pInputText [ngClass]="{'error':((!addBranchForm.controls['code'].valid && addBranchForm.controls['code'].touched) || 
                     (!addBranchForm.controls['code'].valid && addBranchForm.controls['code'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
             <div class="col-md-4">
                 <span>Branch Title</span><br>
                 <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null" formControlName="title"
-                type="text" placeholder="Branch Title" size="30" pInputText [ngClass]="{'error':((!addBranchForm.controls['title'].valid && addBranchForm.controls['title'].touched) || 
+                (keypress)="keyPressAlphabet($event)" type="text" placeholder="Branch Title" size="30" pInputText [ngClass]="{'error':((!addBranchForm.controls['title'].valid && addBranchForm.controls['title'].touched) || 
                 (!addBranchForm.controls['title'].valid && addBranchForm.controls['title'].untouched && 
                 formSubmitAttempt)),'required':(isRequired == true )}">
             </div>

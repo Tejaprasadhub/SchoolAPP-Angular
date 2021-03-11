@@ -11,6 +11,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import * as moment from 'moment';
 import { AchievementsService } from 'src/app/cts/shared/services/achievements.service';
 import { AppConstants } from 'src/app/cts/app-constants';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-event',
@@ -38,7 +39,7 @@ export class AddEventComponent implements OnInit {
 
 
   
-  constructor(private achievementService:AchievementsService,private dropdownService: DropdownService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location) {
+  constructor(private achievementService:AchievementsService,private dropdownService: DropdownService,private fb: FormBuilder, private router: Router, private route: ActivatedRoute,private location: Location,private inputpattern:InputPatternService) {
    
     this.categories = [
       { label: 'major', value: 'MJR' },
@@ -188,4 +189,8 @@ export class AddEventComponent implements OnInit {
     this.location.back();
   }
 
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.Alphabet(event);
+  }
 }

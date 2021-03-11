@@ -10,6 +10,7 @@ import { AchievementsService } from 'src/app/cts/shared/services/achievements.se
 import { AppConstants } from 'src/app/cts/app-constants';
 import { Achievements } from 'src/app/cts/shared/models/achievements';
 import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
+import { InputPatternService } from 'src/app/cts/shared/services/input-pattern.service';
 
 @Component({
   selector: 'app-add-achievement',
@@ -34,7 +35,7 @@ export class AddAchievementComponent implements OnInit {
   querytype:number;
 
 
-  constructor(private dropdownService: DropdownService,private AchievementsService: AchievementsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
+  constructor(private dropdownService: DropdownService,private AchievementsService: AchievementsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location,private inputpattern:InputPatternService) {
       //Get Dropdowns API call
       var dropdowns = ["branches"];
       this.dropdownService.getDropdowns(dropdowns)
@@ -149,7 +150,7 @@ export class AddAchievementComponent implements OnInit {
             }
             this.successMessage = AppConstants.Messages.successMessage;
           }else{
-            this.errorMessage = AppConstants.Messages.errorMessage;
+            this.errorMessage = "Achievement title already exists with this date and branch";
           }
         });
     }
@@ -162,6 +163,10 @@ export class AddAchievementComponent implements OnInit {
 
   list(): void {
     this.location.back();
+  }
+  keyPressAlphabet(event)
+  {
+     this.inputpattern.Alphabet(event);
   }
 
 }

@@ -135,13 +135,13 @@ loadGrids(pagingData){
    //Crud events
    addNew($event: any) {
     let id="0";
-    this.router.navigate(['add-achievement'], { relativeTo: this.route, queryParams: { type: window.btoa('create'),id: window.btoa(id) } });
+    this.router.navigate(['add-achivement'], { relativeTo: this.route, queryParams: { type: window.btoa('create'),id: window.btoa(id) } });
   }
   editAchievement(id):void{
-    this.router.navigate(['add-achievement'],{relativeTo: this.route,queryParams: { type: window.btoa('edit'), id: window.btoa(id) }});
+    this.router.navigate(['add-achivement'],{relativeTo: this.route,queryParams: { type: window.btoa('edit'), id: window.btoa(id) }});
   }
   viewAchievement(id):void{
-    this.router.navigate(['add-achievement'],{relativeTo: this.route,queryParams: { type: window.btoa('view'), id: window.btoa(id) }});
+    this.router.navigate(['add-achivement'],{relativeTo: this.route,queryParams: { type: window.btoa('view'), id: window.btoa(id) }});
   }
   deleteAchievement(id):void{
     this.position="top";

@@ -18,7 +18,7 @@ export class AuthorizationGuard  implements CanActivate, CanActivateChild,CanLoa
     canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot): Observable<boolean> | boolean{
         
         return this.authorizationService.authorizeRouteAccess(state.url).pipe(
-            map(result =>{     
+            map(result =>{ 
                 if(result.status == 'true'){
                     this.permissions = result.featureOptions;
                     AuthorizationGuard.permissionsOnComponent=[];

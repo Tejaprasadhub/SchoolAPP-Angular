@@ -184,7 +184,7 @@ export class AddUserComponent implements OnInit {
       //AED Branches API call
       this.UsersService.AEDUsers(customObj)
         .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
-          debugger;
+          
           if (result.success) {
             // this.branches= result.data;    
             if (this.formType == "create") {

@@ -81,7 +81,7 @@
                     Event Name
                 </span><br>
                 <input id="input" maxlength="45" class="w-100" [attr.disabled]="isDisabled ? 'disabled': null"
-                    formControlName="name" type="text" placeholder=" Event Name" size="30" pInputText [ngClass]="{'error':((!addEventForm.controls['name'].valid && addEventForm.controls['name'].touched) || 
+                (keypress)="keyPressAlphabet($event)" formControlName="name" type="text" placeholder=" Event Name" size="30" pInputText [ngClass]="{'error':((!addEventForm.controls['name'].valid && addEventForm.controls['name'].touched) || 
                     (!addEventForm.controls['name'].valid && addEventForm.controls['name'].untouched && 
                     formSubmitAttempt)),'required':(isRequired == true )}">
             </div>
@@ -146,7 +146,7 @@
                 <span>
                     Description
                 </span><br>
-                <textarea rows="3" cols="30" maxlength="500" placeholder="Descriptiom" pInputTextarea
+                <textarea rows="3" cols="30" maxlength="255" placeholder="Descriptiom" pInputTextarea
                     formControlName="description" autoResize="autoResize" [disabled]="isDisabled"></textarea>
             </div>
             <br>

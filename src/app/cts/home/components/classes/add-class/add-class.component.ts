@@ -145,7 +145,6 @@ export class AddClassComponent implements OnInit {
       let customObj = new Classes();
 
       customObj = this.addClassForm.value;
-      debugger
       customObj.id = this.classId;
       customObj.querytype = this.querytype;
       customObj.name = customObj.class;

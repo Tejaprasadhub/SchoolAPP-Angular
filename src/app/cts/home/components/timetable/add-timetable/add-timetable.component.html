@@ -33,19 +33,25 @@
                                 (!addTimetableForm.controls['classid'].valid && addTimetableForm.controls['classid'].untouched && 
                                 formSubmitAttempt))">
                                 <i class="fa fa-circle"></i>
-                                <span *ngIf="(addTimetableForm.controls['classid'].errors?.required)">Enter "Class Id"</span>
+                                <span *ngIf="(addTimetableForm.controls['classid'].errors?.required)">Enter "Class"</span>
                             </div>
+                            <div class="col-md-3 error-div" *ngIf="((!addTimetableForm.controls['sectionid'].valid && addTimetableForm.controls['sectionid'].touched)|| 
+                            (!addTimetableForm.controls['sectionid'].valid && addTimetableForm.controls['sectionid'].untouched && 
+                            formSubmitAttempt))">
+                            <i class="fa fa-circle"></i>
+                            <span *ngIf="(addTimetableForm.controls['sectionid'].errors?.required)">Enter "Section"</span>
+                        </div>
                             <div class="col-md-3 error-div"
                                 *ngIf="((!addTimetableForm.controls['subjectid'].valid && addTimetableForm.controls['subjectid'].touched)|| 
                                 (!addTimetableForm.controls['subjectid'].valid && addTimetableForm.controls['subjectid'].untouched && formSubmitAttempt))">
                                 <i class="fa fa-circle"></i>
-                                <span *ngIf="(addTimetableForm.controls['subjectid'].errors?.required)">Enter "Subject Id"</span>
+                                <span *ngIf="(addTimetableForm.controls['subjectid'].errors?.required)">Enter "Subject"</span>
                             </div>
                             <div class="col-md-3 error-div" *ngIf="((!addTimetableForm.controls['teacherid'].valid && addTimetableForm.controls['teacherid'].touched)|| 
                                 (!addTimetableForm.controls['teacherid'].valid && addTimetableForm.controls['teacherid'].untouched && 
                                 formSubmitAttempt))">
                                 <i class="fa fa-circle"></i>
-                                <span *ngIf="(addTimetableForm.controls['teacherid'].errors?.required)">Enter "Teacher Id"</span>
+                                <span *ngIf="(addTimetableForm.controls['teacherid'].errors?.required)">Enter "Teacher"</span>
                             </div>
                             <div class="col-md-3 error-div" *ngIf="((!addTimetableForm.controls['periodfrom'].valid && addTimetableForm.controls['periodfrom'].touched)|| 
                                 (!addTimetableForm.controls['periodfrom'].valid && addTimetableForm.controls['periodfrom'].untouched && 
@@ -73,7 +79,7 @@
         <div class="row search-box search-box-padding form-block">
             <div class="col-md-4">
                 <span>
-                    Class Id
+                    Class
                 </span><br>
                 <p-dropdown [options]="classid" filter="true" formControlName="classid" [disabled]="isDisabled"
                     placeholder="Select Class"
@@ -81,15 +87,22 @@
                 </p-dropdown>
             </div>
             <div class="col-md-4">
-                <span>Subject Id</span><br>
+                <span>Section</span><br>
+                <p-dropdown [options]="sections" filter="true" formControlName="sectionid" [disabled]="isDisabled"
+                    placeholder="Select Section"
+                    [ngClass]="{'error':((!addTimetableForm.controls['sectionid'].valid && addTimetableForm.controls['sectionid'].touched) || (!addTimetableForm.controls['sectionid'].valid && addTimetableForm.controls['sectionid'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
+                </p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <span>Subject</span><br>
                 <p-dropdown [options]="subjectid" filter="true" formControlName="subjectid" [disabled]="isDisabled"
                     placeholder="Select Subject"
                     [ngClass]="{'error':((!addTimetableForm.controls['subjectid'].valid && addTimetableForm.controls['subjectid'].touched) || (!addTimetableForm.controls['subjectid'].valid && addTimetableForm.controls['subjectid'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
                 </p-dropdown>
             </div>
             <div class="col-md-4">
-                <span>Teacher Id</span><br>
-                <p-dropdown [options]="subjectid" filter="true" formControlName="teacherid" [disabled]="isDisabled"
+                <span>Teacher</span><br>
+                <p-dropdown [options]="teacherid" filter="true" formControlName="teacherid" [disabled]="isDisabled"
                     placeholder="Select Teacher"
                     [ngClass]="{'error':((!addTimetableForm.controls['teacherid'].valid && addTimetableForm.controls['teacherid'].touched) || (!addTimetableForm.controls['teacherid'].valid && addTimetableForm.controls['teacherid'].untouched && formSubmitAttempt)),'required':(isRequired == true )}">
                 </p-dropdown>
@@ -112,7 +125,8 @@
                 (!addTimetableForm.controls['status'].valid && addTimetableForm.controls['status'].untouched && formSubmitAttempt)),
                 'required':(isRequired == true )}">
                 </p-dropdown>
-            </div>            
+            </div>     
+            <div class="col-md-8"></div>       
             <br>
             <br>
             <br>

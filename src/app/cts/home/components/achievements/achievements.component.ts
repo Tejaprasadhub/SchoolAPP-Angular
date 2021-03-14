@@ -156,7 +156,8 @@ loadGrids(pagingData){
      //AED Branches API call
      this.AchievementsService.AEDAchievements(customObj)
      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
-       if (result.success) {       
+       if (result.success) {      
+        this.DataTable.reset(); 
          this.successMessage = AppConstants.Messages.successMessage;
        }else{
          this.errorMessage = AppConstants.Messages.errorMessage;

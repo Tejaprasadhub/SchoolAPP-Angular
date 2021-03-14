@@ -108,7 +108,8 @@ viewUser(id):void{
      //AED Branches API call
      this.UsersService.AEDUsers(customObj)
      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
-       if (result.success) {       
+       if (result.success) {    
+        this.DataTable.reset();   
          this.successMessage = AppConstants.Messages.successMessage;
        }else{
          this.errorMessage = AppConstants.Messages.errorMessage;

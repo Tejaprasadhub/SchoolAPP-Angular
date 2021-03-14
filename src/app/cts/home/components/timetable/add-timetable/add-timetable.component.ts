@@ -9,6 +9,7 @@ import { Paginationutil } from 'src/app/cts/shared/models/paginationutil';
 import { TimetableService } from 'src/app/cts/shared/services/timetable.service';
 import { AppConstants } from 'src/app/cts/app-constants';
 import { Timetable } from 'src/app/cts/shared/models/timetable';
+import { DropdownService } from 'src/app/cts/shared/services/dropdown.service';
 
 @Component({
   selector: 'app-add-timetable',
@@ -29,32 +30,28 @@ export class AddTimetableComponent implements OnInit {
   display: boolean = false;
   editData: any;
   classid: any[];
+  sections: any[];
   subjectid: any[];
   teacherid: any[];
   status: any[];
   querytype:number;
 
 
-  constructor(private TimetableService: TimetableService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
-    this.classid = [
-      { label: 'class1', value: '1' },
-      { label: 'class2', value: '2' },
-      { label: 'class3', value: '3' }
-    ];
-    this.subjectid = [
-      { label: 'subject1', value: '1' },
-      { label: 'subject2', value: '2' },
-      { label: 'subject3', value: '3' }
-    ];
-    this.teacherid = [
-      { label: 'teacher1', value: '1' },
-      { label: 'teacher2', value: '2' },
-      { label: 'teacher3', value: '3' }
-    ];
+  constructor(private dropdownService: DropdownService,private TimetableService: TimetableService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private location: Location) {
     this.status = [
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
     ];
+    var dropdowns = ["classes","subjects","teachers","sections"];
+    this.dropdownService.getDropdowns(dropdowns)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        if (result.success) {
+          this.classid = result.data.classes;
+          this.subjectid = result.data.subjects;
+          this.teacherid = result.data.teachers;
+          this.sections = result.data.sections;
+        }
+      });
   }
 
   ngOnInit(): void {// On page load
@@ -92,6 +89,7 @@ export class AddTimetableComponent implements OnInit {
   createForm() {
     this.addTimetableForm = this.fb.group({
       'classid': new FormControl('', { validators: [Validators.required] }),
+      'sectionid': new FormControl('', { validators: [Validators.required] }),
       'subjectid': new FormControl('', { validators: [Validators.required] }),
       'teacherid': new FormControl('', { validators: [Validators.required] }),
       'periodfrom': new FormControl('', { validators: [Validators.required] }),
@@ -115,14 +113,13 @@ export class AddTimetableComponent implements OnInit {
         if (result.success) {
           this.editData = result.data[0];
           this.addTimetableForm.setValue({
-            'classid': this.editData.class,
-            'subjectid': this.editData.subject,
-            'teacherid': this.editData.teacher,
+            'classid': this.editData.class_id,
+            'sectionid': this.editData.section_id,
+            'subjectid': this.editData.subject_id,
+            'teacherid': this.editData.teacher_id,
             'periodfrom': new Date(this.editData.periodfrom),
             'periodto': new Date(this.editData.periodto),
-            'status': this.editData.status
-
-           
+            'status': this.editData.status           
           })
         }
       });
@@ -171,7 +168,7 @@ export class AddTimetableComponent implements OnInit {
             }
             this.successMessage = AppConstants.Messages.successMessage;
           }else{
-            this.errorMessage = "classid already exists";
+            this.errorMessage = "Time table already exists";
           }
         },
         error =>{  

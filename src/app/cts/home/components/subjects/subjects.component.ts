@@ -155,6 +155,7 @@ viewSubject(id):void{
      this.SubjectsService.AEDSubjects(customObj)
      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
        if (result.success) {       
+        this.DataTable.reset();
          this.successMessage = AppConstants.Messages.successMessage;
        }else{
          this.errorMessage = AppConstants.Messages.errorMessage;

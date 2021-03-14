@@ -33,6 +33,7 @@ export class TimetableComponent implements OnInit {
   position: string;
   filtersForm: FormGroup;
   classid: any[]=[];
+  sections: any[]=[];
   subjectid: any[]=[];
   teacherid: any[]=[];
   status: any[]=[];
@@ -56,7 +57,7 @@ export class TimetableComponent implements OnInit {
       { label: 'Active', value: 'AC' },
       { label: 'InActive', value: 'NA' }
     ];
-    var dropdowns = ["classes","subjects","teachers","users"];
+    var dropdowns = ["classes","subjects","teachers","users","sections"];
     this.dropdownService.getDropdowns(dropdowns)
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
         if (result.success) {
@@ -64,15 +65,17 @@ export class TimetableComponent implements OnInit {
           this.subjectid = result.data.subjects;
           this.teacherid = result.data.teachers;
           this.users = result.data.users;
+          this.sections = result.data.sections;
         }
       });
   }
 
   public ngOnInit() {
     this.cols = [
-      { field: 'class', header: 'Class Id' },
-      { field: 'subject', header: 'Subject Id' },
-      { field: 'teacher', header: 'Teacher Id' },
+      { field: 'class', header: 'Class' },
+      { field: 'section', header: 'Section' },
+      { field: 'subject', header: 'Subject' },
+      { field: 'teacher', header: 'Teacher' },
       { field: 'periodfrom', header: 'Period From' },
       { field: 'periodto', header: 'Period To' },
       { field: 'createddate', header: 'Created Date' },
@@ -162,7 +165,8 @@ viewTimetable(id):void{
      //AED Branches API call
      this.TimetableService.AEDTimetable(customObj)
      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
-       if (result.success) {       
+       if (result.success) { 
+        this.DataTable.reset();               
          this.successMessage = AppConstants.Messages.successMessage;
        }else{
          this.errorMessage = AppConstants.Messages.errorMessage;
@@ -175,6 +179,7 @@ viewTimetable(id):void{
   createFilterForm() {
     this.filtersForm = this.fb.group({
       'tclassid': new FormControl(''),
+      'tsectionid': new FormControl(''),
       'tsubjectid': new FormControl(''),
       'tteaherid': new FormControl(''),
       'tperiodfrom': new FormControl(''),

@@ -165,7 +165,8 @@ loadGrids(pagingData){
      //AED Branches API call
      this.ClassesService.AEDClasses(customObj)
      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
-       if (result.success) {       
+       if (result.success) {   
+        this.DataTable.reset();    
          this.successMessage = AppConstants.Messages.successMessage;
        }else{
          this.errorMessage = AppConstants.Messages.errorMessage;

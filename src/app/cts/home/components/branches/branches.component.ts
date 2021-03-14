@@ -149,7 +149,8 @@ export class BranchesComponent implements OnInit {
      //AED Branches API call
      this.BranchesService.AEDBranches(customObj)
      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
-       if (result.success) {       
+       if (result.success) {   
+        this.DataTable.reset();    
          this.successMessage = AppConstants.Messages.successMessage;
        }else{
          this.errorMessage = AppConstants.Messages.errorMessage;

@@ -13,7 +13,7 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="this.basic">
         <tr *ngIf="progress > 0 || message">
           <th>   
             <span class="upload">
@@ -72,7 +72,7 @@
         </div>
         <div class="col-md-12">
           <table class="table  table-bordered table-striped">
-            <tbody>
+            <tbody *ngIf="this.personal">
               <tr>
                 <th scope="row">First Name</th>
                 <td>{{this.personal.firstname}}</td>
@@ -93,19 +93,19 @@
               </tr>
               <tr>
                 <th scope="row">Admission Category</th>
-                <td>General</td>
+                <td>{{this.personal.admissioncategory}}</td>
                 <th scope="row">Religion</th>
-                <td>Hindu</td>
+                <td>{{this.personal.religion}}</td>
               </tr>
               <tr>
                 <th scope="row">Blood Group</th>
-                <td>O+</td>
+                <td>{{this.personal.bloodgroup}}</td>
                 <th scope="row">Birth Place</th>
                 <td>{{this.personal.birthplace}}</td>
               </tr>
               <tr>
                 <th scope="row">Languages</th>
-                <td colspan="3">Telugu, English and Hindi</td>
+                <td colspan="3">{{this.personal.languages}}</td>
               </tr>
             </tbody>
           </table>
@@ -202,7 +202,7 @@
         </div>
         <div class="col-md-12">
           <table class="table  table-bordered table-striped">
-            <tbody>
+            <tbody *ngIf="this.gaurdian">
               <tr>
                 <th scope="row">First Name</th>
                 <td>{{ this.gaurdian.firstname}}</td>
@@ -235,7 +235,7 @@
             <thead>
               <th colspan="4" class="text-center">Current Details</th>
             </thead>
-            <tbody>
+            <tbody *ngIf="this.address">
               <tr>
                 <th scope="row">D-no</th>
                 <td>{{this.address.ctcstudent_dno_c}}</td>
@@ -267,7 +267,7 @@
             <thead>
               <th colspan="4" class="text-center">Perminant Details</th>
             </thead>
-            <tbody>
+            <tbody  *ngIf="this.address">
               <tr>
                 <th scope="row">D-no</th>
                 <td>{{this.address.ctcstudent_dno_p}}</td>
